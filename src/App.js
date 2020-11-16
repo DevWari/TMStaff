@@ -15,9 +15,11 @@ const App = () => {
   }, [])
 
   return (
-    <View>
-      <Text>aaaaaaa</Text>
-    </View>    
+    <RootNavigator
+      ref={(navigatorRef) => {
+        setTopLevelNavigator(navigatorRef);
+      }}
+    />
   )
 }
 

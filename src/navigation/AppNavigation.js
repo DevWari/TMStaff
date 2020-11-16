@@ -17,6 +17,7 @@ import {
   Image,
 } from 'react-native'
 import React from 'react'
+
 const AuthStack = createStackNavigator(
   {
     LoginScreen,
@@ -112,17 +113,13 @@ const MainTab = createBottomTabNavigator (
     }, 
   },  
 )
-
-
 export const RootNavigator = createAppContainer(
-	createSwitchNavigator(
-		{
-      AuthLoadingScreen: AuthLoadingScreen ,
+  createSwitchNavigator({		
+      AuthLoadingScreen: AuthLoadingScreen,
       App: MainTab,
-			Auth: AuthStack,
-		},
-		{
-			initialRouteName: 'AuthLoadingScreen',
-		},
-	),
+	  Auth: AuthStack,
+  },
+  {
+    initialRouteName: 'AuthLoadingScreen'    
+  }),
 );

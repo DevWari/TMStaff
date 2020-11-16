@@ -5,7 +5,7 @@ const LoginScreen = () => {
 
   return (
     <View>
-      <Text>My Account</Text>
+      <Text>LoginScreen</Text>
     </View>
   )
 }
