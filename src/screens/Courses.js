@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, Text} from 'react-native'
 
-const MyAccount = () => {
+const Courses = () => {
 
   return (
     <View>
@@ -10,4 +10,4 @@ const MyAccount = () => {
   )
 }
 
-export default MyAccount
+export default Courses
