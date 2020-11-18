@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styled from 'styled-components/native';
-import { navigate } from 'src/utils/navigation';
-import Icon from 'react-native-vector-icons/Ionicons'
-import {drawer} from 'src/App'
+import { navigate, navigateBack } from 'src/utils/navigation';
+import Icon from 'react-native-vector-icons/AntDesign'
 
 const Header = (props) => {  
 
@@ -11,9 +10,13 @@ const Header = (props) => {
     navigate('MyNotificationScreen');
   }
   return (
-    <Container> 
-      
-      <View /> 
+    <Container>       
+      {
+        props.back? 
+        <BackButton onPress={()=>navigateBack()}>
+          <Icon name="doubleleft" size={25} color="white" />
+        </BackButton>: <View />
+      }  
       { props.title && <Title>{props.title}</Title> }
       { props.message ? 
         <TouchableOpacity onPress={()=>onPressNotification()}>
@@ -44,3 +47,6 @@ const Title = styled(Text)`
   font-weight: bold;
   text-align: center;
 `;
+const BackButton = styled (TouchableOpacity)`
+  margin-bottom: 5px;
+`

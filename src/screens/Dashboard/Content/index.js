@@ -26,7 +26,7 @@ const Content = (props) => {
             <Image source={require('src/assets/img/dashboard/dash2.png')} />
             <Title>My Schedule</Title>
         </StyleButton>
-        <StyleButton onPress={()=> navigate("MyAppointment", {hashed_id: null})}>
+        <StyleButton onPress={()=> navigate('Courses')}>
             <Image source={require('src/assets/img/dashboard/dash4.png')} />
             <Title>Courses</Title>
         </StyleButton>
@@ -36,9 +36,9 @@ const Content = (props) => {
             <Image source={require('src/assets/img/dashboard/dash3.png')} />
             <Title>Messages</Title>
         </StyleButton>
-        <StyleButton onPress={() => navigate('MyEstimate')}>
+        <StyleButton onPress={() => navigate('Resources')}>
             <Image source={require('src/assets/img/dashboard/dash5.png')} />
-             <Title>Forums</Title>
+             <Title>Resources</Title>
         </StyleButton>
       </Row>
       

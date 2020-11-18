@@ -6,10 +6,10 @@ import LoginScreen from 'src/screens/LoginScreen';
 import Dashboard from 'src/screens/Dashboard';
 import MyAccount from 'src/screens/MyAccount';
 import Courses from 'src/screens/Courses';
-import Forums from 'src/screens/Forums';
 import RegisterScreen from 'src/screens/RegisterScreen';
 import ForgotScreen from 'src/screens/ForgotScreen';
 import Support from 'src/screens/Support';
+import Resources from 'src/screens/Resources';
 import AuthLoadingScreen from 'src/screens/AuthLoadingScreen';
 
 import {
@@ -32,15 +32,17 @@ const AuthStack = createStackNavigator(
 );
 const AppStack = createStackNavigator(
   {
-    Courses,
-    Forums        
+    Courses,    
+    Resources    
   },
   {
-    initialRouteName: 'Courses',
+    initialRouteName: 'Resources',
     headerMode: 'none',
     //mode: 'modal'
   }
 );
+
+
 const MainTab = createBottomTabNavigator (
   {
     Dashboard: {

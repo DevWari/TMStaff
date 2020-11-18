@@ -83,18 +83,7 @@ const LoginScreen = (props) => {
           </Button>
           <ForgotButton onPress = {()=>navigate('ForgotScreen')}>
             <ForgotTitle>Forgot your password?</ForgotTitle>
-          </ForgotButton>
-          
-          {/* <CustomerTitle>New Customer?</CustomerTitle>
-          <Button 
-            onPress={()=>navigate ('InformationScreen')} 
-            bgColor='#F9CC34'
-          >
-            <ButtonTitle textColor='black'>Request An Estimate</ButtonTitle>
-          </Button>
-          <Text style={{marginTop: 30, fontSize: 16}}>First time here? Did you just receive an estimate? {'\n'}
-          If so, you need to <Text style={{fontSize: 20, fontWeight: 'bold'}} onPress={()=>navigate("RegisterScreen")}>click here</Text> and register first.
-          </Text> */}
+          </ForgotButton>          
           <View style={{height: 30}} />
         </Container>
       </ScrollView>
