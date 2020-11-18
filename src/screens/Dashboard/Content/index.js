@@ -14,7 +14,7 @@ const Content = (props) => {
   return (
     <Container>
       <TabBarContainer>
-        <TabButton style={{backgroundColor: 'red'}}>
+        <TabButton style={{backgroundColor: 'red'}} onPress={()=>navigate('WorkScreen')}>
           <TabBarTitle>Clock in/out</TabBarTitle>
         </TabButton>
         <TabButton style={{backgroundColor: '#15892E'}}>
@@ -26,7 +26,7 @@ const Content = (props) => {
             <Image source={require('src/assets/img/dashboard/dash2.png')} />
             <Title>My Schedule</Title>
         </StyleButton>
-        <StyleButton onPress={()=> navigate('Courses')}>
+        <StyleButton onPress = {()=>Linking.openURL('https://tinamaids.com/locations')}>
             <Image source={require('src/assets/img/dashboard/dash4.png')} />
             <Title>Courses</Title>
         </StyleButton>
@@ -36,7 +36,7 @@ const Content = (props) => {
             <Image source={require('src/assets/img/dashboard/dash3.png')} />
             <Title>Messages</Title>
         </StyleButton>
-        <StyleButton onPress={() => navigate('Resources')}>
+        <StyleButton onPress={() => navigate('Forums')}>
             <Image source={require('src/assets/img/dashboard/dash5.png')} />
              <Title>Resources</Title>
         </StyleButton>

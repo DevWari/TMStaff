@@ -10,6 +10,8 @@ import RegisterScreen from 'src/screens/RegisterScreen';
 import ForgotScreen from 'src/screens/ForgotScreen';
 import Support from 'src/screens/Support';
 import Resources from 'src/screens/Resources';
+import WorkScreen from 'src/screens/WorkScreen';
+import WorkResult from 'src/screens/WorkScreen/WorkResult';
 import AuthLoadingScreen from 'src/screens/AuthLoadingScreen';
 
 import {
@@ -33,7 +35,9 @@ const AuthStack = createStackNavigator(
 const AppStack = createStackNavigator(
   {
     Courses,    
-    Resources    
+    Resources,
+    WorkScreen,
+    WorkResult
   },
   {
     initialRouteName: 'Resources',
