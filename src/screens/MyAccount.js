@@ -124,7 +124,7 @@ const MyAccount = (props) => {
         />
         <Footer />
         <SaveButton 
-          // onPress = {updateProfile}
+          onPress = {updateProfile}
           bgColor = {Colors.textColor}
         >
           <ButtonTitle>Save</ButtonTitle>
