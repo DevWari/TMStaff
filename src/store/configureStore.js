@@ -17,13 +17,13 @@ import { work } from './Work/reducer';
 import { loginSaga, logoutSaga, forgotPasswordSaga, setTokenSaga } from './Auth/sagas';
 import { loadProfileSaga, upadteProfileSaga } from './MyAccount/sagas';
 import { sendContactSaga } from './Contact/sagas';
-import { getWorkSaga } from './Work/sagas';
+import { getWorkSaga, setClockInOutSaga } from './Work/sagas';
 
 /* Actions    */
 import { LOGIN, LOG_OUT, FORGOT_PASSWORD, SET_TOKEN } from './Auth/types';
 import { LOAD_PROFILE, UPDATE_PROFILE } from './MyAccount/types';
 import { SEND_CONTACT } from './Contact/types';
-import { GET_WORK } from './Work/types';
+import { GET_WORK, CLOCK_IN_OUT } from './Work/types';
 
 const rootReducer = combineReducers({
   auth,  
@@ -44,6 +44,7 @@ function* watchAll() {
     takeEvery(UPDATE_PROFILE, upadteProfileSaga),
     takeEvery(SEND_CONTACT, sendContactSaga),
     takeEvery(GET_WORK, getWorkSaga),
+    takeEvery(CLOCK_IN_OUT, setClockInOutSaga),
   ]);
 }
 
