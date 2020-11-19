@@ -22,7 +22,7 @@ export const getWork = (token) => {
 };
 
 export const setClockInOut = (token) => {    
-    const url = API_URL + "api/set_start-stop";
+    const url = API_URL + "api/set-start-stop";
     console.log ("url...", url)
     return fetch(url, {
       method: 'POST',

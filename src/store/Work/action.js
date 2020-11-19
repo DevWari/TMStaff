@@ -10,7 +10,7 @@ export function GetWorkAction(token) {
   };
 }
 
-export function SetClockInOut(token) {
+export function SetClockInOutAction(token) {
   return {
     type: CLOCK_IN_OUT,  
     token,

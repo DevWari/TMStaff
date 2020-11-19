@@ -147,6 +147,10 @@ class Dashboard extends React.Component {
     
   // }
 
+  componentDidMount () {
+    console.log ("a......")
+  }
+
   render() {
     // const { isNotify } = this.state;
 

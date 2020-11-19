@@ -12,7 +12,7 @@ import LoggedComponent from './LoggedComponent'
 import ConfirmView from 'src/components/ConfirmView'
 import {navigate} from'src/utils/navigation'
 import {connect} from 'react-redux'
-import {GetWorkAction} from 'src/store/Work/action'
+import {GetWorkAction,SetClockInOutAction} from 'src/store/Work/action'
 
 const WorkScreen = (props) => {
 
@@ -20,6 +20,7 @@ const WorkScreen = (props) => {
   
   function onOK () {
     setIsVisible (false)
+    props.setClcokInOut(props.token)
     navigate ('WorkResult')
   }
   function onCancel () {
@@ -89,6 +90,7 @@ const mapStateToProps = (state) => {
   const mapDispatchToProps = (dispatch) => {
     return {      
       getWork: (token) => dispatch(GetWorkAction(token)),      
+      setClcokInOut: (token) => dispatch(SetClockInOutAction(token)),      
     };
   };
   export default connect(mapStateToProps, mapDispatchToProps)(WorkScreen);
