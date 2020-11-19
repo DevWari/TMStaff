@@ -4,10 +4,7 @@ import {
     LOGIN_FAILURE, 
     LOGOUT,
     LOG_OUT_SUCCESS,
-    LOG_OUT_FAILURE,
-    REGISTER,
-    REGISTER_SUCCESS,
-    REGISTER_FAILURE, 
+    LOG_OUT_FAILURE,    
     FORGOT_PASSWORD,
     FORGOT_PASSWORD_SUCCESS,
     FORGOT_PASSWORD_FAILURE,
@@ -57,26 +54,7 @@ import {
           user: null,
           name: null,
           status: -2,
-        }
-      case REGISTER_SUCCESS:
-        return {
-          ...state,
-          token: action.authData.token,
-          user: action.authData.user,
-          userName: action.authData.user.name,
-          status: action.authData.status,
-          isLoading: false
-        }; 
-      case REGISTER_FAILURE: 
-        return {
-          ...state,
-          isLoading: false
-      }
-      case REGISTER:
-        return {
-          ...state,
-          isLoading: true,
-        }
+        }      
       case LOGOUT: 
         return {
           ...state,

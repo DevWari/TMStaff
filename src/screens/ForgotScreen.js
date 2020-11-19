@@ -19,10 +19,10 @@ const ForgotScreen = (props) => {
 
   const [email, setEmail] = useState('')
   
-  // function onContinue () {
-  //   props.forgotPassword(email)
-  //   navigate ("LoginScreen")
-  // }
+  function onContinue () {
+    props.forgotPassword(email)
+    navigate ("LoginScreen")
+  }
 
   return (
     <BackgroundContainer source={require('src/assets/img/login/bg.png')}>  
@@ -45,7 +45,7 @@ const ForgotScreen = (props) => {
           />
           <View style={{height: 60}} />
           <Button 
-            // onPress={onContinue}  
+            onPress={onContinue}  
             bgColor={Colors.textColor}
           >
             <ButtonTitle textColor='white'>Continue</ButtonTitle>
@@ -63,22 +63,20 @@ const ForgotScreen = (props) => {
     </BackgroundContainer>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    token: state.auth.token,
+    isLoading: state.auth.isLoading,
+    status: state.auth.status
+  };
+};
 
-export default ForgotScreen
-// const mapStateToProps = (state) => {
-//   return {
-//     token: state.session.token,
-//     isLoading: state.session.isLoading,
-//     status: state.session.status
-//   };
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     forgotPassword: (email) => dispatch(ForgotPasswordAction(email))
-//   };
-// };
-// export default connect(mapStateToProps, mapDispatchToProps)(ForgotScreen);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    forgotPassword: (email) => dispatch(ForgotPasswordAction(email))
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ForgotScreen);
 
 const BackgroundContainer = styled(ImageBackground)`
   flex: 1;

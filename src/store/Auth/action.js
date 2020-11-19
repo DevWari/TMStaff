@@ -1,7 +1,6 @@
 import {
     LOGIN,
-    LOG_OUT,
-    REGISTER,
+    LOG_OUT,    
     FORGOT_PASSWORD,
     SET_TOKEN
   } from './types';
@@ -22,14 +21,6 @@ export function SetTokenAction(token, user) {
     user
   };
 }
-  
-export function RegisterAction(data) {
-  return {
-    type: REGISTER,
-    data,
-  };
-}
-
 export function LogoutAction(token) {
   return {
     type: LOG_OUT,

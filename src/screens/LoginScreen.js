@@ -11,53 +11,53 @@ import {
 import styled from 'styled-components/native';
 import { Colors } from 'src/theme';
 import {connect} from 'react-redux';
-// import {LoginAction} from 'src/store/Auth/action';
-// import AsyncStorage from '@react-native-community/async-storage';
+import {LoginAction} from 'src/store/Auth/action';
+import AsyncStorage from '@react-native-community/async-storage';
 import {navigate} from 'src/utils/navigation';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 const LoginScreen = (props) => {
 
-  // const [username, setUserName] = useState('geronco@gmail.com');
-  // const [password, setPassword] = useState('change543');
-  const [username, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUserName] = useState('geronco@gmail.com');
+  const [password, setPassword] = useState('change543');                
+  // const [username, setUserName] = useState('');
+  // const [password, setPassword] = useState('');
 
-//   useEffect (()=> {
-//     async function setStorage() {
-//     //   try {
-//     //     if (props.status == 1 && props.token && props.user) {
-//     //       await AsyncStorage.setItem("userToken", props.token)
-//     //       await AsyncStorage.setItem("user", props.user.user.name)
-//     //       await AsyncStorage.setItem("user_type", props.user.user?.user_type.toString())
-//     //       await AsyncStorage.setItem("user_hash", props.user.user_hash)
-//     //       navigate('App')
-//     //     }
-//     //     else if (props.status == -1) {
-//     //       Alert.alert("warning", "Your email or password is not correct!")
-//     //     }
-//     //     else {
-//     //       console.log ("return error...")
-//     //     }
-//     //   } catch (e) {
-//     //     console.log ("storage error")
-//     //   }
-//     }
-//     setStorage()
-//   },[props.status, props.token, props.user])
+  useEffect (()=> {
+    async function setStorage() {
+      try {
+        if (props.status == 1 && props.token && props.user) {
+          await AsyncStorage.setItem("userToken", props.token)
+          await AsyncStorage.setItem("user", props.user.user.name)
+          await AsyncStorage.setItem("user_type", props.user.user?.user_type.toString())
+          await AsyncStorage.setItem("user_hash", props.user.user_hash)
+          navigate('App')
+        }
+        else if (props.status == -1) {
+          Alert.alert("warning", "Your email or password is not correct!")
+        }
+        else {
+          console.log ("return error...")
+        }
+      } catch (e) {
+        console.log ("storage error")
+      }
+    }
+    setStorage()
+  },[props.status, props.token, props.user])
 
   function onLogin () {
-    // props.login(username, password)
+    props.login(username, password)
     navigate('App')
   }
 
   return (
     <BackgroundContainer source={require('src/assets/img/login/bg.png')}>  
-      {/* <Spinner 
+      <Spinner 
         visible={props.isLoading}
         textContent={'Loading...'}
         textStyle={{color:'#FFF'}}
-      />    */}
+      />   
       <ScrollView>
         <Container>
           <TitleContainer>
@@ -91,22 +91,21 @@ const LoginScreen = (props) => {
   );
 };
 
-export default LoginScreen
-// const mapStateToProps = (state) => {
-//   return {
-//     token: state.auth.token,
-//     user: state.auth.user,
-//     isLoading: state.auth.isLoading,
-//     status: state.auth.status
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    token: state.auth.token,
+    user: state.auth.user,
+    isLoading: state.auth.isLoading,
+    status: state.auth.status
+  };
+};
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     login: (username, password) => dispatch(LoginAction(username, password))
-//   };
-// };
-// export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (username, password) => dispatch(LoginAction(username, password))
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
 
 const BackgroundContainer = styled(ImageBackground)`
   flex: 1;

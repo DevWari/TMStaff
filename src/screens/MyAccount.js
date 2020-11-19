@@ -5,7 +5,7 @@ import { Colors } from 'src/theme';
 import { navigate } from 'src/utils/navigation';
 import Menu from 'src/components/Menu'
 import {connect} from 'react-redux'
-// import {LoadProfileAction, UpdateProfileAction} from 'src/store/MyAccount/action'
+import {LoadProfileAction, UpdateProfileAction} from 'src/store/MyAccount/action'
 import Spinner from 'react-native-loading-spinner-overlay';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 
@@ -21,39 +21,39 @@ const MyAccount = (props) => {
 
   let STATES = null;
   
-  // useEffect(()=> {
-  //   if (!props.token) {
-  //     navigate('LoginScreen') 
-  //     return
-  //   }
-  //   else props.loadProfile (props.token)
-  // }, [])
+  useEffect(()=> {
+    if (!props.token) {
+      navigate('LoginScreen') 
+      return
+    }
+    else props.loadProfile (props.token)
+  }, [])
   
-  // useEffect(()=> {
-  //   if (props.data && props.data.user) {
-  //     setName(props.data.user.user.name)
-  //     setEmail(props.data.user.user.email)
-  //     setPhone(props.data.user.customer.phone)
-  //     setAddress(props.data.user.customer.address)
-  //     // setStates(props.data.user.states.[props.data.user.customer.state])
-  //     setStates(props.data.user.customer.state)
-  //     setZip(props.data.user.customer.zip)
-  //     setCity(props.data.user.customer.city)
-  //   }
-  // }, [props.data])
+  useEffect(()=> {
+    if (props.data && props.data.user) {
+      setName(props.data.user.user.name)
+      setEmail(props.data.user.user.email)
+      setPhone(props.data.user.customer.phone)
+      setAddress(props.data.user.customer.address)
+      // setStates(props.data.user.states.[props.data.user.customer.state])
+      setStates(props.data.user.customer.state)
+      setZip(props.data.user.customer.zip)
+      setCity(props.data.user.customer.city)
+    }
+  }, [props.data])
 
-  // function updateProfile () {
-  //   let data = {
-  //     name: name, 
-  //     email: email, 
-  //     phone: phone, 
-  //     address: address, 
-  //     state: state, 
-  //     zip: zip, 
-  //     city: city
-  //   }
-  //   props.updateProfile (data, props.token)
-  // }
+  function updateProfile () {
+    let data = {
+      name: name, 
+      email: email, 
+      phone: phone, 
+      address: address, 
+      state: state, 
+      zip: zip, 
+      city: city
+    }
+    props.updateProfile (data, props.token)
+  }
 
   return (
     <KeyboardAwareScrollView>
@@ -134,27 +134,24 @@ const MyAccount = (props) => {
     </KeyboardAwareScrollView>
   );
 };
-
-export default MyAccount
-
-// const mapStateToProps = (state) => {
-//   return {
-//     token: state.session.token,
-//     isLoading: state.account.isLoading,
-//     status: state.account.status,
-//     update_status: state.account.update_status,
-//     data: state.account.data
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    token: state.session.token,
+    isLoading: state.account.isLoading,
+    status: state.account.status,
+    update_status: state.account.update_status,
+    data: state.account.data
+  };
+};
 
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     loadProfile: (token) => dispatch(LoadProfileAction(token)),
-//     updateProfile: (data,token) => dispatch(UpdateProfileAction(data,token))
-//   };
-// };
-// export default connect(mapStateToProps, mapDispatchToProps)(MyAccount);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadProfile: (token) => dispatch(LoadProfileAction(token)),
+    updateProfile: (data,token) => dispatch(UpdateProfileAction(data,token))
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(MyAccount);
 
 const Container = styled(View)`
   flex: 1;

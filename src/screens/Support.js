@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert} from 'react-native';
 import styled from 'styled-components/native';
 import { Colors } from 'src/theme';
 import { navigate } from 'src/utils/navigation';
 import Menu from 'src/components/Menu';
 import { connect } from 'react-redux';
-// import { SendContactAction, InitStatustAction } from 'src/store/Contact/action'
+import { SendContactAction, InitStatustAction } from 'src/store/Contact/action'
 import Spinner from 'react-native-loading-spinner-overlay';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 
@@ -20,20 +20,20 @@ const Support = (props) => {
   const [city, setCity] = useState(null)
   const [message, setMessage] = useState(null)
   
-  // useEffect (()=> {
-  //   if (props.status == 1) {
-  //     props.initStatus()
-  //     Alert.alert("Saved successfully!")
-  //   }
-  //   else if (props.status && props.status == -1) {
-  //     props.initStatus()
-  //     Alert.alert("Save Error!")
-  //   }
-  //   else {console.log("saving.....")}
+  useEffect (()=> {
+    if (props.status == 1) {
+      props.initStatus()
+      Alert.alert("Saved successfully!")
+    }
+    else if (props.status && props.status == -1) {
+      props.initStatus()
+      Alert.alert("Save Error!")
+    }
+    else {console.log("saving.....")}
 
-  //   if (!props.token) navigate('LoginScreen')
+    if (!props.token) navigate('LoginScreen')
 
-  // }, [props.status, props.token])
+  }, [props.status, props.token])
   
 
   function validateEmail (email) {
@@ -151,8 +151,7 @@ const Support = (props) => {
         />
         <Footer />
         <SaveButton 
-          bgColor = {Colors.textColor}
-          // onPress = {()=>navigate('ResultScreen')}
+          bgColor = {Colors.textColor}          
           onPress = {sendContact}
         >
           <ButtonTitle>Send</ButtonTitle>
@@ -165,21 +164,21 @@ const Support = (props) => {
 
 export default Support
 
-// const mapStateToProps = (state) => {
-//   return {
-//     isLoading: state.contact.isLoading,
-//     status: state.contact.status,
-//     token: state.session.token
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.contact.isLoading,
+    status: state.contact.status,
+    token: state.session.token
+  };
+};
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     sendContact: (data) => dispatch(SendContactAction(data)),
-//     initStatus: () => dispatch(InitStatustAction())
-//   };
-// };
-// export default connect(mapStateToProps, mapDispatchToProps)(Support);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    sendContact: (data) => dispatch(SendContactAction(data)),
+    initStatus: () => dispatch(InitStatustAction())
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Support);
 
 const Container = styled(View)`
   flex: 1;

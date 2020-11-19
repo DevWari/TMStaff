@@ -1,10 +1,8 @@
 import { put, all } from 'redux-saga/effects';
-import { login, getUser, register, logout, forgotPassword } from './services';
+import { login, getUser, logout, forgotPassword } from './services';
 import { 
   LOGIN_SUCCESS, 
-  LOGIN_FAILURE,
-  REGISTER_SUCCESS,
-  REGISTER_FAILURE, 
+  LOGIN_FAILURE,  
   LOG_OUT_SUCCESS,
   LOG_OUT_FAILURE,  
   FORGOT_PASSWORD_SUCCESS,
@@ -23,8 +21,8 @@ export function* loginSaga(action) {
       user: user.user,
       status: response.status,
     } 
-     yield put({ type: LOGIN_SUCCESS, data });
-    //return navigate('CheckInHome');
+    console.log ("user.....saga", data )
+     yield put({ type: LOGIN_SUCCESS, data });    
   } catch (e) {
     yield put({ type: LOGIN_FAILURE });
   }
@@ -44,24 +42,6 @@ export function* setTokenSaga(action) {
     yield put({ type: SET_TOKEN_FAILURE });
   } 
 }
-
-export function* registerSaga(action) {
-  const { data } = action;
-  try {
-    const response = yield register(data);
-    const user = yield getUser(response.token);
-    const authData = {
-      token: response.token,
-      user: user.user,
-      status: response.status,
-    }
-     yield put({ type: REGISTER_SUCCESS, authData });
-    //return navigate('CheckInHome');
-  } catch (e) {
-    yield put({ type: REGISTER_FAILURE });
-  }
-}
-
 export function* logoutSaga(action) {
   const {token} = action;
   try {
@@ -77,6 +57,7 @@ export function* forgotPasswordSaga(action) {
   const {email} = action;
   try {
     const response = yield forgotPassword(email);
+    console.log ("response....", response)
      yield put({ type: FORGOT_PASSWORD_SUCCESS, response });
     //return navigate('CheckInHome');
   } catch (e) {
