@@ -8,7 +8,7 @@ import {connect} from 'react-redux'
 import {LoadProfileAction, UpdateProfileAction} from 'src/store/MyAccount/action'
 import Spinner from 'react-native-loading-spinner-overlay';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
-
+import {LogoutAction} from 'src/store/Auth/action';
 const MyAccount = (props) => {
   
   const [name, setName] = useState('')
@@ -29,6 +29,22 @@ const MyAccount = (props) => {
     else props.loadProfile (props.token)
   }, [])
   
+  async function onLogout (){
+    // try {
+    //   await AsyncStorage.removeItem('userToken');
+    //   await AsyncStorage.removeItem('user_type');
+    //   await AsyncStorage.removeItem('user_hash');
+    //   OneSignal.sendTags({'myid': "", "type": ""});
+    // }
+    // catch(exception) {
+    //     console.log ("error storage")
+    // }
+    // this.props.logout (this.props.token)
+    // navigate ("Auth")
+    console.log ("logout....")
+  }
+
+
   useEffect(()=> {
     if (props.data && props.data.user) {
       setName(props.data.user.user.name)
@@ -64,7 +80,11 @@ const MyAccount = (props) => {
       />   
       <Container>      
         <Menu title="My Account" back={true} />
-        <Footer />
+        <LogoutContainer>
+          <LogoutButton onPress={onLogout}>
+            <LogoutButtonTitle>Logout</LogoutButtonTitle>
+          </LogoutButton>
+        </LogoutContainer>        
         <InputTitle>Name:</InputTitle>
         <Input 
           placeholder="Jonnas Doe"
@@ -148,7 +168,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loadProfile: (token) => dispatch(LoadProfileAction(token)),
-    updateProfile: (data,token) => dispatch(UpdateProfileAction(data,token))
+    updateProfile: (data,token) => dispatch(UpdateProfileAction(data,token)),
+    logout: (token) => dispatch(LogoutAction(token))
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(MyAccount);
@@ -189,4 +210,15 @@ const ButtonTitle = styled (Text)`
   color: white;
   height: 25px;
   text-align: center;
+`
+const LogoutContainer = styled (View)`
+  width: 100%;
+  align-items: flex-end;
+  margin-top: 10px;
+`
+const LogoutButton = styled (TouchableOpacity)`
+  margin-right: 20px;
+`
+const LogoutButtonTitle = styled (Text)`
+  font-size: 18px;
 `

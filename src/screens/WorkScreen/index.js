@@ -11,8 +11,10 @@ import Menu from 'src/components/Menu'
 import LoggedComponent from './LoggedComponent'
 import ConfirmView from 'src/components/ConfirmView'
 import {navigate} from'src/utils/navigation'
+import {connect} from 'react-redux'
+import {GetWorkAction} from 'src/store/Work/action'
 
-const WorkScreen = () => {
+const WorkScreen = (props) => {
 
   const [isVisible, setIsVisible] = useState(false)
   
@@ -23,6 +25,10 @@ const WorkScreen = () => {
   function onCancel () {
     setIsVisible (false)
   }
+
+  useEffect (()=> {
+    
+  }, [])
   return (
     <ScrollView>
       <Container>
@@ -71,8 +77,21 @@ const WorkScreen = () => {
     </ScrollView>
   )
 }
-
-export default WorkScreen
+const mapStateToProps = (state) => {
+    return {
+      token: state.auth.token,
+      isLoading: state.work.isLoading,      
+      data: state.work.data
+    };
+  };
+  
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {      
+      getWork: (data,token) => dispatch(GetWorkAction(data,token)),      
+    };
+  };
+  export default connect(mapStateToProps, mapDispatchToProps)(WorkScreen);
 
 const Container = styled (View)`
   flex: 1;

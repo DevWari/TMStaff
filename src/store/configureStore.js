@@ -11,21 +11,25 @@ import { takeEvery, all } from 'redux-saga/effects';
 import { auth } from './Auth/reducer';
 import { account } from './MyAccount/reducer';
 import { contact } from './Contact/reducer';
+import { work } from './Work/reducer';
 /* Sagas */
 
 import { loginSaga, logoutSaga, forgotPasswordSaga, setTokenSaga } from './Auth/sagas';
 import { loadProfileSaga, upadteProfileSaga } from './MyAccount/sagas';
 import { sendContactSaga } from './Contact/sagas';
+import { getWorkSaga } from './Work/sagas';
 
 /* Actions    */
 import { LOGIN, LOG_OUT, FORGOT_PASSWORD, SET_TOKEN } from './Auth/types';
 import { LOAD_PROFILE, UPDATE_PROFILE } from './MyAccount/types';
 import { SEND_CONTACT } from './Contact/types';
+import { GET_WORK } from './Work/types';
 
 const rootReducer = combineReducers({
   auth,  
   account,
   contact,
+  work,
 });
 
 const sagaMiddleware = createSagaMiddleware();
@@ -39,6 +43,7 @@ function* watchAll() {
     takeEvery(LOAD_PROFILE, loadProfileSaga),
     takeEvery(UPDATE_PROFILE, upadteProfileSaga),
     takeEvery(SEND_CONTACT, sendContactSaga),
+    takeEvery(GET_WORK, getWorkSaga),
   ]);
 }
 
