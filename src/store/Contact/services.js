@@ -1,7 +1,7 @@
 import { API_URL } from 'src/utils/config';
 
 export const sendContact = (data) => {
-    const url = API_URL + "contact-form";
+    const url = API_URL + "api/contact-form";
     return fetch(url, {
       method: 'POST',
       headers: {

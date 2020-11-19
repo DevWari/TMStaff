@@ -6,9 +6,10 @@ import {
 } from './types';
 
 export function* getWorkSaga(action) {
-    const { data, token } = action
+    const { token } = action
     try {
-      const response = yield getWork(data, token);
+      const response = yield getWork(token);
+      console.log ("work resspone....", response)
       yield put({ type: GET_WORK_SUCCESS, response });
            
     } catch (e) {

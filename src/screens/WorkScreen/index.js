@@ -27,7 +27,7 @@ const WorkScreen = (props) => {
   }
 
   useEffect (()=> {
-    
+    props.getWork(props.token)
   }, [])
   return (
     <ScrollView>
@@ -88,7 +88,7 @@ const mapStateToProps = (state) => {
   
   const mapDispatchToProps = (dispatch) => {
     return {      
-      getWork: (data,token) => dispatch(GetWorkAction(data,token)),      
+      getWork: (token) => dispatch(GetWorkAction(token)),      
     };
   };
   export default connect(mapStateToProps, mapDispatchToProps)(WorkScreen);
