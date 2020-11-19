@@ -20,8 +20,7 @@ export function* loginSaga(action) {
       token: response.token,
       user: user.user,
       status: response.status,
-    } 
-    console.log ("user.....saga", data )
+    }     
      yield put({ type: LOGIN_SUCCESS, data });    
   } catch (e) {
     yield put({ type: LOGIN_FAILURE });
