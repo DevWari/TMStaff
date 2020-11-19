@@ -5,11 +5,6 @@ import {
   SEND_CONTACT_FAILURE
 } from './types';
 
-import { SetTokenAction } from 'src/store/Auth/action'
-import {removeStorage, replaceToken} from 'src/utils/global'
-import { navigate } from 'src/utils/navigation'
-
-
 export function* sendContactSaga(action) {
     const { data } = action
     try {

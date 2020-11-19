@@ -87,7 +87,7 @@ const Support = (props) => {
         source: ''
       }
       console.log ("data....", data)
-      props.sendContact (data)
+      props.sendContact1 (data);
     }
   }
   return (
@@ -168,13 +168,13 @@ const mapStateToProps = (state) => {
   return {
     isLoading: state.contact.isLoading,
     status: state.contact.status,
-    token: state.session.token
+    token: state.auth.token
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    sendContact: (data) => dispatch(SendContactAction(data)),
+    sendContact1: (data) => dispatch(SendContactAction(data)),
     initStatus: () => dispatch(InitStatustAction())
   };
 };

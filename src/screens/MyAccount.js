@@ -136,7 +136,7 @@ const MyAccount = (props) => {
 };
 const mapStateToProps = (state) => {
   return {
-    token: state.session.token,
+    token: state.auth.token,
     isLoading: state.account.isLoading,
     status: state.account.status,
     update_status: state.account.update_status,

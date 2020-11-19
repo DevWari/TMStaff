@@ -4,6 +4,8 @@ import {
 } from './types';
   
 export function SendContactAction(data) {
+
+  console.log ("contact action...", data)
   return {
     type: SEND_CONTACT,
     data,
