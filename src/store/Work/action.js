@@ -3,10 +3,12 @@ import {
   CLOCK_IN_OUT
 } from './types';
 
-export function GetWorkAction(token) {
+export function GetWorkAction(paginator, token) {
+  console.log ("get work action...", token)
   return {
     type: GET_WORK,  
-    token,
+    paginator,
+    token,    
   };
 }
 
@@ -16,4 +18,3 @@ export function SetClockInOutAction(token) {
     token,
   };
 }
-

@@ -6,14 +6,39 @@ import {
   CLOCK_IN_OUT_FAILURE,
   CLOCK_IN_OUT_SUCCESS
 } from './types';
+import { SetTokenAction } from 'src/store/Auth/action'
+import {removeStorage, replaceToken} from 'src/utils/global'
 
 export function* getWorkSaga(action) {
-    const { token } = action
+    const { token, paginator } = action    
+    let response = null;
     try {
-      const response = yield getWork(token);
-      console.log ("work resspone....", response)
-      yield put({ type: GET_WORK_SUCCESS, response });
-           
+      response = yield getWork(paginator, token);
+      console.log ("work saga....", response)
+      if (response.status == 1) {
+        yield put({ type: GET_WORK_SUCCESS, response });
+      } else if (response.status == 2) {
+        let token = response.token
+        replaceToken (token)
+        response = yield getWork(paginator,token)      
+        if (response.status == 1) {        
+          yield all([
+            put({ type: GET_WORK_SUCCESS, response }),
+            put(SetTokenAction(token, null)),        	
+          ]);     
+        }
+        else {    
+          yield put(SetTokenAction(null, null))    
+          removeStorage ()
+          navigate ('LoginScreen')
+        }
+      }
+      else {
+        yield put(SetTokenAction(null, null))    
+        removeStorage ()
+        navigate ('LoginScreen')
+      }
+      
     } catch (e) {
       yield put({ type: GET_WORK_FAILURE });
     }

@@ -31,6 +31,7 @@ const LoginScreen = (props) => {
           await AsyncStorage.setItem("user", props.user.user.name)
           await AsyncStorage.setItem("user_type", props.user.user?.user_type.toString())
           await AsyncStorage.setItem("user_hash", props.user.user_hash)
+          console.log ("storage ok....")
           navigate('App')
         }
         else if (props.status == -1) {

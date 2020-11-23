@@ -12,7 +12,7 @@ import Menu from 'src/components/Menu';
 import Header from './Header'
 import Content from './Content'
 import AsyncStorage from '@react-native-community/async-storage'
-// import {SetTokenAction} from 'src/store/Auth/action'
+import {SetTokenAction} from 'src/store/Auth/action'
 
 let _this = null;
 class Dashboard extends React.Component {
@@ -20,21 +20,21 @@ class Dashboard extends React.Component {
     super(props);
     
     _this = this;
-    // this._bootstrapAsync();
+    this._bootstrapAsync();
     // this._setOneSignal();
    
-    // this.state = {
-    //   isNotify: false,
-    //   token: null
-    // }
+    this.state = {
+      isNotify: false,
+      token: null
+    }
   }
 
-  // _bootstrapAsync = async () => {
-  //   const userToken = await AsyncStorage.getItem('userToken');
-  //   const user = await AsyncStorage.getItem('user');
-  //   if (!userToken) navigate ('LoginScreen')
-  //   else this.props.setToken(userToken, user)
-  // };
+  _bootstrapAsync = async () => {
+    const userToken = await AsyncStorage.getItem('userToken');
+    const user = await AsyncStorage.getItem('user');
+    if (!userToken) navigate ('LoginScreen')
+    else this.props.setToken(userToken, user)
+  };
 
   // _setOneSignal = async () => {
   //   OneSignal.setLogLevel(6, 0);
@@ -148,7 +148,11 @@ class Dashboard extends React.Component {
   // }
 
   componentDidMount () {
-    console.log ("a......")
+    // console.log ("Dashboard....", this.props.token)
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+
   }
 
   render() {
@@ -167,29 +171,29 @@ class Dashboard extends React.Component {
   }
 };
 
-export default Dashboard
+// export default Dashboard
 
-// const mapStateToProps = (state) => {
-//   const { notifyData, isReadNotify } = state.notification;
-//   return {
-//     notifyData,
-//     isReadNotify,
-//     token: state.session.token,
-//     user: state.session.user,
-//   };
-// };
+const mapStateToProps = (state) => {
+  // const { notifyData, isReadNotify } = state.notification;
+  return {
+    // notifyData,
+    // isReadNotify,
+    token: state.auth.token,
+    user: state.auth.user,
+  };
+};
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     addNotification: (data) => dispatch(addNotification(data)),
-//     setToken: (token, user) => dispatch(SetTokenAction(token, user)),
-//   }
-// }
+const mapDispatchToProps = dispatch => {
+  return {
+    // addNotification: (data) => dispatch(addNotification(data)),
+    setToken: (token, user) => dispatch(SetTokenAction(token, user)),
+  }
+}
 
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Dashboard);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dashboard);
 
 
 const Container = styled(View)`

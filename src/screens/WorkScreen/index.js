@@ -28,15 +28,29 @@ const WorkScreen = (props) => {
   }
 
   useEffect (()=> {
-    props.getWork(props.token)
+    console.log ("messsage....")
+    const paginator = 0
+    props.getWork(paginator, props.token)
   }, [])
+
+  useEffect (()=> {
+    console.log ("work token........", props.token)
+    
+  }, [props.token])
   return (
     <ScrollView>
       <Container>
-        <Menu title="Work Hours" back={true} />
-        <ClockButton onPress={()=>setIsVisible(true)}>
+        <Menu title="Work Hours" back={true} />        
+          { props.message == 'You have successfully clocked out.' ? 
+            <ClockButton onPress={()=>setIsVisible(true)}>
+              <ButtonTitle>Clock In</ButtonTitle>
+            </ClockButton>: 
+            <ClockButton onPress={()=>setIsVisible(true)}>
+              <ButtonTitle>Clock In</ButtonTitle>
+            </ClockButton>
+          }
           <ButtonTitle>Clock In</ButtonTitle>
-        </ClockButton>
+       
         <Title>Logged Hours</Title>
         <LoggedComponent 
           start="November 13 2020 @ 08:03"
@@ -82,14 +96,15 @@ const mapStateToProps = (state) => {
     return {
       token: state.auth.token,
       isLoading: state.work.isLoading,      
-      data: state.work.data
+      data: state.work.data,
+      message: state.work.message,
     };
   };
   
   
   const mapDispatchToProps = (dispatch) => {
     return {      
-      getWork: (token) => dispatch(GetWorkAction(token)),      
+      getWork: (paginator, token) => dispatch(GetWorkAction(paginator, token)),      
       setClcokInOut: (token) => dispatch(SetClockInOutAction(token)),      
     };
   };

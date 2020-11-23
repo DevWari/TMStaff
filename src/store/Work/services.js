@@ -1,8 +1,8 @@
 import { API_URL } from 'src/utils/config';
 
-export const getWork = (token) => {
-    console.log ("token...", token)
-    const url = API_URL + "api/hour-list";
+export const getWork = (paginator, token) => {
+    console.log ("work services   token...", token)
+    const url = API_URL + `api/hour-list?paginator=${paginator}`;
     console.log ("url...", url)
     return fetch(url, {
       method: 'POST',
@@ -11,7 +11,7 @@ export const getWork = (token) => {
         'Content-Type': 'application/json',
         Authorization:  `Bearer ${token}`, 
       }      
-    })
+    })    
     .then((response) => response.json())
     .then((responseJson) => {      
       return responseJson
@@ -22,7 +22,7 @@ export const getWork = (token) => {
 };
 
 export const setClockInOut = (token) => {    
-    const url = API_URL + "api/set-start-stop";
+    const url = API_URL + "api/set-start-stop";  
     console.log ("url...", url)
     return fetch(url, {
       method: 'POST',

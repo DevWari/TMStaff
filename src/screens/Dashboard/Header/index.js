@@ -28,13 +28,12 @@ const Header = (props) => {
   )
 }
 
-export default Header
-// const mapStateToProps = (state) => {
-//   return {
-//     name: state.session.userName
-//   };
-// };
-// export default connect(mapStateToProps, null)(Header);
+const mapStateToProps = (state) => {
+  return {
+    name: state.auth.userName
+  };
+};
+export default connect(mapStateToProps, null)(Header);
 
 const Container = styled(ImageBackground)`
   width: 100%;
