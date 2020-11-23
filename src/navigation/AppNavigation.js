@@ -13,6 +13,9 @@ import Resources from 'src/screens/Resources';
 import WorkScreen from 'src/screens/WorkScreen';
 import WorkResult from 'src/screens/WorkScreen/WorkResult';
 import AuthLoadingScreen from 'src/screens/AuthLoadingScreen';
+import AppointmentOne from 'src/screens/MyAppointment/AppointmentOne';
+import AppointmentOption from 'src/screens/MyAppointment/AppointmentOption';
+import MyAppointment from 'src/screens/MyAppointment/MyAppointment';
 
 import {
   View,
@@ -37,7 +40,10 @@ const AppStack = createStackNavigator(
     Courses,    
     Resources,
     WorkScreen,
-    WorkResult
+    WorkResult,
+    AppointmentOne,
+    MyAppointment,
+    AppointmentOption
   },
   {
     initialRouteName: 'Resources',

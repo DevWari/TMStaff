@@ -12,6 +12,7 @@ import { auth } from './Auth/reducer';
 import { account } from './MyAccount/reducer';
 import { contact } from './Contact/reducer';
 import { work } from './Work/reducer';
+import { appointment } from './Appointment/reducer';
 /* Sagas */
 
 import { loginSaga, logoutSaga, forgotPasswordSaga, setTokenSaga } from './Auth/sagas';
@@ -19,17 +20,36 @@ import { loadProfileSaga, upadteProfileSaga } from './MyAccount/sagas';
 import { sendContactSaga } from './Contact/sagas';
 import { getWorkSaga, setClockInOutSaga } from './Work/sagas';
 
+import {
+  getAllAppointmentsSaga,
+  getEstimateAppointmentsSaga,
+  getAppointmentDetailSaga,
+  getExtraServicesSaga,
+  addAppointmentSaga,
+  cancelAppointmentSaga,
+} from './Appointment/sagas';
+
 /* Actions    */
 import { LOGIN, LOG_OUT, FORGOT_PASSWORD, SET_TOKEN } from './Auth/types';
 import { LOAD_PROFILE, UPDATE_PROFILE } from './MyAccount/types';
 import { SEND_CONTACT } from './Contact/types';
 import { GET_WORK, CLOCK_IN_OUT } from './Work/types';
 
+import {
+  GET_ALL_APPOINTMENTS,
+  GET_ESTIMATE_APPOINTMENTS,
+  GET_APPOINTMENT_DETAIL,
+  GET_EXTRA_SERVICES,
+  ADD_APPOINTMENT,
+  CANCEL_APPOINTMENT,
+} from './Appointment/types';
+
 const rootReducer = combineReducers({
   auth,  
   account,
   contact,
   work,
+  appointment,
 });
 
 const sagaMiddleware = createSagaMiddleware();
@@ -45,6 +65,13 @@ function* watchAll() {
     takeEvery(SEND_CONTACT, sendContactSaga),
     takeEvery(GET_WORK, getWorkSaga),
     takeEvery(CLOCK_IN_OUT, setClockInOutSaga),
+
+    takeEvery(GET_ALL_APPOINTMENTS, getAllAppointmentsSaga),
+    takeEvery(GET_ESTIMATE_APPOINTMENTS, getEstimateAppointmentsSaga),
+    takeEvery(GET_APPOINTMENT_DETAIL, getAppointmentDetailSaga),
+    takeEvery(GET_EXTRA_SERVICES, getExtraServicesSaga),
+    takeEvery(ADD_APPOINTMENT, addAppointmentSaga),
+    takeEvery(CANCEL_APPOINTMENT, cancelAppointmentSaga),
   ]);
 }
 

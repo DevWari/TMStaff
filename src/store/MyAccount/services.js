@@ -2,7 +2,7 @@ import { API_URL } from 'src/utils/config';
 
 export const loadProfile = (token) => {
   
-  const url = API_URL + "api/user";
+  const url = API_URL + "user";
   return fetch(url, {
     method: 'POST',
     headers: {
@@ -22,7 +22,7 @@ export const loadProfile = (token) => {
 
 export const updateProfile = (data, token) => {
     
-    const url = API_URL + "api/update-user";
+    const url = API_URL + "update-user";
     return fetch(url, {
       method: 'POST',
       headers: {

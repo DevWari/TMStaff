@@ -38,10 +38,7 @@ const WorkResult = (props) => {
   )
 }
 const mapStateToProps = (state) => {
-    return {
-      token: state.auth.token,
-      isLoading: state.work.isLoading,      
-      data: state.work.data,
+    return {      
       clockStatus: state.work.clockStatus
     };
 };  

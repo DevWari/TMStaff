@@ -22,7 +22,7 @@ const Content = (props) => {
         </TabButton>
       </TabBarContainer>
       <Row>
-        <StyleButton onPress={()=>navigate('MyEstimate')}>
+        <StyleButton onPress={()=>navigate('MyAppointment')}>
             <Image source={require('src/assets/img/dashboard/dash2.png')} />
             <Title>My Schedule</Title>
         </StyleButton>

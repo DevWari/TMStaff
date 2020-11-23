@@ -3,7 +3,7 @@ import { API_URL } from 'src/utils/config';
 export const login = (username, password) => {
 
   console.log ("login.... service...", username)
-  const url = API_URL + "api/login";
+  const url = API_URL + "login";
   return fetch(url, {
     method: 'POST',
     headers: {
@@ -20,7 +20,7 @@ export const login = (username, password) => {
   .catch(error=> "error")};
 
 export const refreshToken = (token) => {
-  const url = API_URL + "api/refresh-token";
+  const url = API_URL + "refresh-token";
   return fetch(url, {
     method: 'POST',
     headers: {
@@ -40,7 +40,7 @@ export const refreshToken = (token) => {
 };
 
 export const getUser = (token) => {
-  const url = API_URL + "api/user";
+  const url = API_URL + "user";
   return fetch(url, {
     method: 'POST',
     headers: {
@@ -58,7 +58,7 @@ export const getUser = (token) => {
   });
 };
 export const logout = (token) => {
-  const url = API_URL + "api/logout";
+  const url = API_URL + "logout";
   return fetch(url, {
     method: 'POST',
     headers: {
@@ -77,7 +77,7 @@ export const logout = (token) => {
 };
 
 export const forgotPassword = (email) => {
-  const url = API_URL + "api/forgot-password";
+  const url = API_URL + "forgot-password";
   return fetch(url, {
     method: 'POST',
     headers: {

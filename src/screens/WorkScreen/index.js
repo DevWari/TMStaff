@@ -44,11 +44,11 @@ const WorkScreen = (props) => {
   return (
     <ScrollView>
       <Container>
-        <Spinner 
+        {/* <Spinner 
           visible={props.isLoading}
           textContent={'Loading...'}
           textStyle={{color:'#FFF'}}
-        />  
+        />   */}
         <Menu title="Work Hours" back={true} />        
           { props.clockStatus == 0 ? 
             <ClockButton onPress={()=>setIsVisible(true)}>
@@ -58,8 +58,8 @@ const WorkScreen = (props) => {
               <ButtonTitle>Clock Out</ButtonTitle>
             </ClockButton>
           }
-        <ButtonTitle>Clock In</ButtonTitle>
-        <Title>Logged Hours</Title>
+        <ButtonTitle>Clock In</ButtonTitle>        
+        { props.pageCount > 0 && <Title>Logged Hours</Title> }     
         { props.data && props.data.length > 0 &&
           props.data.map (item =>  {
             return (              
@@ -67,6 +67,7 @@ const WorkScreen = (props) => {
                 start={item.created_at}
                 end={item.end_date_time}
                 total={item.total}
+                key={item.created_at}
               />
             )
           })        
@@ -81,7 +82,7 @@ const WorkScreen = (props) => {
                 <PageTitle>{'<'} PREV  </PageTitle>
               </TouchableOpacity>
           }   
-          <PageTitle>{props.paginator + 1} of {props.pageCount}</PageTitle>
+          { props.pageCount > 0 && <PageTitle>{props.paginator + 1} of {props.pageCount}</PageTitle> }          
           {
               props.paginator < props.pageCount - 1 &&
               <TouchableOpacity 
