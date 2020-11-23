@@ -13,8 +13,8 @@ export const defaultState = {
   data: null,
   status: -2,
   clockStatus: -2,
-  paginator: 0,
-  message: 'You have successfully clocked out.'
+  paginator: 0,  
+  clockStatus: 0,
 };
 export const work = (state = defaultState, action) => {
   
@@ -41,14 +41,14 @@ export const work = (state = defaultState, action) => {
     case CLOCK_IN_OUT:
       return {
         ...state,
-        isLoading: true,
+        isLoading: true,        
         status: -2,
       };
     case CLOCK_IN_OUT_SUCCESS: 
       return {
         ...state,        
         isLoading: false,
-        message: action.response.message
+        clockStatus: action.response.clockStatus
       }
     case CLOCK_IN_OUT_FAILURE:
       return {

@@ -34,19 +34,19 @@ const WorkScreen = (props) => {
   }, [])
 
   useEffect (()=> {
-    console.log ("work token........", props.token)
+    console.log ("clock status is changed", props.clockStatus)
     
-  }, [props.token])
+  }, [props.clockStatus])
   return (
     <ScrollView>
       <Container>
         <Menu title="Work Hours" back={true} />        
-          { props.message == 'You have successfully clocked out.' ? 
+          { props.clockStatus == 0 ? 
             <ClockButton onPress={()=>setIsVisible(true)}>
               <ButtonTitle>Clock In</ButtonTitle>
             </ClockButton>: 
             <ClockButton onPress={()=>setIsVisible(true)}>
-              <ButtonTitle>Clock In</ButtonTitle>
+              <ButtonTitle>Clock Out</ButtonTitle>
             </ClockButton>
           }
           <ButtonTitle>Clock In</ButtonTitle>
@@ -97,10 +97,9 @@ const mapStateToProps = (state) => {
       token: state.auth.token,
       isLoading: state.work.isLoading,      
       data: state.work.data,
-      message: state.work.message,
+      clockStatus: state.work.clockStatus
     };
-  };
-  
+  }; 
   
   const mapDispatchToProps = (dispatch) => {
     return {      

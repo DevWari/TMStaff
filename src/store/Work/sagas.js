@@ -45,12 +45,35 @@ export function* getWorkSaga(action) {
 }
 
 export function* setClockInOutSaga(action) {
-    const { token } = action
+    const { token } = action    
+    let response = null;
     try {
-      const response = yield setClockInOut(token);
-      console.log ("clock resspone....", response)
-      yield put({ type: CLOCK_IN_OUT_SUCCESS, response });
-           
+      response = yield setClockInOut(token);    
+      console.log ("response...clock", response)  
+      if (response.status == 1) {
+        yield put({ type: CLOCK_IN_OUT_SUCCESS, response });
+      } else if (response.status == 2) {
+        let token = response.token
+        replaceToken (token)
+        response = yield setClockInOut(token)  
+        console.log ("response...clock", response)      
+        if (response.status == 1) {        
+          yield all([
+            put({ type: CLOCK_IN_OUT_SUCCESS, response }),
+            put(SetTokenAction(token, null)),        	
+          ]);     
+        }
+        else {    
+          yield put(SetTokenAction(null, null))    
+          removeStorage ()
+          navigate ('LoginScreen')
+        }
+      } else {
+        yield put(SetTokenAction(null, null))    
+        removeStorage ()
+        navigate ('LoginScreen')
+      }
+      
     } catch (e) {
       yield put({ type: CLOCK_IN_OUT_FAILURE });
     }

@@ -28,7 +28,7 @@ const Header = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => {   
   return {
     name: state.auth.userName
   };
