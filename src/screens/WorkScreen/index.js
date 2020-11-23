@@ -13,6 +13,7 @@ import ConfirmView from 'src/components/ConfirmView'
 import {navigate} from'src/utils/navigation'
 import {connect} from 'react-redux'
 import {GetWorkAction,SetClockInOutAction} from 'src/store/Work/action'
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const WorkScreen = (props) => {
 
@@ -26,20 +27,28 @@ const WorkScreen = (props) => {
   function onCancel () {
     setIsVisible (false)
   }
-
-  useEffect (()=> {
-    console.log ("messsage....")
+  function onNext () {    
+    props.getWork(props.paginator + 1, props.token)
+  }
+  function onPrev () {    
+    props.getWork(props.paginator - 1, props.token)
+  }
+  useEffect (()=> {    
     const paginator = 0
     props.getWork(paginator, props.token)
   }, [])
 
   useEffect (()=> {
-    console.log ("clock status is changed", props.clockStatus)
-    
-  }, [props.clockStatus])
+    console.log ("work data...", props.pageCount)    
+  }, [props.pageCount])
   return (
     <ScrollView>
       <Container>
+        <Spinner 
+          visible={props.isLoading}
+          textContent={'Loading...'}
+          textStyle={{color:'#FFF'}}
+        />  
         <Menu title="Work Hours" back={true} />        
           { props.clockStatus == 0 ? 
             <ClockButton onPress={()=>setIsVisible(true)}>
@@ -49,29 +58,39 @@ const WorkScreen = (props) => {
               <ButtonTitle>Clock Out</ButtonTitle>
             </ClockButton>
           }
-          <ButtonTitle>Clock In</ButtonTitle>
-       
+        <ButtonTitle>Clock In</ButtonTitle>
         <Title>Logged Hours</Title>
-        <LoggedComponent 
-          start="November 13 2020 @ 08:03"
-          end="November 13 2020 @ 16:33"
-          total="08:30 hours"
-        />
-        <LoggedComponent 
-          start="November 13 2020 @ 08:03"
-          end="November 13 2020 @ 16:33"
-          total="08:30 hours"
-        />
-        <LoggedComponent 
-          start="November 13 2020 @ 08:03"
-          end="November 13 2020 @ 16:33"
-          total="08:30 hours"
-        />    
+        { props.data && props.data.length > 0 &&
+          props.data.map (item =>  {
+            return (              
+              <LoggedComponent 
+                start={item.created_at}
+                end={item.end_date_time}
+                total={item.total}
+              />
+            )
+          })        
+        }       
         <PageContainer>
-            <PageTitle>1 of 3</PageTitle>
-            <TouchableOpacity style={{marginLeft: 10}}>
+          {
+              props.paginator > 0 &&
+              <TouchableOpacity 
+                style={{marginLeft: 10}}
+                onPress = {onPrev}
+              >
+                <PageTitle>{'<'} PREV  </PageTitle>
+              </TouchableOpacity>
+          }   
+          <PageTitle>{props.paginator + 1} of {props.pageCount}</PageTitle>
+          {
+              props.paginator < props.pageCount - 1 &&
+              <TouchableOpacity 
+                style={{marginLeft: 10}}
+                onPress = {onNext}
+              >
                 <PageTitle>NEXT {'>'}</PageTitle>
-            </TouchableOpacity>
+              </TouchableOpacity>
+          }          
         </PageContainer>  
         <Modal
           animationType="slide"
@@ -97,7 +116,9 @@ const mapStateToProps = (state) => {
       token: state.auth.token,
       isLoading: state.work.isLoading,      
       data: state.work.data,
-      clockStatus: state.work.clockStatus
+      clockStatus: state.work.clockStatus,
+      pageCount: state.work.pageCount,
+      paginator: state.work.paginator
     };
   }; 
   
@@ -137,7 +158,7 @@ const PageContainer = styled (View)`
   margin-top: 20px;
 `
 const PageTitle = styled (Text)`
-  font-size: 20px;
+  font-size: 16px;
 `
 const ModalContainer = styled (TouchableOpacity)`
   width: 100%;

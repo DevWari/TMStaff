@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import {
   View,
   Text,
@@ -13,7 +13,7 @@ import {connect} from 'react-redux'
 const WorkResult = (props) => {
   return (
     <ScrollView>
-      <Container>
+      <Container>                 
         <Menu title="Work Hours" back={true} />        
         {props.clockStatus == 1 ? 
            <Title>Sucessfully Clocked In</Title> : 
@@ -44,14 +44,8 @@ const mapStateToProps = (state) => {
       data: state.work.data,
       clockStatus: state.work.clockStatus
     };
-}; 
-  
-//   const mapDispatchToProps = (dispatch) => {
-//     return {      
-//       getWork: (paginator, token) => dispatch(GetWorkAction(paginator, token)),      
-//       setClcokInOut: (token) => dispatch(SetClockInOutAction(token)),      
-//     };
-//   };
+};  
+
 export default connect(mapStateToProps, null)(WorkResult);
 
 const Container = styled (View)`

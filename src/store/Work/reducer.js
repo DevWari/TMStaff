@@ -11,9 +11,9 @@ export const defaultState = {
   error: null,
   isLoading: false,
   data: null,
-  status: -2,
-  clockStatus: -2,
+  status: -2,  
   paginator: 0,  
+  pageCount: 0,
   clockStatus: 0,
 };
 export const work = (state = defaultState, action) => {
@@ -26,10 +26,11 @@ export const work = (state = defaultState, action) => {
         paginator: action.paginator,
         status: -2,
       };
-    case GET_WORK_SUCCESS: 
+    case GET_WORK_SUCCESS:       
       return {
         ...state,
         data: action.response.data,
+        pageCount: action.response.paginationCount,
         isLoading: false
       }
     case GET_WORK_FAILURE:
