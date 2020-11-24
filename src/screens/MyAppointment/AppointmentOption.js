@@ -5,7 +5,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  PermissionsAndroid
+  PermissionsAndroid,
+  Modal
 } from "react-native";
 
 import { navigate } from 'src/utils/navigation';
@@ -13,15 +14,27 @@ import Menu from '../../components/Menu';
 import Theme from '../../theme/Theme';
 import Geolocation from '@react-native-community/geolocation';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
-import {
-  getAppointmentDetailAction,
-  cancelAppointmentAction
-} from "../../store/Appointment/action";
-
+import ConfirmView from 'src/components/ConfirmView'
 import {connect} from 'react-redux'
 import Spinner from 'react-native-loading-spinner-overlay';
 import moment from "moment"
+import styled from 'styled-components/native'
+import {SetClockInOutAction} from 'src/store/Work/action'
+import {getAppointmentDetailAction} from 'src/store/Appointment/action'
+import { TextInput } from "react-native-paper";
 
+const serviceSize = [
+  '',
+  '600-900 SQ',
+  '900-1200 SQ',
+  '1200-1600 SQ',
+  '1600-2000 SQ',
+  '2000-2500 SQ',
+  '2500-2900 SQ',
+  '2900-3200 SQ',
+  '3200-3500 SQ',
+  '3500 SQ or more'
+]
 class AppointmentOption extends React.Component {
   state = {
     hashed_id: this.props.navigation.state?.params?.hashed_id,
@@ -32,7 +45,7 @@ class AppointmentOption extends React.Component {
     show: false,
     showdate: false,
     showtime: false,
-    modalOption: false,
+    isVisible: false,
     markers: [],
     initialPosition: 'unknown',
     lastPosition: 'unknown',
@@ -58,7 +71,7 @@ class AppointmentOption extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log ("hashed_id", this.props.navigation.state?.params?.hashed_id)
+    console.log ("aaaaccc", this.props.data?.data)
     if (prevProps.navigation.state?.params?.hashed_id != this.props.navigation.state?.params?.hashed_id)      
       this.setState({ hashed_id: this.props.navigation.state?.params?.hashed_id })
 
@@ -76,8 +89,7 @@ class AppointmentOption extends React.Component {
         time: new Date(item.service_time),
         show: false,
         showdate: false,
-        showtime: false,
-        modalOption: false,
+        showtime: false,        
       })
     }
   }
@@ -154,105 +166,17 @@ class AppointmentOption extends React.Component {
         (error) => {
           that.setState({loading: false})
         },
-        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+        { enableHighAccuracy: false}
      );
-  }
-
-
-  onRegionChange(region, lastLat, lastLong) {
-
   }  
 
-  onChangeCurrentPassword = (text) => {
-    this.setState({currentPwd: text});
+  onOK = () => {
+    this.setState ({isVisible: false})
+    this.props.setClcokInOut(this.props.token)
+    navigate ('JobResult')
   }
-  onChangeNewPassword = (text) => {
-    this.setState({newPwd: text});
-  }
-  onChangeConfirmPassword = (text) => {
-    this.setState({confirmPwd: text});
-  }
-
-  onChangeDateTime = (event, selectedDate) => {
-    this.setState({show: false})
-
-    if(selectedDate == undefined) 
-      return;
-
-    this.setState ( {
-      showtime: Platform.OS === 'ios',
-      datetime: selectedDate,
-    })
-  }
-  onChangeDate = (event, selectedDate) => {
-    this.setState({showdate: false})
-
-    if(selectedDate == undefined) 
-      return;
-
-    this.setState ( {
-      showtime: Platform.OS === 'ios',
-      date: selectedDate,
-      showtime: true
-    })
-  }
-
-  onChangeTime = (event, selectedDate) => {
-    this.setState({showtime: false})
-
-    if(selectedDate == undefined) 
-      return;
-
-    this.setState ( {
-      showtime: Platform.OS === 'ios',
-      time: selectedDate,
-    })
-  }
-  
-  onPressDateTime = () => {
-    if ( Platform.OS === 'ios' )
-      this.setState({show: true});
-    else
-      this.setState({showdate: true});
-  }
-
-  onPressedOptions () {
-    const { modalOption } = this.state;
-    this.setState({modalOption: !modalOption})
-  }
-
-  onPressSendMessage = () => {
-    this.setState({modalOption: false});
-    navigate("NewMessage");
-  }
-
-  onPressViewEstimate = () => {
-    const { data } = this.state;
-    const estimate = data?.estimate;
-    
-    this.setState({modalOption: false});
-    navigate('PersonalInfo', {accept: true, hashedId: estimate?.hashed_id})
-  }
-
-  onPressCancel = () => {
-    this.setState({modalOption: false});
-    const { hashed_id } = this.state;
-    if ( hashed_id == undefined)
-      return;
-
-    let data = {
-      hashed_id, // "f7e0b956540676a129760a3eae309294" // appointment's hashed_id
-    }
-
-    this.props.cancelAppointment(data, this.props.token)
-  }
-
-  onPressedReuestNew () {
-    const { data } = this.state;
-    const estimate = data?.estimate;
-
-    this.setState({modalOption: false});
-    navigate('AppointmentOne', {hashed_id: estimate?.hashed_id});
+  onCancel = () => {
+    this.setState ({isVisible: false})
   }
 
   render() {
@@ -265,130 +189,116 @@ class AppointmentOption extends React.Component {
           visible={this.props.isLoading}
           textContent={'Loading...'}
           textStyle={{color:'#FFF'}}
-        />
+        />        
         <Menu title="Job" message={false} back={true}/>
-            <View style={{marginTop: 30, alignItems: "center"}}>
-              <Text style={styles.texttitle}>
-                Job #{data?.id}
-              </Text>
-              <Text style={styles.text2}>
-                Job Details
-              </Text>
-            </View>
+        { this.props.clockStatus == 0 ? 
+            <ClockButton onPress={()=>this.setState ({isVisible: true})}>
+              <ButtonTitle>Begin Job</ButtonTitle>
+            </ClockButton>: 
+            <ClockButton onPress={()=>this.setState ({isVisible: true})}>
+              <ButtonTitle>Complete Job</ButtonTitle>
+            </ClockButton>
+        }
+        <View style={{marginTop: 30, alignItems: "center"}}>
+          <Text style={styles.texttitle}>
+            Job #{data?.id}
+          </Text>
+          <Text style={styles.text2}>
+            Job Details
+          </Text>
+        </View>
+        <View style={styles.body}>
+          <View style={styles.itemGroup}>
+            <Text style={styles.title}>{estimate?.customer_name}</Text>
+          </View>          
+          <View style={styles.itemGroup}>
+            <Text style={styles.title}>{estimate?.address}</Text>
+          </View>
+        </View>
 
-            <View style={styles.body}>
-              <View style={styles.itemGroup}>
-                <Text style={styles.title}>{estimate?.customer_name}</Text>
-              </View>
-              <View style={styles.itemGroup}>
-                <Text style={styles.title}>{estimate?.customer_email}</Text>
-              </View>
-              <View style={styles.itemGroup}>
-                <Text style={styles.title}>{estimate?.customer_phone}</Text>
-              </View>
-              <View style={styles.itemGroup}>
-                <Text style={styles.title}>{estimate?.address}</Text>
-              </View>
-            </View>
+        <View style={{marginTop: 30, alignItems: "center"}}>
+          <Text style={styles.text2}>          
+          {moment(data?.service_date ).format('MMM Do YYYY')} {"\n"}at {data?.service_time}
+          </Text>
+        </View>
 
-            <View style={{marginTop: 30, alignItems: "center"}}>
-              <Text style={styles.text2}>
-              {/* {moment(data?.service_date ).format('MMM Do YYYY')} {"\n"}at { moment(this.state.datetime).format('h:mm A') } */}
-              {moment(data?.service_date ).format('MMM Do YYYY')} {"\n"}at {data?.service_time}
-              </Text>
-            </View>
-
-            <View style={styles.mapGroup}>
-              {/* {this.state.initialRegion != "" && markers.length > 0 &&
-                <MapView
-                  initialRegion={this.state.initialRegion}
-                  provider={PROVIDER_GOOGLE}
-                  tintColor={null}
-                  mapType="standard" // standard, none, satellite, hybrid, terrain, mutedStandard(iOS 11.0+ only)
-                  style={styles.map}
-                  onRegionChange={this.onRegionChange}
-                  >
-                    { markers.map((marker) => (
-                        <Marker
-                          coordinate={marker.latlng}
-                          title={marker.title}
-                          description={marker.description}
-                        ></Marker>
-                      ))
-                    }
-                </MapView>
-              } */}
-            </View>
-
-            {this.state.modalOption == true ? (
-              <View style={{marginTop: -90, alignItems: 'center'}}>
-                <View style={{width: "70%"}}>
-                      <View style={styles.optionModal}>
-                        <TouchableOpacity onPress={()=>this.onPressSendMessage()}>
-                          <View style={{paddingTop: 18, paddingBottom: 6}} >
-                            <Text style={styles.textmodal}>
-                              Send message
-                            </Text>
-                          </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>this.onPressCancel()}>
-                          <View style={{paddingVertical: 6}} >
-                            <Text style={styles.textmodal}>
-                              Cancel Appointment
-                            </Text>
-                          </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>this.onPressViewEstimate()}>
-                          <View style={{paddingVertical: 6}} >
-                            <Text style={styles.textmodal}>
-                              View Estimate Details
-                            </Text>
-                          </View>
-                        </TouchableOpacity>
-                    </View>
-                    
-                  <View  style={styles.btnWrapper}>
-                  <TouchableOpacity onPress={() =>this.onPressedOptions()}>
-                    <Text style={styles.btn}>
-                      Options
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-
-                <View  style={styles.btnWrapper}>
-                  <TouchableOpacity onPress={()=>this.onPressViewEstimate()}>
-                    <Text style={styles.btn}>
-                      View Estimate
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-            ) : (
-            <View style={{marginTop: 50, alignItems: 'center'}}>
-                <View style={{width: "70%"}}>
-                    
-                  <View  style={styles.btnWrapper}>
-                    <TouchableOpacity onPress={() => this.setState({modalOption: true})}>
-                      <Text style={styles.btn}>
-                        Options
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-
-                  <View  style={styles.btnWrapper}>
-                    <TouchableOpacity onPress={()=>navigate('PersonalInfo', {accept: true, hashedId: estimate?.hashed_id})}>
-                      <Text style={styles.btn}>
-                        View Estimate
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-            </View>
-            )
+        <View style={styles.mapGroup}>
+          {this.state.initialRegion != "" && markers.length > 0 &&
+            <MapView
+              initialRegion={this.state.initialRegion}
+              provider={PROVIDER_GOOGLE}
+              tintColor={null}
+              mapType="standard" // standard, none, satellite, hybrid, terrain, mutedStandard(iOS 11.0+ only)
+              style={styles.map}
+              onRegionChange={this.onRegionChange}
+              >
+                { markers.map((marker) => (
+                    <Marker
+                      coordinate={marker.latlng}
+                      title={marker.title}
+                      description={marker.description}
+                    ></Marker>
+                  ))
+                }
+            </MapView>
           }
+        </View>
+        <View style={{width: '100%', alignItems: 'center'}}>
+          <Text style={{fontSize: 18}}>Tap on map for directions</Text>           
+        </View>
+        <JobContainer>
+          <JobTitleContainer>            
+            <Text style={{fontSize: 28}}>Job Details</Text>
+          </JobTitleContainer>
+          <JobItemContainer>            
+            <JobItemTitle>{this.state.data?.st.service_type.name}</JobItemTitle>
+          </JobItemContainer>
+          <JobItemContainer>            
+            <JobItemTitle>{this.state.data?.estimate.bedrooms} bedrooms</JobItemTitle>
+          </JobItemContainer>
+          <JobItemContainer>            
+            <JobItemTitle>{this.state.data?.estimate.bathrooms} bathrooms</JobItemTitle>
+          </JobItemContainer>
+          <JobItemContainer>            
+            <JobItemTitle>{serviceSize[this.state.data?.estimate.service_size_id]} home</JobItemTitle>
+          </JobItemContainer>
+          <RequestContainer>
+            <JobItemTitle>Special Resquests</JobItemTitle>
+            <Input
+              // placeholder = "Read only"
+              value={this.state.data?.special_request}
+              multiline={true}
+              editable = {false}
+              textAlignVertical = "top"              
+            />
+          </RequestContainer>
+          <RequestContainer>
+            <JobItemTitle>Internal Notes</JobItemTitle>
+            <Input
+              // placeholder = "Read only"
+              multiline={true}
+              editable = {false}
+              textAlignVertical = "top"
+              value={this.state.data?.internal_notes}            
+            />
+          </RequestContainer>
+        </JobContainer>        
         </ScrollView>
-
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={this.state.isVisible}        
+        >
+          <ModalContainer
+            activeOpacity={1}  
+            onPressOut={()=>this.setState({isVisible: false})}          
+          >
+            <ConfirmView 
+              onOK = {this.onOK}
+              onCancel = {this.onCancel}
+            />
+          </ModalContainer>   
+        </Modal>
       </View>
     );
   }
@@ -399,15 +309,15 @@ const mapStateToProps = (state) => {
     token: state.auth.token,
     isLoading: state.appointment.isLoading,
     status: state.appointment.status,
-    data: state.appointment.appointment
+    data: state.appointment.appointment,
+    clockStatus: state.work.clockStatus
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAppointmentDetail: (data, token) => dispatch(getAppointmentDetailAction(data,token)),
-    cancelAppointment: (data, token) => dispatch(cancelAppointmentAction(data,token)),
-    
+    getAppointmentDetail: (data, token) => dispatch(getAppointmentDetailAction(data,token)),   
+    setClcokInOut: (token) => dispatch(SetClockInOutAction(token)),      
   };
 };
 
@@ -445,15 +355,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: Theme.black,
     backgroundColor: Theme.primaryDark,
-  },
-  optionModal: {
-    zIndex: 1,
-    height: 150,
-    width: 220,
-    alignSelf: "flex-end",
-    borderRadius: 8,
-    backgroundColor: Theme.primaryDark
-  },
+  },  
   btn: {
     color: Theme.white,
     fontSize: Theme.fontSubTitle,
@@ -491,14 +393,68 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightgrey',
     justifyContent: "center",
     alignItems: "center",
-  },
-  textmodal: {
-    textAlign: "center",
-    color: Theme.white,
-    fontSize: Theme.fontText,
-  },
+  },  
   map: {
     width: "100%",
     height: "100%"
   },
 });
+
+
+const ClockButton = styled (TouchableOpacity)`
+  width: 100%;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  margin-top: 2px;
+`
+const ButtonTitle = styled (Text)`
+  font-size: 20px;
+  color: white;  
+`
+
+const ModalContainer = styled (TouchableOpacity)`
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+`
+const JobContainer = styled (View)`
+  padding-horizontal: 20px;
+  align-items: center;
+  margin-top: 30px;
+`
+const JobTitleContainer = styled (View)`
+  width: 100%;
+  padding-vertical: 10px;
+  border-bottom-color: gray;
+  border-bottom-width: 1px;
+  align-items: center;
+`
+const JobItemContainer = styled (View)`
+  width: 100%;
+  padding-vertical: 10px;
+  border-bottom-color: gray;
+  border-bottom-width: 1px;
+`
+const JobItemTitle = styled(Text)`
+  font-size: 20px;
+  padding-left: 40px;
+`
+const RequestContainer = styled (View)`
+  width: 100%;
+  padding-vertical: 10px;  
+`
+const Input = styled (TextInput)`
+  width: 80%;
+  height: 90px;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: gray;
+  background-color: white;
+  margin-left: 20px;
+  margin-top: 10px;
+  text-align-vertical: top;  
+`

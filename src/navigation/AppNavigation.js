@@ -16,6 +16,7 @@ import AuthLoadingScreen from 'src/screens/AuthLoadingScreen';
 import AppointmentOne from 'src/screens/MyAppointment/AppointmentOne';
 import AppointmentOption from 'src/screens/MyAppointment/AppointmentOption';
 import MyAppointment from 'src/screens/MyAppointment/MyAppointment';
+import JobResult from 'src/screens/MyAppointment/JobResult';
 
 import {
   View,
@@ -43,7 +44,8 @@ const AppStack = createStackNavigator(
     WorkResult,
     AppointmentOne,
     MyAppointment,
-    AppointmentOption
+    AppointmentOption,
+    JobResult
   },
   {
     initialRouteName: 'Resources',
