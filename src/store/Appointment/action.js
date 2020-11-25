@@ -7,11 +7,10 @@ import {
   CANCEL_APPOINTMENT,
 } from './types';
 
-export function getAllAppointmentsAction(data, token) {
+export function getAllAppointmentsAction(token) {
   return {
     type: GET_ALL_APPOINTMENTS,
-    token,
-    data
+    token    
   };
 }
 

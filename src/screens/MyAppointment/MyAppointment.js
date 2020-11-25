@@ -10,7 +10,7 @@ import {
 import { navigate } from 'src/utils/navigation';
 import Menu from '../../components/Menu';
 import Theme from '../../theme/Theme';
-import { getEstimateAppointmentsAction, getAllAppointmentsAction } from "../../store/Appointment/action";
+import { getAllAppointmentsAction } from "../../store/Appointment/action";
 import {connect} from 'react-redux'
 import Spinner from 'react-native-loading-spinner-overlay';
 
@@ -21,21 +21,20 @@ class MyAppointment extends React.Component {
     data: [],
   };
 
-  componentDidMount () {
-    if (!this.props.token) {
-      navigate('LoginScreen')
-      return
-    }
-    else this.getEstimateAppointments(this.props.navigation.state?.params?.hashed_id);
+  componentDidMount () {   
+
+    const { navigation } = this.props
+    this.focusListener = navigation.addListener("didFocus", () => {
+      console.log ("navigation status....", this.props.navigation.state?.params?.todayStatus)
+      if (!this.props.token) {
+        navigate('LoginScreen')
+        return
+      }
+      else this.props.getAllAppointments (this.props.token);
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if ( prevProps.navigation.state?.params?.hashed_id != this.props.navigation.state?.params?.hashed_id ||
-        this.props.status == 200 ) {
-       this.setState({hashed_id: this.props.navigation.state?.params?.hashed_id})
-       this.getEstimateAppointments(this.props.navigation.state?.params?.hashed_id);
-    }
-
     if (prevProps.data != this.props.data) {
       let newData = [];
       this.props.data?.forEach(item => {
@@ -53,18 +52,7 @@ class MyAppointment extends React.Component {
       });
       this.setState({ data: newData });
     }
-  }
-
-  getEstimateAppointments(hashed_id) {
-    let data = {
-      hashed_id, //: "6c4b761a28b734fe93831e3fb400ce87" // estimate's hashed_id
-    }
-
-    if( hashed_id == undefined || hashed_id == null )
-      this.props.getAllAppointments([], this.props.token)
-    else
-      this.props.getEstimateAppointments(data, this.props.token)
-  }
+  } 
 
   onChangeDescription = (text) => {
     this.setState({description: text});
@@ -141,9 +129,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    getEstimateAppointments: (data, token) => dispatch(getEstimateAppointmentsAction(data,token)),
-    getAllAppointments: (data, token) => dispatch(getAllAppointmentsAction(data,token))
+  return {    
+    getAllAppointments: (token) => dispatch(getAllAppointmentsAction(token))
   };
 };
 

@@ -6,7 +6,9 @@ import {
   TouchableOpacity,
   ScrollView,
   PermissionsAndroid,
-  Modal
+  Modal,
+  Linking,
+  Platform
 } from "react-native";
 
 import { navigate } from 'src/utils/navigation';
@@ -21,6 +23,7 @@ import moment from "moment"
 import styled from 'styled-components/native'
 import {SetClockInOutAction} from 'src/store/Work/action'
 import {getAppointmentDetailAction} from 'src/store/Appointment/action'
+import Icon from 'react-native-vector-icons/Foundation'
 import { TextInput } from "react-native-paper";
 
 const serviceSize = [
@@ -179,6 +182,12 @@ class AppointmentOption extends React.Component {
     this.setState ({isVisible: false})
   }
 
+  openGoogleMap = () => {    
+    var scheme = Platform.OS === 'ios' ? 'maps:' : 'geo:';
+    var url = scheme + `${this.state.initialRegion?.longitude},${this.state.initialRegion?.latitude}`;
+    Linking.openURL(url);   
+  }
+
   render() {
     const { markers, data } = this.state;
     const estimate = data?.estimate;
@@ -231,7 +240,10 @@ class AppointmentOption extends React.Component {
               mapType="standard" // standard, none, satellite, hybrid, terrain, mutedStandard(iOS 11.0+ only)
               style={styles.map}
               onRegionChange={this.onRegionChange}
-              >
+              >                
+                <GoogleMapButton onPress={this.openGoogleMap} >
+                  <Icon name="thumbnails" size={25} color="gray" />
+                </GoogleMapButton>                
                 { markers.map((marker) => (
                     <Marker
                       coordinate={marker.latlng}
@@ -457,4 +469,13 @@ const Input = styled (TextInput)`
   margin-left: 20px;
   margin-top: 10px;
   text-align-vertical: top;  
+`
+const GoogleMapButton = styled (TouchableOpacity)`
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 10px;
+  top: 10px;
 `

@@ -23,10 +23,10 @@ import { SetTokenAction } from 'src/store/Auth/action'
 import {removeStorage, replaceToken} from 'src/utils/global'
 
 export function* getAllAppointmentsSaga(action) {
-  const { token, data } = action  
+  const { token } = action  
   let response = null;
     try {
-      response = yield getAllAppointments(data, token);
+      response = yield getAllAppointments(token);
       if ( response.status == 1) {
         yield put({ type: GET_ALL_APPOINTMENTS_SUCCESS, response });
       }
@@ -34,7 +34,7 @@ export function* getAllAppointmentsSaga(action) {
         replaceToken (response.token)
         yield put(SetTokenAction(response.token, null))
 
-        response = yield getAllAppointments(data, response.token)
+        response = yield getAllAppointments(response.token)
         if (response.status == 1) {
           yield all([
             put({ type: GET_ALL_APPOINTMENTS_SUCCESS, response }),

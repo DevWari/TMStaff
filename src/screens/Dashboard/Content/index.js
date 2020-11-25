@@ -17,7 +17,7 @@ const Content = (props) => {
         <TabButton style={{backgroundColor: 'red'}} onPress={()=>navigate('WorkScreen')}>
           <TabBarTitle>Clock in/out</TabBarTitle>
         </TabButton>
-        <TabButton style={{backgroundColor: '#15892E'}}>
+        <TabButton style={{backgroundColor: '#15892E'}} onPress={()=>navigate('MyAppointment', {todayStatus: 1})}>
           <TabBarTitle>Today's Jobs</TabBarTitle>
         </TabButton>
       </TabBarContainer>

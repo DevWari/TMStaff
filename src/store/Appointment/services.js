@@ -1,6 +1,6 @@
 import { API_URL } from 'src/utils/config';
 
-export const getAllAppointments = (data, token) => {
+export const getAllAppointments = (token) => {
   const url = API_URL + "get-appointments";
   
   return fetch(url, {
