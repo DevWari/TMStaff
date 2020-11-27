@@ -8,6 +8,7 @@ import {
   getExtraServices,
   addAppointment,
   cancelAppointment,
+  getAllAppointmentsDate
 } from './services';
 
 import {
@@ -16,7 +17,8 @@ import {
   GET_APPOINTMENT_DETAIL_SUCCESS, GET_APPOINTMENT_DETAIL_FAILURE,
   GET_EXTRA_SERVICES_SUCCESS, GET_EXTRA_SERVICES_FAILURE,
   ADD_APPOINTMENT_SUCCESS, ADD_APPOINTMENT_FAILURE,
-  CANCEL_APPOINTMENT_SUCCESS, CANCEL_APPOINTMENT_FAILURE
+  CANCEL_APPOINTMENT_SUCCESS, CANCEL_APPOINTMENT_FAILURE,
+  GET_ALL_APPOINTMENTS_DATE_SUCCESS, GET_ALL_APPOINTMENTS_DATE_FAILURE
 } from './types';
 import { Alert } from 'react-native';
 import { SetTokenAction } from 'src/store/Auth/action'
@@ -56,6 +58,39 @@ export function* getAllAppointmentsSaga(action) {
     }
 }
 
+export function* getAllAppointmentsDateSaga(action) {
+  const { token } = action  
+  let response = null;
+    try {
+      response = yield getAllAppointmentsDate(token);
+      if ( response.status == 1) {
+        yield put({ type: GET_ALL_APPOINTMENTS_DATE_SUCCESS, response });
+      }
+      else if ( response.status == 2) {
+        replaceToken (response.token)
+        yield put(SetTokenAction(response.token, null))
+
+        response = yield getAllAppointmentsDate(response.token)
+        if (response.status == 1) {
+          yield all([
+            put({ type: GET_ALL_APPOINTMENTS_DATE_SUCCESS, response }),
+          ]);
+        }
+        else {
+          yield put(SetTokenAction(null, null))
+          removeStorage ()
+          navigate ('LoginScreen')
+        }
+      }
+      else {
+        yield put(SetTokenAction(null, null))
+        removeStorage ()
+        navigate('LoginScreen')
+      }
+    } catch (e) {
+      yield put({ type: GET_ALL_APPOINTMENTS_DATE_FAILURE });
+    }
+}
 export function* getEstimateAppointmentsSaga(action) {
   const { token, data } = action
     let response = null;

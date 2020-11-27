@@ -14,6 +14,14 @@ export function getAllAppointmentsAction(token) {
   };
 }
 
+export function getAllAppointmentsDateAction(data, token) {
+  return {
+    type: GET_ALL_APPOINTMENTS,
+    data,
+    token    
+  };
+}
+
 export function getEstimateAppointmentsAction(data, token) {
   return {
     type: GET_ESTIMATE_APPOINTMENTS,

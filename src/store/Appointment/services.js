@@ -20,6 +20,29 @@ export const getAllAppointments = (token) => {
   });
 };
 
+export const getAllAppointmentsDate = (data, token) => {
+
+  console.log ("date service....", data)
+  const url = API_URL + "get-appointments-by-date";
+  
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization:  `Bearer ${token}`,
+    },
+    body: JSON.stringify(data)
+  })
+  .then((response) => response.json())
+  .then((responseJson) => {
+     return responseJson
+  })
+  .catch((error) => {
+    return "error";
+  });
+};
+
 export const getEstimateAppointments = (data, token) => {
   const url = API_URL + "get-estimate-appointments";
   

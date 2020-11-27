@@ -27,6 +27,7 @@ import {
   getExtraServicesSaga,
   addAppointmentSaga,
   cancelAppointmentSaga,
+  getAllAppointmentsDateSaga
 } from './Appointment/sagas';
 
 /* Actions    */
@@ -42,6 +43,7 @@ import {
   GET_EXTRA_SERVICES,
   ADD_APPOINTMENT,
   CANCEL_APPOINTMENT,
+  GET_ALL_APPOINTMENTS_DATE
 } from './Appointment/types';
 
 const rootReducer = combineReducers({
@@ -67,6 +69,7 @@ function* watchAll() {
     takeEvery(CLOCK_IN_OUT, setClockInOutSaga),
 
     takeEvery(GET_ALL_APPOINTMENTS, getAllAppointmentsSaga),
+    takeEvery(GET_ALL_APPOINTMENTS_DATE, getAllAppointmentsDateSaga),
     takeEvery(GET_ESTIMATE_APPOINTMENTS, getEstimateAppointmentsSaga),
     takeEvery(GET_APPOINTMENT_DETAIL, getAppointmentDetailSaga),
     takeEvery(GET_EXTRA_SERVICES, getExtraServicesSaga),

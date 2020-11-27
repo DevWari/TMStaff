@@ -23,6 +23,10 @@ import {
   CANCEL_APPOINTMENT_SUCCESS,
   CANCEL_APPOINTMENT_FAILURE,
 
+  GET_ALL_APPOINTMENTS_DATE,
+  GET_ALL_APPOINTMENTS_DATE_SUCCESS,
+  GET_ALL_APPOINTMENTS_DATE_FAILURE,
+
 } from './types';
 
 export const defaultState = {
@@ -43,13 +47,33 @@ export const appointment = (state = defaultState, action) => {
         status: 1,
         isLoading: false
       };
-    case GET_ALL_APPOINTMENTS_SUCCESS: 
+    case GET_ALL_APPOINTMENTS_FAILURE: 
       return {
         ...state,
         isLoading: false,
         status: -2,
     }
     case GET_ALL_APPOINTMENTS:
+      return {
+        ...state,
+        appointments: [],
+        status: -2,
+        isLoading: true,
+      };
+    case GET_ALL_APPOINTMENTS_DATE_SUCCESS:
+      return {
+        ...state,
+        appointments: action.response?.data?.jobs,
+        status: 1,
+        isLoading: false
+      };
+    case GET_ALL_APPOINTMENTS_DATE_FAILURE: 
+      return {
+        ...state,
+        isLoading: false,
+        status: -2,
+    }
+    case GET_ALL_APPOINTMENTS_DATE:
       return {
         ...state,
         appointments: [],

@@ -5,11 +5,9 @@ import {
   Linking, 
   TouchableOpacity,
   ScrollView,
-
 } from 'react-native'
 import Menu from 'src/components/Menu'
 import styled from 'styled-components/native'
-
 
 const Resources = () => {
   return (

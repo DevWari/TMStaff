@@ -10,7 +10,7 @@ import {
 import { navigate } from 'src/utils/navigation';
 import Menu from '../../components/Menu';
 import Theme from '../../theme/Theme';
-import { getAllAppointmentsAction } from "../../store/Appointment/action";
+import { getAllAppointmentsAction, getAllAppointmentsDateAction } from "src/store/Appointment/action";
 import {connect} from 'react-redux'
 import Spinner from 'react-native-loading-spinner-overlay';
 
@@ -21,18 +21,18 @@ class MyAppointment extends React.Component {
     data: [],
   };
 
-  componentDidMount () {   
-
+  componentDidMount () {       
     const { navigation } = this.props
-    this.focusListener = navigation.addListener("didFocus", () => {
-      console.log ("navigation status....", this.props.navigation.state?.params?.todayStatus)
+    console.log ("navigation status111....", this.props.navigation.state?.params?.todayStatus)
       if (!this.props.token) {
         navigate('LoginScreen')
         return
       }
-      else this.props.getAllAppointments (this.props.token);
-    })
-  }
+      else {
+        if (this.props.navigation.state?.params?.todayStatus == 0) this.props.getAllAppointments (this.props.token);
+        else this.props.getAllAppointmentsDate({Start_date: '2020-10-11'}, this.props.token)
+      }
+  }  
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.data != this.props.data) {
@@ -51,6 +51,11 @@ class MyAppointment extends React.Component {
         newData.push(temp);
       });
       this.setState({ data: newData });
+    }
+
+    if ( prevProps.navigation.state?.params?.todayStatus != this.props.navigation.state?.params?.todayStatus ) {       
+       if (this.props.navigation.state?.params?.todayStatus == 1) this.props.getAllAppointmentsDate({Start_date: '2020-10-11'}, this.props.token)
+       else this.props.getAllAppointments ()
     }
   } 
 
@@ -130,7 +135,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {    
-    getAllAppointments: (token) => dispatch(getAllAppointmentsAction(token))
+    getAllAppointments: (token) => dispatch(getAllAppointmentsAction(token)),
+    getAllAppointmentsDate: (data,token) => dispatch(getAllAppointmentsDateAction(data,token))
   };
 };
 
