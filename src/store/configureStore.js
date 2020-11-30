@@ -13,12 +13,14 @@ import { account } from './MyAccount/reducer';
 import { contact } from './Contact/reducer';
 import { work } from './Work/reducer';
 import { appointment } from './Appointment/reducer';
+import { courses } from './Courses/reducer';
 /* Sagas */
 
 import { loginSaga, logoutSaga, forgotPasswordSaga, setTokenSaga } from './Auth/sagas';
 import { loadProfileSaga, upadteProfileSaga } from './MyAccount/sagas';
 import { sendContactSaga } from './Contact/sagas';
 import { getWorkSaga, setClockInOutSaga } from './Work/sagas';
+import { getAllCoursesSaga, getCourseSaga } from './Courses/sagas';
 
 import {
   getAllAppointmentsSaga,
@@ -45,6 +47,7 @@ import {
   CANCEL_APPOINTMENT,
   GET_ALL_APPOINTMENTS_DATE
 } from './Appointment/types';
+import { GET_ALL_COURSES, GET_COURSE } from './Courses/types';
 
 const rootReducer = combineReducers({
   auth,  
@@ -52,6 +55,7 @@ const rootReducer = combineReducers({
   contact,
   work,
   appointment,
+  courses
 });
 
 const sagaMiddleware = createSagaMiddleware();
@@ -75,6 +79,8 @@ function* watchAll() {
     takeEvery(GET_EXTRA_SERVICES, getExtraServicesSaga),
     takeEvery(ADD_APPOINTMENT, addAppointmentSaga),
     takeEvery(CANCEL_APPOINTMENT, cancelAppointmentSaga),
+    takeEvery(GET_ALL_COURSES, getAllCoursesSaga),
+    takeEvery(GET_COURSE, getCourseSaga),
   ]);
 }
 

@@ -6,6 +6,7 @@ import LoginScreen from 'src/screens/LoginScreen';
 import Dashboard from 'src/screens/Dashboard';
 import MyAccount from 'src/screens/MyAccount';
 import Courses from 'src/screens/Courses';
+import CourseDetail from 'src/screens/CourseDetail';
 import RegisterScreen from 'src/screens/RegisterScreen';
 import ForgotScreen from 'src/screens/ForgotScreen';
 import Support from 'src/screens/Support';
@@ -45,7 +46,8 @@ const AppStack = createStackNavigator(
     AppointmentOne,
     MyAppointment,
     AppointmentOption,
-    JobResult
+    JobResult,   
+    CourseDetail 
   },
   {
     initialRouteName: 'Resources',

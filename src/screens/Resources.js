@@ -16,19 +16,16 @@ const Resources = () => {
         <Menu title="Resources" back={true} />
         <Title>Useful Links</Title>
         <Description>Tap on any link below to get started</Description>
-        <LinkButton>
+        <LinkButton onPress={()=>Linking.openURL('https://app.gusto.com/login')}>
           <ButtonTitle>Payroll - Gusto</ButtonTitle>
         </LinkButton>
-        <LinkButton>
+        <LinkButton onPress={()=>Linking.openURL('https://app.tinamaids.com/login')}>
           <ButtonTitle>Tina Maids SOP</ButtonTitle>
-        </LinkButton>
-        <LinkButton>
-          <ButtonTitle>Courses and Online Classes</ButtonTitle>
-        </LinkButton>
-        <LinkButton>
+        </LinkButton>        
+        <LinkButton onPress={()=>Linking.openURL('https://mailto:help@tinamaids.com')}>
           <ButtonTitle>Contact Local Branch</ButtonTitle>
         </LinkButton>
-        <LinkButton>
+        <LinkButton onPress={()=>Linking.openURL('https://tinamaids.com/locations')}>
           <ButtonTitle>Contact Corporate</ButtonTitle>
         </LinkButton>
       </Container>

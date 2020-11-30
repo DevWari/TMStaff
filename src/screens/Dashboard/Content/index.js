@@ -26,7 +26,7 @@ const Content = (props) => {
             <Image source={require('src/assets/img/dashboard/dash2.png')} />
             <Title>My Schedule</Title>
         </StyleButton>
-        <StyleButton onPress = {()=>Linking.openURL('https://app.tinamaids.com/courses-list')}>
+        <StyleButton onPress = {()=>navigate('Courses')}>
             <Image source={require('src/assets/img/dashboard/dash4.png')} />
             <Title>Courses</Title>
         </StyleButton>
