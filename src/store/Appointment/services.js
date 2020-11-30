@@ -1,8 +1,10 @@
 import { API_URL } from 'src/utils/config';
 
 export const getAllAppointments = (token) => {
-  const url = API_URL + "get-appointments";
-  
+
+  console.log ("appoinment service by all....")
+  console.log ("appoinment service by all....", token)
+  const url = API_URL + "get-appointments";  
   return fetch(url, {
     method: 'POST',
     headers: {
@@ -22,9 +24,10 @@ export const getAllAppointments = (token) => {
 
 export const getAllAppointmentsDate = (data, token) => {
 
-  console.log ("date service....", data)
-  const url = API_URL + "get-appointments-by-date";
-  
+  console.log ("appintment service by date....", data)
+  console.log ("appintment service by date....", token)
+  const url = API_URL + `get-appointments-by-date?start_date=${data.start_date}`;
+  console.log ("url....", url)
   return fetch(url, {
     method: 'POST',
     headers: {
@@ -36,6 +39,7 @@ export const getAllAppointmentsDate = (data, token) => {
   })
   .then((response) => response.json())
   .then((responseJson) => {
+    console.log ("service by data response...", responseJson)
      return responseJson
   })
   .catch((error) => {

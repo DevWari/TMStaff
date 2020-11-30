@@ -22,15 +22,14 @@ class MyAppointment extends React.Component {
   };
 
   componentDidMount () {       
-    const { navigation } = this.props
-    console.log ("navigation status111....", this.props.navigation.state?.params?.todayStatus)
+    const { navigation } = this.props    
       if (!this.props.token) {
         navigate('LoginScreen')
         return
       }
       else {
         if (this.props.navigation.state?.params?.todayStatus == 0) this.props.getAllAppointments (this.props.token);
-        else this.props.getAllAppointmentsDate({Start_date: '2020-10-11'}, this.props.token)
+        else this.props.getAllAppointmentsDate({start_date: '2020-10-11'}, this.props.token)
       }
   }  
 
@@ -54,8 +53,9 @@ class MyAppointment extends React.Component {
     }
 
     if ( prevProps.navigation.state?.params?.todayStatus != this.props.navigation.state?.params?.todayStatus ) {       
-       if (this.props.navigation.state?.params?.todayStatus == 1) this.props.getAllAppointmentsDate({Start_date: '2020-10-11'}, this.props.token)
-       else this.props.getAllAppointments ()
+       if (this.props.navigation.state?.params?.todayStatus == 1) this.props.getAllAppointmentsDate({start_date: '2020-10-11'}, this.props.token)
+       else this.props.getAllAppointments (this.props.token)
+      // console.log ('status...', this.props.navigation.state?.params?.todayStatus)
     }
   } 
 

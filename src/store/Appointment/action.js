@@ -1,5 +1,6 @@
 import {
   GET_ALL_APPOINTMENTS,
+  GET_ALL_APPOINTMENTS_DATE,
   GET_ESTIMATE_APPOINTMENTS,
   GET_APPOINTMENT_DETAIL,
   GET_EXTRA_SERVICES,
@@ -8,6 +9,8 @@ import {
 } from './types';
 
 export function getAllAppointmentsAction(token) {
+
+  console.log ("all appointment action....")
   return {
     type: GET_ALL_APPOINTMENTS,
     token    
@@ -15,8 +18,9 @@ export function getAllAppointmentsAction(token) {
 }
 
 export function getAllAppointmentsDateAction(data, token) {
+  console.log ("date appointment action....")
   return {
-    type: GET_ALL_APPOINTMENTS,
+    type: GET_ALL_APPOINTMENTS_DATE,
     data,
     token    
   };

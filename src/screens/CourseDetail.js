@@ -31,14 +31,16 @@ const CoursesDetail = (props) => {
   useEffect (()=> {    
     let videoTempArray = props.courseData?.videos.split("https://www.youtube.com/")
     let tempVideoList = []
-    videoTempArray.map ((item, index)=> {      
-      if (item.indexOf("embed/") > -1) {
-          let video = item.split(" ")[0].slice(0, -1)          
-          tempVideoList.push ("https://www.youtube.com/" + video)
-      }
-    })
-    console.log ("videoList...", tempVideoList)
-    setVideoList (tempVideoList)
+    if (videoTempArray) {
+      videoTempArray.map ((item, index)=> {      
+        if (item.indexOf("embed/") > -1) {
+            let video = item.split(" ")[0].slice(0, -1)          
+            tempVideoList.push ("https://www.youtube.com/" + video)
+        }
+      })
+      console.log ("videoList...", tempVideoList)
+      setVideoList (tempVideoList)
+    }    
   }, [props.courseData])
 
   useEffect (()=> {

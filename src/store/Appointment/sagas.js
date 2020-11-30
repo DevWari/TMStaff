@@ -59,18 +59,19 @@ export function* getAllAppointmentsSaga(action) {
 }
 
 export function* getAllAppointmentsDateSaga(action) {
-  const { token } = action  
+  const {data, token } = action  
   let response = null;
     try {
-      response = yield getAllAppointmentsDate(token);
+      response = yield getAllAppointmentsDate(data, token);
       if ( response.status == 1) {
         yield put({ type: GET_ALL_APPOINTMENTS_DATE_SUCCESS, response });
       }
       else if ( response.status == 2) {
+        console.log ("by date.... response...saga....", response)
         replaceToken (response.token)
         yield put(SetTokenAction(response.token, null))
 
-        response = yield getAllAppointmentsDate(response.token)
+        response = yield getAllAppointmentsDate(data, response.token)
         if (response.status == 1) {
           yield all([
             put({ type: GET_ALL_APPOINTMENTS_DATE_SUCCESS, response }),
