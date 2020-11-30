@@ -20,7 +20,7 @@ import { loginSaga, logoutSaga, forgotPasswordSaga, setTokenSaga } from './Auth/
 import { loadProfileSaga, upadteProfileSaga } from './MyAccount/sagas';
 import { sendContactSaga } from './Contact/sagas';
 import { getWorkSaga, setClockInOutSaga } from './Work/sagas';
-import { getAllCoursesSaga, getCourseSaga } from './Courses/sagas';
+import { getAllCoursesSaga, getCourseSaga, sendMarkCourseSaga } from './Courses/sagas';
 
 import {
   getAllAppointmentsSaga,
@@ -47,7 +47,7 @@ import {
   CANCEL_APPOINTMENT,
   GET_ALL_APPOINTMENTS_DATE
 } from './Appointment/types';
-import { GET_ALL_COURSES, GET_COURSE } from './Courses/types';
+import { GET_ALL_COURSES, GET_COURSE, SNED_MARK_COURSE } from './Courses/types';
 
 const rootReducer = combineReducers({
   auth,  
@@ -81,6 +81,7 @@ function* watchAll() {
     takeEvery(CANCEL_APPOINTMENT, cancelAppointmentSaga),
     takeEvery(GET_ALL_COURSES, getAllCoursesSaga),
     takeEvery(GET_COURSE, getCourseSaga),
+    takeEvery(SNED_MARK_COURSE, sendMarkCourseSaga),
   ]);
 }
 

@@ -5,13 +5,18 @@ import {
 
     GET_COURSE,
     GET_COURSE_SUCCESS,
-    GET_COURSE_FAILURE
+    GET_COURSE_FAILURE,
+
+    SNED_MARK_COURSE,
+    SNED_MARK_COURSE_SUCCESS,
+    SNED_MARK_COURSE_FAILURE
   } from './types';
   
   export const defaultState = {    
     isLoading: false,
     data: null,
     courseData: null,
+    markData: null,
     status: -2,
   };
   export const courses = (state = defaultState, action) => {
@@ -49,6 +54,25 @@ import {
           status: 1,
         }; 
       case GET_COURSE_FAILURE: 
+        return {
+          ...state,
+          isLoading: false,
+          status: -1,
+      }    
+      case SNED_MARK_COURSE: 
+        return {
+          ...state,
+          isLoading: true,
+          status: -2,
+        }
+      case SNED_MARK_COURSE_SUCCESS:
+        return {
+          ...state,
+          isLoading: false,
+          markData: action.response.data,
+          status: 1,
+        }; 
+      case SNED_MARK_COURSE_FAILURE: 
         return {
           ...state,
           isLoading: false,

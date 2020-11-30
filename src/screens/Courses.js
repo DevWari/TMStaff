@@ -36,7 +36,7 @@ const Courses = (props) => {
         <Title>Learning Center</Title>
         <Description>Choose a course below to get started</Description>        
         {
-          props.data && props.data.map ((item, index) => 
+          props.data && props.data.map (item => 
             <LinkButton 
               key={item.id}
               onPress={()=>navigate('CourseDetail', {item: item})}
