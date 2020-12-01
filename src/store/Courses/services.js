@@ -44,7 +44,7 @@ export const getCourse = (hashedId, token) => {
 };
 
 export const sendMarkCourse = (hashedId, token) => {
-    const url = API_URL + "complete-course";
+    const url = API_URL + " ";
     return fetch(url, {
       method: 'POST',
       headers: {

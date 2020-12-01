@@ -21,28 +21,30 @@ import {
     password: null,
     user: null,
     userName: null,
+    loginStatus: -2,
     status: -2,
   };
   export const auth = (state = defaultState, action) => {
     switch (action.type) {
-      case LOGIN_SUCCESS:        
+      case LOGIN_SUCCESS:             
         return {
           ...state,
           token: action.data.token,
           user: action.data.user,
-          userName: action.data.user.user.name,
+          userName: action.data.user?.user?.name,
           username: action.email,
           password: action.password,
-          status: action.data.status,
+          loginStatus: action.data.status,
           isLoading: false
         }; 
       case LOGIN_FAILURE: 
+        console.log ("login failure...")
         return {
           ...state,
           token: null,
           user: null,
           name: null,
-          status: -1,
+          loginStatus: -1,
           isLoading: false
       }
       case LOGIN:
@@ -52,7 +54,7 @@ import {
           token: null,
           user: null,
           name: null,
-          status: -2,
+          loginStatus: -2,
         }      
       case LOGOUT: 
         return {

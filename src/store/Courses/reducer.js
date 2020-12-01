@@ -69,7 +69,7 @@ import {
         return {
           ...state,
           isLoading: false,
-          markData: action.response.data,
+          markData: action.response.message,
           status: 1,
         }; 
       case SNED_MARK_COURSE_FAILURE: 

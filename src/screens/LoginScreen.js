@@ -20,23 +20,31 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 const LoginScreen = (props) => {
 
-  const [username, setUserName] = useState('geronco@gmail.com');
-  const [password, setPassword] = useState('change543');                
+  const [username, setUserName] = useState('christina@geronco.com');
+  const [password, setPassword] = useState('change543');                 
   // const [username, setUserName] = useState('');
   // const [password, setPassword] = useState('');
 
   useEffect (()=> {
-    async function setStorage() {
+    async function setStorage() {      
       try {
-        if (props.status == 1 && props.token && props.user) {
+        // if (props.status == 1 && props.token && props.user) {
+        //   await AsyncStorage.setItem("userToken", props.token)
+        //   await AsyncStorage.setItem("user", props.user.user.name)
+        //   await AsyncStorage.setItem("user_type", props.user.user?.user_type.toString())
+        //   await AsyncStorage.setItem("user_hash", props.user.user_hash)
+        //   console.log ("storage ok....")
+        //   navigate('App')
+        // }
+        if (props.status == 1 && props.token) {
           await AsyncStorage.setItem("userToken", props.token)
-          await AsyncStorage.setItem("user", props.user.user.name)
-          await AsyncStorage.setItem("user_type", props.user.user?.user_type.toString())
-          await AsyncStorage.setItem("user_hash", props.user.user_hash)
+          await AsyncStorage.setItem("user", 'aaaaa')
+          await AsyncStorage.setItem("user_type", '2')
+          await AsyncStorage.setItem("user_hash", "safasfdsadf12312")
           console.log ("storage ok....")
           navigate('App')
         }
-        else if (props.status == -1) {
+        else if (props.status == -1) {          
           Alert.alert("warning", "Your email or password is not correct!")
         }
         else {
@@ -99,7 +107,7 @@ const mapStateToProps = (state) => {
     token: state.auth.token,
     user: state.auth.user,
     isLoading: state.auth.isLoading,
-    status: state.auth.status
+    status: state.auth.loginStatus
   };
 };
 

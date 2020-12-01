@@ -14,15 +14,19 @@ import {
 export function* loginSaga(action) {
   const { email, password } = action;
   try {
-    const response = yield login(email, password);
-    const user = yield getUser(response.token);
-    const data = {
+    const response = yield login(email, password);  
+    console.log ("response...", response)  
+    // const user = yield getUser(response.token);
+    // console.log ("user....", user)
+    const data = {  
       token: response.token,
-      user: user.user,
+      // user: user.user,
+      user: {},
       status: response.status,
     }     
      yield put({ type: LOGIN_SUCCESS, data });    
   } catch (e) {
+    console.log ("error....", e)
     yield put({ type: LOGIN_FAILURE });
   }
 }
