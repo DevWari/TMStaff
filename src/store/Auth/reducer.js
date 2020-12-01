@@ -26,19 +26,19 @@ import {
   };
   export const auth = (state = defaultState, action) => {
     switch (action.type) {
-      case LOGIN_SUCCESS:             
+      case LOGIN_SUCCESS:      
+        console.log ("user...reducer..", action.data.user)       
         return {
           ...state,
           token: action.data.token,
           user: action.data.user,
-          userName: action.data.user?.user?.name,
-          username: action.email,
+          userName: action.data.user?.name,
+          username: action.email,          
           password: action.password,
           loginStatus: action.data.status,
           isLoading: false
         }; 
-      case LOGIN_FAILURE: 
-        console.log ("login failure...")
+      case LOGIN_FAILURE:         
         return {
           ...state,
           token: null,

@@ -40,7 +40,7 @@ export const refreshToken = (token) => {
 };
 
 export const getUser = (token) => {
-  const url = API_URL + "user";
+  const url = API_URL + "get-user-info";
   return fetch(url, {
     method: 'POST',
     headers: {

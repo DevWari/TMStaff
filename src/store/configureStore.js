@@ -14,6 +14,7 @@ import { contact } from './Contact/reducer';
 import { work } from './Work/reducer';
 import { appointment } from './Appointment/reducer';
 import { courses } from './Courses/reducer';
+import { chats } from './Chat/reducer';
 /* Sagas */
 
 import { loginSaga, logoutSaga, forgotPasswordSaga, setTokenSaga } from './Auth/sagas';
@@ -32,6 +33,17 @@ import {
   getAllAppointmentsDateSaga
 } from './Appointment/sagas';
 
+import { 
+  getChatsSaga,
+  getChatsHistorySaga,
+  getChatMessagesSaga,
+  getMessageDetailSaga,
+  replyMessageSaga,
+  newChatConversationSaga,
+  moveChatToHistorySaga,
+  getUnreadMessagesSaga
+} from './Chat/sagas';
+
 /* Actions    */
 import { LOGIN, LOG_OUT, FORGOT_PASSWORD, SET_TOKEN } from './Auth/types';
 import { LOAD_PROFILE, UPDATE_PROFILE } from './MyAccount/types';
@@ -47,6 +59,18 @@ import {
   CANCEL_APPOINTMENT,
   GET_ALL_APPOINTMENTS_DATE
 } from './Appointment/types';
+
+import {
+  GET_CHATS,
+  GET_CHATS_HISTORY,
+  GET_CHAT_MESSAGES,
+  GET_MESSAGE_DETAIL,
+  REPLY_MESSAGE,
+  NEW_CONVERSATION,
+  MOVE_CHAT_HISTORY,
+  GET_UNREAD_MESSAGES
+} from './Chat/types';
+
 import { GET_ALL_COURSES, GET_COURSE, SNED_MARK_COURSE } from './Courses/types';
 
 const rootReducer = combineReducers({
@@ -55,7 +79,8 @@ const rootReducer = combineReducers({
   contact,
   work,
   appointment,
-  courses
+  courses,
+  chats,
 });
 
 const sagaMiddleware = createSagaMiddleware();
@@ -82,6 +107,15 @@ function* watchAll() {
     takeEvery(GET_ALL_COURSES, getAllCoursesSaga),
     takeEvery(GET_COURSE, getCourseSaga),
     takeEvery(SNED_MARK_COURSE, sendMarkCourseSaga),
+
+    takeEvery(GET_CHAT_MESSAGES, getChatMessagesSaga),
+    takeEvery(GET_MESSAGE_DETAIL, getMessageDetailSaga),
+    takeEvery(REPLY_MESSAGE, replyMessageSaga),
+    takeEvery(NEW_CONVERSATION, newChatConversationSaga),
+    takeEvery(MOVE_CHAT_HISTORY, moveChatToHistorySaga),
+    takeEvery(GET_UNREAD_MESSAGES, getUnreadMessagesSaga),
+    akeEvery(GET_CHATS, getChatsSaga),
+    takeEvery(GET_CHATS_HISTORY, getChatsHistorySaga),
   ]);
 }
 

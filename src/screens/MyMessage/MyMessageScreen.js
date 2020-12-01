@@ -233,7 +233,7 @@ class MyMessageScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    token: state.session.token,
+    token: state.auth.token,
     isLoading: state.chats.isLoading,
     status: state.chats.status,
     chatsData: state.chats.chats,

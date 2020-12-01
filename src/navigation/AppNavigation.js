@@ -19,6 +19,12 @@ import AppointmentOption from 'src/screens/MyAppointment/AppointmentOption';
 import MyAppointment from 'src/screens/MyAppointment/MyAppointment';
 import JobResult from 'src/screens/MyAppointment/JobResult';
 
+import MyMessageScreen from '../screens/MyMessage/MyMessageScreen';
+import NewMessage from '../screens/MyMessage/NewMessage';
+import MessageList from '../screens/MyMessage/MessageList';
+import MessageDetail from '../screens/MyMessage/MessageDetail';
+import MessageReply from '../screens/MyMessage/MessageReply';
+
 import {
   View,
   Image,
@@ -47,7 +53,13 @@ const AppStack = createStackNavigator(
     MyAppointment,
     AppointmentOption,
     JobResult,   
-    CourseDetail 
+    CourseDetail,
+
+    MyMessageScreen,
+    NewMessage,
+    MessageList,
+    MessageDetail,
+    MessageReply
   },
   {
     initialRouteName: 'Resources',

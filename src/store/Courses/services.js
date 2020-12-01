@@ -44,15 +44,17 @@ export const getCourse = (hashedId, token) => {
 };
 
 export const sendMarkCourse = (hashedId, token) => {
+    console.log ("hashed_id...", hashedId)
+    console.log ("token...", token)
     const url = API_URL + " ";
     return fetch(url, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization:  `Bearer ${token}`, 
+        Authorization:  `Bearer ${token}`,  
       },
-      body: JSON.stringify({hashed_id: hashedId})
+      body: JSON.stringify({id: hashedId})
     })
     .then((response) => response.json())
     .then((responseJson) => {

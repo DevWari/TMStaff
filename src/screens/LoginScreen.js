@@ -7,8 +7,6 @@ import {
   ImageBackground, 
   ScrollView,
   Alert
- 
-
 } from 'react-native';
 import styled from 'styled-components/native';
 import { Colors } from 'src/theme';
@@ -21,29 +19,24 @@ import Spinner from 'react-native-loading-spinner-overlay';
 const LoginScreen = (props) => {
 
   const [username, setUserName] = useState('christina@geronco.com');
-  const [password, setPassword] = useState('change543');                 
+  const [password, setPassword] = useState('change543');       
+  // const [username, setUserName] = useState('geronco@gmail.com');
+  // const [password, setPassword] = useState('change543');          
   // const [username, setUserName] = useState('');
   // const [password, setPassword] = useState('');
 
   useEffect (()=> {
     async function setStorage() {      
       try {
-        // if (props.status == 1 && props.token && props.user) {
-        //   await AsyncStorage.setItem("userToken", props.token)
-        //   await AsyncStorage.setItem("user", props.user.user.name)
-        //   await AsyncStorage.setItem("user_type", props.user.user?.user_type.toString())
-        //   await AsyncStorage.setItem("user_hash", props.user.user_hash)
-        //   console.log ("storage ok....")
-        //   navigate('App')
-        // }
-        if (props.status == 1 && props.token) {
-          await AsyncStorage.setItem("userToken", props.token)
-          await AsyncStorage.setItem("user", 'aaaaa')
-          await AsyncStorage.setItem("user_type", '2')
-          await AsyncStorage.setItem("user_hash", "safasfdsadf12312")
-          console.log ("storage ok....")
+        console.log ("status ok....", props.user)
+        if (props.status == 1 && props.token && props.user) {
+          console.log ("storage ok111....")
+          await AsyncStorage.setItem("userToken", props.token)          
+          await AsyncStorage.setItem("user", props.user.name)
+          await AsyncStorage.setItem("user_type", props.user?.user_type.toString())
+          await AsyncStorage.setItem("user_hash", props.user.user_hash)          
           navigate('App')
-        }
+        }        
         else if (props.status == -1) {          
           Alert.alert("warning", "Your email or password is not correct!")
         }

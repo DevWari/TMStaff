@@ -16,23 +16,20 @@ export function* loginSaga(action) {
   try {
     const response = yield login(email, password);  
     console.log ("response...", response)  
-    // const user = yield getUser(response.token);
-    // console.log ("user....", user)
+    const user = yield getUser(response.token);
+    console.log ("user....", user)
     const data = {  
       token: response.token,
-      // user: user.user,
-      user: {},
+      user: user.data,      
       status: response.status,
     }     
      yield put({ type: LOGIN_SUCCESS, data });    
-  } catch (e) {
-    console.log ("error....", e)
+  } catch (e) {    
     yield put({ type: LOGIN_FAILURE });
   }
 }
 
 export function* setTokenSaga(action) {
-
   console.log ("Set Token Saga......", action)
   const {token, user} = action
   try {
