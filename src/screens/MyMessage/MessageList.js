@@ -135,7 +135,6 @@ class MessageList extends React.Component {
 
   render() {
     const { loading, selected, chatMessages } = this.state;
-
     return (
       <View style={styles.container}>
         <Menu title="My Messages" message={false}/>

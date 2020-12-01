@@ -44,8 +44,8 @@ class Inbox extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    token: state.session.token,
-    user: state.session?.user?.user,
+    token: state.auth.token,
+    user: state.auth?.user,
     isLoading: state.chats.isLoading,
     status: state.chats.status,
   };

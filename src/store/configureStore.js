@@ -114,7 +114,7 @@ function* watchAll() {
     takeEvery(NEW_CONVERSATION, newChatConversationSaga),
     takeEvery(MOVE_CHAT_HISTORY, moveChatToHistorySaga),
     takeEvery(GET_UNREAD_MESSAGES, getUnreadMessagesSaga),
-    akeEvery(GET_CHATS, getChatsSaga),
+    takeEvery(GET_CHATS, getChatsSaga),
     takeEvery(GET_CHATS_HISTORY, getChatsHistorySaga),
   ]);
 }
