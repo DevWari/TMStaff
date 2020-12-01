@@ -15,6 +15,7 @@ import { work } from './Work/reducer';
 import { appointment } from './Appointment/reducer';
 import { courses } from './Courses/reducer';
 import { chats } from './Chat/reducer';
+import { notification } from './Notification/reducer';
 /* Sagas */
 
 import { loginSaga, logoutSaga, forgotPasswordSaga, setTokenSaga } from './Auth/sagas';
@@ -81,6 +82,7 @@ const rootReducer = combineReducers({
   appointment,
   courses,
   chats,
+  notification
 });
 
 const sagaMiddleware = createSagaMiddleware();
