@@ -24,7 +24,7 @@ export const account = (state = defaultState, action) => {
     case LOAD_PROFILE_SUCCESS: 
       return {
         ...state,
-        data: action.response,
+        data: action.response.data,
         isLoading: false
       }
     case LOAD_PROFILE_FAILURE:

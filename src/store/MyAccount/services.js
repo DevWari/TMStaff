@@ -1,7 +1,7 @@
 import { API_URL } from 'src/utils/config';
 
 export const loadProfile = (token) => {
-  
+  console.log ("load profile....")
   const url = API_URL + "get-user-info";
   return fetch(url, {
     method: 'POST',
@@ -12,7 +12,7 @@ export const loadProfile = (token) => {
     },
   })
   .then((response) => response.json())
-  .then((responseJson) => {
+  .then((responseJson) => {    
      return responseJson
   })
   .catch((error) => {

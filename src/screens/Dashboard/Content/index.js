@@ -3,8 +3,7 @@ import {
   View,
   Text,
   Image,
-  TouchableOpacity,
-  Linking
+  TouchableOpacity,  
 } from 'react-native'
 import styled from 'styled-components/native'
 import { Colors } from 'src/theme';

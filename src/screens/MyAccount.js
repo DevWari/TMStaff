@@ -47,14 +47,14 @@ const MyAccount = (props) => {
 
   useEffect(()=> {
     if (props.data && props.data.user) {
-      setName(props.data.user.user.name)
-      setEmail(props.data.user.user.email)
-      setPhone(props.data.user.customer.phone)
-      setAddress(props.data.user.customer.address)
+      setName(props.data.user.name)
+      setEmail(props.data.user.email)
+      setPhone(props.data.phone)
+      setAddress(props.data.address)
       // setStates(props.data.user.states.[props.data.user.customer.state])
-      setStates(props.data.user.customer.state)
-      setZip(props.data.user.customer.zip)
-      setCity(props.data.user.customer.city)
+      setStates(props.data.state)
+      setZip(props.data.zip)
+      setCity(props.data.city)
     }
   }, [props.data])
 
@@ -157,8 +157,7 @@ const MyAccount = (props) => {
 const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
-    isLoading: state.account.isLoading,
-    status: state.account.status,
+    isLoading: state.account.isLoading,    
     update_status: state.account.update_status,
     data: state.account.data
   };

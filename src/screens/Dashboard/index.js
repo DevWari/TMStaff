@@ -7,7 +7,7 @@ import styled from 'styled-components/native';
 import { navigate } from 'src/utils/navigation';
 // import OneSignal from 'react-native-onesignal';
 import { connect } from "react-redux";
-// import { addNotification } from "src/store/Notification/action";
+import { addNotification } from "src/store/Notification/action";
 import Menu from 'src/components/Menu';
 import Header from './Header'
 import Content from './Content'
@@ -174,10 +174,10 @@ class Dashboard extends React.Component {
 // export default Dashboard
 
 const mapStateToProps = (state) => {
-  // const { notifyData, isReadNotify } = state.notification;
+  const { notifyData, isReadNotify } = state.notification;
   return {
-    // notifyData,
-    // isReadNotify,
+    notifyData,
+    isReadNotify,
     token: state.auth.token,
     user: state.auth.user,
   };
@@ -185,7 +185,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // addNotification: (data) => dispatch(addNotification(data)),
+    addNotification: (data) => dispatch(addNotification(data)),
     setToken: (token, user) => dispatch(SetTokenAction(token, user)),
   }
 }

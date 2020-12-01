@@ -4,6 +4,7 @@ import {
   } from './types';
   
 export function LoadProfileAction(token) {
+  console.log ("profile action...", token)
   return {
     type: LOAD_PROFILE,
     token
