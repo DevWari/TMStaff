@@ -20,8 +20,9 @@ export const loadProfile = (token) => {
   });
 };
 
-export const updateProfile = (data, token) => {    
-    const url = API_URL + "update-user";
+export const updateProfile = (data, token) => {
+    const url = API_URL + "update-worker";
+    console.log ("update worker....", data)
     return fetch(url, {
       method: 'POST',
       headers: {
@@ -33,6 +34,7 @@ export const updateProfile = (data, token) => {
     })
     .then((response) => response.json())
     .then((responseJson) => {
+      console.log ("update worker response....", responseJson)
        return responseJson
     })
     .catch((error) => {
