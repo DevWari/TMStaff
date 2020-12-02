@@ -13,7 +13,7 @@ import Theme from '../../theme/Theme';
 import { getAllAppointmentsAction, getAllAppointmentsDateAction } from "src/store/Appointment/action";
 import {connect} from 'react-redux'
 import Spinner from 'react-native-loading-spinner-overlay';
-
+import moment from "moment"
 class MyAppointment extends React.Component {
   state = {    
     description: "",
@@ -28,7 +28,7 @@ class MyAppointment extends React.Component {
       }
       else {
         if (this.props.navigation.state?.params?.todayStatus == 0) this.props.getAllAppointments (this.props.token);
-        else this.props.getAllAppointmentsDate({start_date: '2020-10-11'}, this.props.token)
+        else this.props.getAllAppointmentsDate({start_date: moment(new Date()).format('YYYY-MM-DD')}, this.props.token)
       }
   }  
 
@@ -51,8 +51,9 @@ class MyAppointment extends React.Component {
       this.setState({ data: newData });
     }
 
-    if ( prevProps.navigation.state?.params?.todayStatus != this.props.navigation.state?.params?.todayStatus ) {       
-       if (this.props.navigation.state?.params?.todayStatus == 1) this.props.getAllAppointmentsDate({start_date: '2020-10-11'}, this.props.token)
+    if ( prevProps.navigation.state?.params?.todayStatus != this.props.navigation.state?.params?.todayStatus ) {   
+       console.log ("no data....",moment(new Date()).format('YYYY-MM-DD') )    
+       if (this.props.navigation.state?.params?.todayStatus == 1) this.props.getAllAppointmentsDate({start_date: moment(new Date()).format('YYYY-MM-DD')}, this.props.token)
        else this.props.getAllAppointments (this.props.token)
       // console.log ('status...', this.props.navigation.state?.params?.todayStatus)
     }

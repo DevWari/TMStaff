@@ -70,8 +70,6 @@ class Dashboard extends React.Component {
       else
         this.setState({isNotify: false})
     }
-
-
   }
 
   componentWillUnmount() {
@@ -99,7 +97,6 @@ class Dashboard extends React.Component {
       date: new Date(),
       check: false,
     }
-
     _this.props.addNotification(notifyData);
   }
 
@@ -110,13 +107,13 @@ class Dashboard extends React.Component {
     let hashed_id = launchURL.split('/')[3];
     
     if (routeName.toUpperCase() == "INVOICE")
-      navigate('Invoice', {paid: false, hashedId: hashed_id});
+      console.log ("Invoice")
     else if (routeName.toUpperCase() == "ESTIMATE")
-      navigate('PersonalInfo', {accept: 1, hashedId: hashed_id});
+      console.log ("estimate")
     else if (routeName.toUpperCase() == "JOB")
-      navigate('MyEstimate');
+      console.log ("job")
     else if (routeName.toUpperCase() == "ANNOUNCEMENTS")
-      navigate("AppointmentOption", {hashed_id: hashed_id});
+      console.log ("announcements")
     else if (routeName.toUpperCase() == "CHATS")
       navigate('MessageList', {hashed_id: hashed_id});
       //navigate('MessageDetail', {hashed_id: hashed_id});
