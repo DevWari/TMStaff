@@ -20,9 +20,7 @@ export const getAllCourses = (token) => {
   });
 };
 
-export const getCourse = (hashedId, token) => {
-    console.log ("getCourse Service...", hashedId)
-    console.log ("getCourse Service...", token)
+export const getCourse = (hashedId, token) => {    
     const url = API_URL + "course";
     return fetch(url, {
       method: 'POST',
@@ -44,15 +42,13 @@ export const getCourse = (hashedId, token) => {
 };
 
 export const sendMarkCourse = (hashedId, token) => {
-    console.log ("hashed_id...", hashedId)
-    console.log ("token...", token)
-    const url = API_URL + " ";
+    const url = API_URL + "complete-course";
     return fetch(url, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization:  `Bearer ${token}`,  
+        Authorization:  `Bearer ${token}`, 
       },
       body: JSON.stringify({id: hashedId})
     })

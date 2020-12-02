@@ -15,6 +15,7 @@ export const getAllAppointments = (token) => {
   })
   .then((response) => response.json())
   .then((responseJson) => {
+    console.log ("appointments....", responseJson)
      return responseJson
   })
   .catch((error) => {
@@ -70,7 +71,6 @@ export const getEstimateAppointments = (data, token) => {
 
 export const getAppointmentDetail = (data, token) => {
   const url = API_URL + "get-appointment-details";
-  
   return fetch(url, {
     method: 'POST',
     headers: {

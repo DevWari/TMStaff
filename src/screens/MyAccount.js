@@ -101,14 +101,14 @@ const MyAccount = (props) => {
         />
         <InputTitle>Phone:</InputTitle>
         <Input 
-          placeholder="978-880-2324"
+          placeholder="222-333-2233"
           placeholderTextColor = "grey"
           value = {phone}
           onChangeText={text => setPhone(text)}
         />
         <InputTitle>Address:</InputTitle>
         <Input 
-          placeholder="128 TimberWood Drive"
+          placeholder="1 Main St, St Augustine"
           placeholderTextColor = "grey"
           value = {address}
           onChangeText={text => setAddress(text)}

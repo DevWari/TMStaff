@@ -22,10 +22,9 @@ class MyAppointment extends React.Component {
   };
 
   componentDidMount () {       
-    const { navigation } = this.props    
+    console.log ("appointment token....", this.props.token) 
       if (!this.props.token) {
-        navigate('LoginScreen')
-        return
+        navigate('LoginScreen')        
       }
       else {
         if (this.props.navigation.state?.params?.todayStatus == 0) this.props.getAllAppointments (this.props.token);
