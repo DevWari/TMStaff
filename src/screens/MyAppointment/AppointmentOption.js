@@ -73,8 +73,7 @@ class AppointmentOption extends React.Component {
     this.watchID != null && Geolocation.clearWatch(this.watchID);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log ("aaaaccc", this.props.data?.data)
+  componentDidUpdate(prevProps, prevState) {    
     if (prevProps.navigation.state?.params?.hashed_id != this.props.navigation.state?.params?.hashed_id)      
       this.setState({ hashed_id: this.props.navigation.state?.params?.hashed_id })
 

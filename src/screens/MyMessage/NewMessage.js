@@ -185,7 +185,7 @@ class NewMessage extends React.Component {
 
     return (
       <ScrollView style={styles.container}>
-        <Menu title="My Messages" message={false}/>
+        <Menu title="My Messages" message={false} back={true}/>
         { loading && 
           <ActivityIndicator style={styles.spinnerStyle} animating={loading} size="large" color={'lightgreen'} />
         }

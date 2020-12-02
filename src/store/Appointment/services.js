@@ -70,6 +70,7 @@ export const getEstimateAppointments = (data, token) => {
 };
 
 export const getAppointmentDetail = (data, token) => {
+  console.log ("detail...", data)
   const url = API_URL + "get-appointment-details";
   return fetch(url, {
     method: 'POST',
@@ -82,6 +83,7 @@ export const getAppointmentDetail = (data, token) => {
   })
   .then((response) => response.json())
   .then((responseJson) => {
+     console.log ("appointment detail....", responseJson)
      return responseJson
   })
   .catch((error) => {

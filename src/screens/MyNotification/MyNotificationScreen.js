@@ -9,7 +9,6 @@ import Menu from 'src/components/Menu';
 import Theme from 'src/theme/Theme';
 import Notification from 'src/components/Notification/Notification'
 import { connect } from "react-redux";
-import {navigate} from 'src/utils/navigation'
 
 class MyNotificationScreen extends React.Component {
   constructor (props) {

@@ -20,6 +20,12 @@ target 'tmstaff' do
   use_flipper!
   post_install do |installer|
     flipper_post_install(installer)
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'NO'
+      end
+    end
+  
   end
 end
   # React Native Maps dependencies
@@ -27,6 +33,11 @@ end
   pod 'react-native-google-maps', :path => rn_maps_path
   pod 'GoogleMaps'
   pod 'Google-Maps-iOS-Utils'
+
+  target 'OneSignalNotificationServiceExtension' do
+    pod 'OneSignal', '>= 2.9.3', '< 3.0'
+  end
+
   target 'tmstaff-tvOS' do
   # Pods for tmstaff-tvOS
 

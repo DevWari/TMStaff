@@ -9,6 +9,8 @@ import {LoadProfileAction, UpdateProfileAction} from 'src/store/MyAccount/action
 import Spinner from 'react-native-loading-spinner-overlay';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 import {LogoutAction} from 'src/store/Auth/action';
+import OneSignal from 'react-native-onesignal';
+
 const MyAccount = (props) => {
   
   const [name, setName] = useState('')
@@ -30,17 +32,17 @@ const MyAccount = (props) => {
   }, [])
   
   async function onLogout (){
-    // try {
-    //   await AsyncStorage.removeItem('userToken');
-    //   await AsyncStorage.removeItem('user_type');
-    //   await AsyncStorage.removeItem('user_hash');
-    //   OneSignal.sendTags({'myid': "", "type": ""});
-    // }
-    // catch(exception) {
-    //     console.log ("error storage")
-    // }
-    // this.props.logout (this.props.token)
-    // navigate ("Auth")
+    try {
+      await AsyncStorage.removeItem('userToken');
+      await AsyncStorage.removeItem('user_type');
+      await AsyncStorage.removeItem('user_hash');
+      OneSignal.sendTags({'myid': "", "type": ""});
+    }
+    catch(exception) {
+        console.log ("error storage")
+    }
+    this.props.logout (this.props.token)
+    navigate ("Auth")
     console.log ("logout....")
   }
 

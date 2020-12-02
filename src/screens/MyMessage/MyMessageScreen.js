@@ -153,7 +153,7 @@ class MyMessageScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Menu title="My Messages" message={false}/>
+        <Menu title="My Messages" message={false} back={true}/>
         {/* { this.props.isLoading && 
           <ActivityIndicator style={styles.spinnerStyle} animating={this.props.isLoading} size="large" color={'lightgreen'} />
         } */}
