@@ -21,7 +21,7 @@ class Dashboard extends React.Component {
     
     _this = this;
     this._bootstrapAsync();
-    // this._setOneSignal();
+    this._setOneSignal();
    
     this.state = {
       isNotify: false,
@@ -35,10 +35,13 @@ class Dashboard extends React.Component {
     if (!userToken) navigate ('LoginScreen')
     else this.props.setToken(userToken, user)
   };
-
+  
   _setOneSignal = async () => {
+    console.log ("onesignal....")
+
+    // OneSignal.setLogLevel(OneSignal.LOG_LEVEL.DEBUG, OneSignal.LOG_LEVEL.DEBUG);
     OneSignal.setLogLevel(6, 0);
-    OneSignal.init("ee562f69-ba8f-465e-9697-1b17aa613062", {kOSSettingsKeyAutoPrompt : false, kOSSettingsKeyInAppLaunchURL: false, kOSSettingsKeyInFocusDisplayOption:2});
+    OneSignal.init("713cd998-c73b-4207-9a39-27517209688b", {kOSSettingsKeyAutoPrompt : false, kOSSettingsKeyInAppLaunchURL: false, kOSSettingsKeyInFocusDisplayOption:2});
     OneSignal.inFocusDisplaying(2);
     
     OneSignal.promptForPushNotificationsWithUserResponse(myiOSPromptCallback);
@@ -79,6 +82,8 @@ class Dashboard extends React.Component {
   }
 
   onReceived(notification) {
+
+    console.log ("notification.....", notification)
     const bigPicture = notification.payload.bigPicture;
     const body = notification.payload.body;
     const launchURL = notification.payload.launchURL;
