@@ -231,6 +231,9 @@ class AppointmentOption extends React.Component {
         </View>
 
         <View style={styles.mapGroup}>
+          <GoogleMapButton onPress={this.openGoogleMap} >
+            <Icon name="thumbnails" size={25} color="gray" />
+          </GoogleMapButton>                
           {this.state.initialRegion != "" && markers.length > 0 &&
             <MapView
               initialRegion={this.state.initialRegion}
@@ -239,15 +242,13 @@ class AppointmentOption extends React.Component {
               mapType="standard" // standard, none, satellite, hybrid, terrain, mutedStandard(iOS 11.0+ only)
               style={styles.map}
               onRegionChange={this.onRegionChange}
-              >                
-                <GoogleMapButton onPress={this.openGoogleMap} >
-                  <Icon name="thumbnails" size={25} color="gray" />
-                </GoogleMapButton>                
-                { markers.map((marker) => (
+              >               
+                { markers.map((marker, index) => (
                     <Marker
                       coordinate={marker.latlng}
                       title={marker.title}
                       description={marker.description}
+                      key={"map" + index}
                     ></Marker>
                   ))
                 }
@@ -476,5 +477,6 @@ const GoogleMapButton = styled (TouchableOpacity)`
   align-items: center;
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 10px;  
+  z-index: 1;
 `
