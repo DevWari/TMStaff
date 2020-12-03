@@ -45,7 +45,7 @@ export function* setTokenSaga(action) {
 export function* logoutSaga(action) {
   const {token} = action;
   try {
-    const response = yield logout(token);
+    const response = yield logout(token);    
      yield put({ type: LOG_OUT_SUCCESS, response });
     //return navigate('CheckInHome');
   } catch (e) {

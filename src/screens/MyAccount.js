@@ -86,6 +86,11 @@ const MyAccount = (props) => {
         textContent={'Loading...'}
         textStyle={{color:'#FFF'}}
       />   
+      <Spinner 
+        visible={props.isLogoutLoading}
+        textContent={'Loading...'}
+        textStyle={{color:'#FFF'}}
+      />   
       <Container>      
         <Menu title="My Account" back={true} />
         <LogoutContainer>
@@ -165,7 +170,8 @@ const MyAccount = (props) => {
 const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
-    isLoading: state.account.isLoading,    
+    isLoading: state.account.isLoading,   
+    isLogoutLoading: state.auth.isLoading, 
     update_status: state.account.update_status,
     data: state.account.data
   };

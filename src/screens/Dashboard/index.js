@@ -37,13 +37,14 @@ class Dashboard extends React.Component {
   };
   
   _setOneSignal = async () => {
-    
-    console.log ("onesignal....")    
+        
     OneSignal.setLogLevel(6, 0);
     OneSignal.init("713cd998-c73b-4207-9a39-27517209688b", {kOSSettingsKeyAutoPrompt : false, kOSSettingsKeyInAppLaunchURL: false, kOSSettingsKeyInFocusDisplayOption:2});
     OneSignal.inFocusDisplaying(2);
     
-    OneSignal.promptForPushNotificationsWithUserResponse(myiOSPromptCallback);
+    OneSignal.promptForPushNotificationsWithUserResponse(function () {
+      console.log ("ios callback...")
+    });
 
     OneSignal.addEventListener('received', this.onReceived);
     OneSignal.addEventListener('opened', this.onOpened);
@@ -72,6 +73,7 @@ class Dashboard extends React.Component {
       else
         this.setState({isNotify: false})
     }
+    if (prevProps.token != this.props.token && !this.props.token) navigate ("Auth")
   }
 
   componentWillUnmount() {
@@ -82,7 +84,6 @@ class Dashboard extends React.Component {
   }
 
   onReceived(notification) {
-
     console.log ("notification.....", notification)
     const bigPicture = notification.payload.bigPicture;
     const body = notification.payload.body;
@@ -103,7 +104,7 @@ class Dashboard extends React.Component {
   }
 
   onOpened(openResult) {
-       
+    console.log ("onResult....", openResult)
     let launchURL = openResult.notification.payload.launchURL.split('?')[0]
     let routeName = launchURL.split('/')[2];
     let hashed_id = launchURL.split('/')[3];
@@ -130,33 +131,32 @@ class Dashboard extends React.Component {
   onInAppMessageClicked = (actionResult) => {
     
     let launchURL = actionResult.click_url;
+    console.log ("launchURL...", launchURL)
     if (launchURL != undefined) {
       let routeName = launchURL.split('/')[2];
       let hashed_id = launchURL.split('/')[3];
       
-      if (routeName.toUpperCase() == "INVOICE")
-        navigate('Invoice', {paid: false, hashedId: hashed_id});
-      else if (routeName.toUpperCase() == "ESTIMATE")
-        navigate('PersonalInfo', {accept: 1, hashedId: hashed_id});
-      else if (routeName.toUpperCase() == "JOB")
-        navigate('MyEstimate');
-      else if (routeName.toUpperCase() == "ANNOUNCEMENTS")
-        navigate("AppointmentOption", {hashed_id: hashed_id});
+      if (routeName.toUpperCase() == "INVOICE") console.log ("Invoice")        
+      else if (routeName.toUpperCase() == "ESTIMATE") console.log ("ESTIMATE")          
+      else if (routeName.toUpperCase() == "JOB") navigate('JOB')        
+      else if (routeName.toUpperCase() == "ANNOUNCEMENTS") navigate("ANNOUNCEMENTS");        
       else if (routeName.toUpperCase() == "CHATS")
-        navigate('MessageList', {hashed_id: hashed_id});
-        //navigate('MessageDetail', {hashed_id: hashed_id});
+        navigate('MessageList', {hashed_id: hashed_id});        
       else
         navigate('MyNotificationScreen');
-    }
-    
+    }    
   }
 
-  componentDidMount () {
-    console.log ("Dashboard....", this.props.token)
+  componentDidMount () {    
+    if (this.props.isReadNotify == false) this.setState ({isNotify: true})
+    else this.setState ({isNotify: false})
   }
 
   componentDidUpdate (prevProps, prevState) {
-
+    if (prevProps.isReadNotify != this.props.isReadNotify) {
+      if (this.props.isReadNotify == false) this.setState ({isNotify: true})
+      else this.setState ({isNotify: false})
+    }
   }
 
   render() {
@@ -165,8 +165,7 @@ class Dashboard extends React.Component {
     return (
       <ScrollView>
         <Container>      
-          {/* <Menu message={isNotify}/> */}
-          <Menu message={true}/>
+          <Menu message={isNotify}/>          
           <Header />
           <Content />
         </Container>
@@ -174,8 +173,6 @@ class Dashboard extends React.Component {
     );
   }
 };
-
-// export default Dashboard
 
 const mapStateToProps = (state) => {
   const { notifyData, isReadNotify } = state.notification;

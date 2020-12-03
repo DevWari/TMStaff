@@ -28,17 +28,12 @@ class Notification extends React.Component {
     let routeName = launchURL.split('/')[2];
     let hashed_id = launchURL.split('/')[3];
     
-    if (routeName.toUpperCase() == "INVOICE")
-      navigate('Invoice', {paid: false, hashedId: hashed_id});
-    else if (routeName.toUpperCase() == "ESTIMATE")
-      navigate('PersonalInfo', {accept: 1, hashedId: hashed_id});
-    else if (routeName.toUpperCase() == "JOB")
-      navigate('MyEstimate');
-    else if (routeName.toUpperCase() == "ANNOUNCEMENTS")
-      navigate("AppointmentOption", {hashed_id: hashed_id});
+    if (routeName.toUpperCase() == "INVOICE") console.log ("invoice...")      
+    else if (routeName.toUpperCase() == "ESTIMATE") console.log ("estimate...")      
+    else if (routeName.toUpperCase() == "JOB") console.log ("job...")      
+    else if (routeName.toUpperCase() == "ANNOUNCEMENTS") console.log ("announcement...")      
     else if (routeName.toUpperCase() == "CHATS")
-      navigate('MessageList', {hashed_id: hashed_id});
-      //navigate('MessageDetail', {hashed_id: hashed_id});
+      navigate('MessageList', {hashed_id: hashed_id});      
     else
       navigate('MyNotificationScreen');
     }
@@ -49,10 +44,7 @@ class Notification extends React.Component {
               <View style={styles.contentContainer}>
                 <View style={{flex: 10}}>
                   <View style={{ flexDirection: 'row'}}>
-                        <Text numberOfLines={1} style={{ color: Theme.black, fontSize: Theme.fontSubTitle }}>{this.props.item.title}</Text>
-                        {/* <View style={{flex: 1}}>
-                          <Text numberOfLines={1} style={{ color: Theme.black, fontSize: Theme.fontText }}>{this.props.item.message}</Text>
-                        </View> */}
+                        <Text numberOfLines={1} style={{ color: Theme.black, fontSize: Theme.fontSubTitle }}>{this.props.item.title}</Text>                        
                   </View>
                   <View style={{ flexDirection: 'row', marginTop: 3 }}>
                         <Text numberOfLines={1} style={{ color: Theme.black, fontSize: Theme.fontText }}>{moment(this.props.item.date).format('MMM DD YYYY')} - </Text>
@@ -71,12 +63,6 @@ class Notification extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-  return {
-
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     updateNotification: (data) => dispatch(updateNotification(data)),
@@ -84,7 +70,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Notification);
 
