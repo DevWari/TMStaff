@@ -145,7 +145,7 @@ export const RootNavigator = createAppContainer(
   createSwitchNavigator({		
       AuthLoadingScreen: AuthLoadingScreen,
       App: MainTab,
-	  Auth: AuthStack,
+	    Auth: AuthStack,
   },
   {
     initialRouteName: 'AuthLoadingScreen'    

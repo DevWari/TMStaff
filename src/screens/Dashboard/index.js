@@ -56,10 +56,7 @@ class Dashboard extends React.Component {
     OneSignal.sendTags({'myid': user_hash, "type": user_type == 3 ? "customer" : "tinamaids"});
   }
   
-  componentDidMount () {
-    if (!this.props.token) {
-      navigate('LoginScreen')        
-    }
+  componentDidMount () {        
     if (this.props.isReadNotify == false)
       this.setState({isNotify: true})
     else
@@ -72,8 +69,7 @@ class Dashboard extends React.Component {
         this.setState({isNotify: true})
       else
         this.setState({isNotify: false})
-    }
-    if (prevProps.token != this.props.token && !this.props.token) navigate ("Auth")
+    }    
   }
 
   componentWillUnmount() {
