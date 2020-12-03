@@ -50,8 +50,7 @@ const LoginScreen = (props) => {
   },[props.status, props.token, props.user])
 
   function onLogin () {
-    props.login(username, password)
-    navigate('App')
+    props.login(username, password)    
   }
 
   return (
