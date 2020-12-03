@@ -145,19 +145,7 @@ class Dashboard extends React.Component {
       else
         navigate('MyNotificationScreen');
     }    
-  }
-
-  componentDidMount () {    
-    if (this.props.isReadNotify == false) this.setState ({isNotify: true})
-    else this.setState ({isNotify: false})
-  }
-
-  componentDidUpdate (prevProps, prevState) {
-    if (prevProps.isReadNotify != this.props.isReadNotify) {
-      if (this.props.isReadNotify == false) this.setState ({isNotify: true})
-      else this.setState ({isNotify: false})
-    }
-  }
+  }  
 
   render() {
     const { isNotify } = this.state;
