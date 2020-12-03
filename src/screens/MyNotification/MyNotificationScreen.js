@@ -9,6 +9,7 @@ import Menu from 'src/components/Menu';
 import Theme from 'src/theme/Theme';
 import Notification from 'src/components/Notification/Notification'
 import { connect } from "react-redux";
+import {navigate} from 'src/utils/navigation'
 
 class MyNotificationScreen extends React.Component {
   constructor (props) {
@@ -19,9 +20,7 @@ class MyNotificationScreen extends React.Component {
     }
   }
   componentDidMount () {
-    // if (!this.props.token) {
-    //   navigate('LoginScreen')
-    // }
+    if (!this.props.token) navigate ("Auth")
   }
   render() {
     const { loading } = this.state;

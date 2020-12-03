@@ -12,6 +12,7 @@ import {connect} from 'react-redux'
 import {GetAllCoursesAction} from 'src/store/Courses/action'
 import Spinner from 'react-native-loading-spinner-overlay';
 import { useNavigation, useNavigationParam, useFocusEffect } from 'react-navigation-hooks'
+import {navigate} from 'src/utils/navigation'
 
 const Courses = (props) => {
 
@@ -24,6 +25,10 @@ const Courses = (props) => {
   useEffect (()=> {
     console.log ("courses...", props.data)
   }, [props.data])
+
+  useEffect (()=> {
+    if (!props.token) navigate ('Auth')
+  }, [props.token])
   return (    
     <ScrollView>
       <Container>

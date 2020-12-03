@@ -3,8 +3,7 @@ import {
   CLOCK_IN_OUT
 } from './types';
 
-export function GetWorkAction(paginator, token) {
-  console.log ("get work action...", token)
+export function GetWorkAction(paginator, token) {  
   return {
     type: GET_WORK,  
     paginator,

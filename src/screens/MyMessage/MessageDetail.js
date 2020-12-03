@@ -45,6 +45,7 @@ class MessageDetail extends React.Component {
     {
       this.setState({messageDetail: this.props.messageDetail?.data})
     }
+    if (prevProps.token != this.props.token && !this.props.token) navigate ("Auth")
   }
 
   getMessageDetail (hashed_id) {

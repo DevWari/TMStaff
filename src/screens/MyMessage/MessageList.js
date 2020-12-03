@@ -45,6 +45,8 @@ class MessageList extends React.Component {
     {
       this.setState({chatMessages: this.props.chatMessages?.data[1]})
     }
+
+    if (prevProps.token != this.props.token && !this.props.token) navigate ("Auth")
   }
 
   getChatMessages (hashed_id) {

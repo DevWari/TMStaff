@@ -94,6 +94,8 @@ class AppointmentOption extends React.Component {
         showtime: false,        
       })
     }
+
+    if (prevProps.token != this.props.token && !this.props.token) navigate ("Auth")
   }
 
   getAppointmentDetail() {

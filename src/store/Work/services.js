@@ -33,7 +33,8 @@ export const setClockInOut = (token) => {
       }      
     })
     .then((response) => response.json())
-    .then((responseJson) => {      
+    .then((responseJson) => {  
+      console.log ("aaaaa....", responseJson)    
       return responseJson
     })
     .catch((error) => {

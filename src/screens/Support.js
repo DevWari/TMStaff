@@ -89,6 +89,10 @@ const Support = (props) => {
       
     }
   }
+
+  useEffect (()=> {
+    if (!props.token) navigate("Auth")
+  }, [props.token])
   return (
     <KeyboardAwareScrollView>
       <Spinner 

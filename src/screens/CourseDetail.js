@@ -14,6 +14,7 @@ import Spinner from 'react-native-loading-spinner-overlay'
 import MarkModal from 'src/components/MarkModal'
 import { useFocusEffect} from 'react-navigation-hooks'
 import {WebView} from 'react-native-webview'
+import { navigate } from 'src/utils/navigation'
 
 const CoursesDetail = (props) => {
 
@@ -42,12 +43,10 @@ const CoursesDetail = (props) => {
       setVideoList (tempVideoList)
     }    
   }, [props.courseData])
-
+  
   useEffect (()=> {
-   
-    console.log ("mark data...", props.markData)
-  }, [props.markData])
-
+    if (!props.token) navigate ("Auth")
+  }, [props.token])
   const onOK = () => {
     let hashedId = props.navigation.state?.params?.item.hashed_id
     props.sendMarkCourse(hashedId, props.token)

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styled from 'styled-components/native';
-import { navigate, navigateBack } from 'src/utils/navigation';
+import { navigate } from 'src/utils/navigation';
 import Icon from 'react-native-vector-icons/AntDesign'
 
 const Header = (props) => {  

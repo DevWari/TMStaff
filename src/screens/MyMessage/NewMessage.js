@@ -66,7 +66,7 @@ class NewMessage extends React.Component {
   }
   
   componentDidUpdate(prevProps, prevState) {
-
+    if (prevProps.token != this.props.token && !this.props.token) navigate ("Auth")
   }
 
   onPressHistory = () => {

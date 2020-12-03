@@ -80,6 +80,8 @@ class MyMessageScreen extends React.Component {
         messageContent: this.props.navigation.state.params?.message})
     }
 
+    if (prevProps.token != this.props.token && !this.props.token) navigate ("Auth")
+
     if (this.props.chatsData?.data?.chats != undefined && prevProps.chatsData?.data?.chats != this.props.chatsData?.data?.chats) {
       let newData = [];
       this.props.chatsData?.data?.chats.forEach(item => {

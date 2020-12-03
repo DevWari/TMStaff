@@ -57,6 +57,8 @@ class MyAppointment extends React.Component {
        else this.props.getAllAppointments (this.props.token)
       // console.log ('status...', this.props.navigation.state?.params?.todayStatus)
     }
+
+    if (prevProps.token != this.props.token && !this.props.token) navigate ("Auth")
   } 
 
   onChangeDescription = (text) => {
