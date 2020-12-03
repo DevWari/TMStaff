@@ -27,15 +27,14 @@ const LoginScreen = (props) => {
 
   useEffect (()=> {
     async function setStorage() {      
-      try {
-        console.log ("status ok....", props.user)
+      try {        
         if (props.status == 1 && props.token && props.user) {
           console.log ("storage ok111....")
           await AsyncStorage.setItem("userToken", props.token)          
           await AsyncStorage.setItem("user", props.user.name)
           await AsyncStorage.setItem("user_type", props.user?.user_type.toString())
           await AsyncStorage.setItem("user_hash", props.user.hashed_id)          
-          navigate('App')
+          navigate('App')          
         }        
         else if (props.status == -1) {          
           Alert.alert("warning", "Your email or password is not correct!")
@@ -174,12 +173,5 @@ const ForgotTitle = styled(Text)`
   text-align: center;
   font-size: 20px;
   margin-bottom: 25px;
-  font-weight: 700;
-`;
-const CustomerTitle = styled(Text)`
-  height: 40px;
-  text-align: center;
-  font-size: 30px;
-  margin-bottom: 15px;
   font-weight: 700;
 `;

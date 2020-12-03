@@ -66,7 +66,13 @@ import {
         return {
           ...state,
           isLoading: false,
-          token: null
+          token: null,      
+          error: null,    
+          username: null,
+          password: null,
+          user: null,
+          userName: null,          
+          status: -2,
         }; 
       case LOG_OUT_FAILURE: 
         return {

@@ -37,9 +37,8 @@ class Dashboard extends React.Component {
   };
   
   _setOneSignal = async () => {
-    console.log ("onesignal....")
-
-    // OneSignal.setLogLevel(OneSignal.LOG_LEVEL.DEBUG, OneSignal.LOG_LEVEL.DEBUG);
+    
+    console.log ("onesignal....")    
     OneSignal.setLogLevel(6, 0);
     OneSignal.init("713cd998-c73b-4207-9a39-27517209688b", {kOSSettingsKeyAutoPrompt : false, kOSSettingsKeyInAppLaunchURL: false, kOSSettingsKeyInFocusDisplayOption:2});
     OneSignal.inFocusDisplaying(2);
@@ -57,6 +56,9 @@ class Dashboard extends React.Component {
   }
   
   componentDidMount () {
+    if (!this.props.token) {
+      navigate('LoginScreen')        
+    }
     if (this.props.isReadNotify == false)
       this.setState({isNotify: true})
     else

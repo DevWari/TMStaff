@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView} from 'react-native';
 import styled from 'styled-components/native';
 import { Colors } from 'src/theme';
@@ -10,6 +10,8 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 import {LogoutAction} from 'src/store/Auth/action';
 import OneSignal from 'react-native-onesignal';
+import AsyncStorage from '@react-native-community/async-storage';
+import { useFocusEffect} from 'react-navigation-hooks'
 
 const MyAccount = (props) => {
   
@@ -21,31 +23,29 @@ const MyAccount = (props) => {
   const [zip, setZip] = useState('')
   const [city, setCity] = useState('')
 
-  let STATES = null;
+  let STATES = null;  
   
-  useEffect(()=> {
+  useFocusEffect(useCallback(() => {    
     if (!props.token) {
       navigate('LoginScreen') 
       return
     }
     else props.loadProfile (props.token)
-  }, [])
-  
+  }, []));
+
   async function onLogout (){
+    console.log ("logout...")
     try {
-      await AsyncStorage.removeItem('userToken');
+      await AsyncStorage.removeItem('userToken')      
       await AsyncStorage.removeItem('user_type');
-      await AsyncStorage.removeItem('user_hash');
-      OneSignal.sendTags({'myid': "", "type": ""});
+      await AsyncStorage.removeItem('user_hash');      
+      OneSignal.sendTags({'myid': "", "type": ""});       
     }
     catch(exception) {
-        console.log ("error storage")
-    }
-    this.props.logout (this.props.token)
-    navigate ("Auth")
-    console.log ("logout....")
+      console.log ("error storage")
+    }    
+    props.logout (props.token)    
   }
-
 
   useEffect(()=> {
     if (props.data && props.data.user) {
@@ -59,6 +59,12 @@ const MyAccount = (props) => {
       setCity(props.data.city)
     }
   }, [props.data])
+
+  useEffect (()=> {
+    if (!props.token) {
+      navigate ("Auth")
+    }
+  }, [props.token])
 
   function updateProfile () {
     let data = {
