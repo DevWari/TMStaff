@@ -26,8 +26,7 @@ import {
   };
   export const auth = (state = defaultState, action) => {
     switch (action.type) {
-      case LOGIN_SUCCESS:      
-        console.log ("user...reducer..", action.data.user)       
+      case LOGIN_SUCCESS:                 
         return {
           ...state,
           token: action.data.token,

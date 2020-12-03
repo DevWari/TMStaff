@@ -2,7 +2,6 @@ import { API_URL } from 'src/utils/config';
 
 export const login = (username, password) => {
 
-  console.log ("login.... service...", username)
   const url = API_URL + "login";
   return fetch(url, {
     method: 'POST',
@@ -30,8 +29,7 @@ export const refreshToken = (token) => {
     }
   })
   .then((response) => response.json())
-  .then((responseJson) => {
-    console.log ("refresh token...", responseJson)
+  .then((responseJson) => {    
     return responseJson
   })
   .catch((error) => {
