@@ -13,7 +13,7 @@ const Header = (props) => {
     <Container>       
       {
         props.back? 
-        <BackButton onPress={()=>navigateBack()}>
+        <BackButton onPress={()=>navigate('Dashboard')}>
           <Icon name="doubleleft" size={25} color="white" />
         </BackButton>: <View />
       }  
