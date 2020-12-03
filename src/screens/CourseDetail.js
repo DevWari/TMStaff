@@ -87,7 +87,10 @@ const CoursesDetail = (props) => {
                 />   
               </VideoContainer>    
             )
-        }        
+        }      
+        <DetailContainer>
+          <Detail>{props.courseData?.description}</Detail>
+        </DetailContainer>          
         <MarkButton onPress={()=>setIsVisible(true)}>
           <MarkTitle>Mark as completed</MarkTitle>
         </MarkButton>
@@ -179,4 +182,12 @@ const CourseTitle = styled (Text)`
   margin-top: 15px;
   text-align: center;
   font-weight: 400;
+`
+const DetailContainer = styled (View)`
+  width: 90%;
+  margin-top: 25px;
+`
+const Detail = styled (Text)`
+  font-size: 20px;
+  padding-left: 10px;
 `
