@@ -29,15 +29,11 @@ const LoginScreen = (props) => {
     async function setStorage() {      
       try {        
         if (props.status == 1 && props.token && props.user) {
-          console.log ("storage ok111....", props.token)
-          await AsyncStorage.setItem("userToken", props.token)  
-          console.log ("storage token....", props.token)        
-          await AsyncStorage.setItem("user", props.user.name)
-          console.log ("storage user....", props.user.name)        
-          await AsyncStorage.setItem("user_type", props.user?.user_type.toString())
-          console.log ("storage user_type....", props.user?.user_type.toString())     
-          await AsyncStorage.setItem("user_hash", props.user.hashed_id)    
-          console.log ("user_hash....", props.user.hashed_id)
+
+          await AsyncStorage.setItem("userToken", props.token)             
+          await AsyncStorage.setItem("user", props.user.name)              
+          await AsyncStorage.setItem("user_type", props.user?.user_type.toString())          
+          await AsyncStorage.setItem("user_hash", props.user.hashed_id)             
           navigate('App')          
         }        
         else if (props.status == -1) {          
