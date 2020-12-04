@@ -15,14 +15,14 @@ const JobResult = (props) => {
     <ScrollView>
       <Container>                 
         <Menu title="Job" back={true} />        
-        {props.clockStatus == 1 ? 
+        {props.clockStatus == 2 ? 
            <Title>Job Sucessfully Started</Title> : 
            <CompletedContainer>
              <CompletedTitle>Job Completed!</CompletedTitle > 
            </CompletedContainer>
            
         }        
-        {props.clockStatus == 1 ?
+        {props.clockStatus == 2 ?
           <Content>You have sucessfully started this job.</Content>:
           <View>
             <Content>This job is now completed. Make sure your client is happy and the final workthrough is approved.</Content>            

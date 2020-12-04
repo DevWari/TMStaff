@@ -40,7 +40,7 @@ export const defaultState = {
   message: null,
   isLoading: false,
   status: -2,
-  clockStatus: 0,
+  jobStatusData: null,
 };
 
 export const appointment = (state = defaultState, action) => {
@@ -57,7 +57,7 @@ export const appointment = (state = defaultState, action) => {
         ...state,
         isLoading: false,
         status: 1,
-        clockStatus: action.response.clockStatus
+        jobStatusData: action.response
     }
     case SET_JOB_BEGIN_FAILURE:
       return {

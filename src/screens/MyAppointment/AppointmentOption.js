@@ -80,6 +80,7 @@ class AppointmentOption extends React.Component {
       return;
 
     if (prevProps.data?.data != this.props.data.data) {
+      
       let item = this.props.data?.data;
       let datetime = item.service_date + " " + item.service_time;
 
@@ -92,6 +93,10 @@ class AppointmentOption extends React.Component {
         showdate: false,
         showtime: false,        
       })
+    }
+
+    if (prevProps.jobStatusData != this.props.jobStatusData) {
+      this.getAppointmentDetail();
     }
     
     if (prevProps.token != this.props.token && !this.props.token) navigate ("Auth")
@@ -177,7 +182,7 @@ class AppointmentOption extends React.Component {
     this.setState ({isVisible: false})   
     let data = {
       id: this.state.hashed_id,
-      job_status_id: 3,
+      job_status_id: Number(this.state.data.service_status_id) + 1,
       worker_comment: ''
     } 
     this.props.setJobBeginAction(data, this.props.token)
@@ -194,6 +199,28 @@ class AppointmentOption extends React.Component {
     Linking.openURL(url);   
   }
 
+  renderJobStatus = () => {
+
+    if (this.state.data?.service_status_id == 2) 
+      return (
+        <ClockButton onPress={()=>this.setState ({isVisible: true})}>
+            <ButtonTitle>Begin Job</ButtonTitle>
+        </ClockButton>
+      )
+    else if (this.state.data?.service_status_id == 3) 
+      return (
+        <ClockButton onPress={()=>this.setState ({isVisible: true})}>
+          <ButtonTitle>Complete Job</ButtonTitle>
+        </ClockButton>
+      )     
+    else
+      return (
+        <ClockView onPress={()=>this.setState ({isVisible: true})}>
+          <ButtonTitle>This job is completed</ButtonTitle>
+        </ClockView>
+      ) 
+  }
+
   render() {
     const { markers, data } = this.state;
     const estimate = data?.estimate;
@@ -205,15 +232,8 @@ class AppointmentOption extends React.Component {
           textContent={'Loading...'}
           textStyle={{color:'#FFF'}}
         />        
-        <Menu title="Job" message={false} back={true}/>
-        { this.props.clockStatus == 0 ? 
-            <ClockButton onPress={()=>this.setState ({isVisible: true})}>
-              <ButtonTitle>Begin Job</ButtonTitle>
-            </ClockButton>: 
-            <ClockButton onPress={()=>this.setState ({isVisible: true})}>
-              <ButtonTitle>Complete Job</ButtonTitle>
-            </ClockButton>
-        }
+        <Menu title="Job" message={false} back={true}/>        
+        {this.state.data && this.renderJobStatus()}
         <View style={{marginTop: 30, alignItems: "center"}}>
           <Text style={styles.texttitle}>
             Job #{data?.id}
@@ -284,7 +304,7 @@ class AppointmentOption extends React.Component {
             <ConfirmView 
               onOK = {this.onOK}
               onCancel = {this.onCancel}
-              clockStatus={this.props.clockStatus}
+              clockStatus={this.state.data?.service_status_id}
             />
           </ModalContainer>   
         </Modal>
@@ -299,7 +319,7 @@ const mapStateToProps = (state) => {
     isLoading: state.appointment.isLoading,
     status: state.appointment.status,
     data: state.appointment.appointment,
-    clockStatus: state.appointment.clockStatus
+    jobStatusData: state.appointment.jobStatusData
   };
 };
 
@@ -391,6 +411,14 @@ const styles = StyleSheet.create({
 
 
 const ClockButton = styled (TouchableOpacity)`
+  width: 100%;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  margin-top: 2px;
+`
+const ClockView = styled (View)`
   width: 100%;
   height: 50px;
   justify-content: center;
