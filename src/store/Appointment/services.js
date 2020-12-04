@@ -1,7 +1,7 @@
 import { API_URL } from 'src/utils/config';
 
-export const setJobBegin = (hashedId, token) => {    
-  const url = API_URL + "set-start-stop";    
+export const setJobBegin = (data, token) => {    
+  const url = API_URL + "change_status_by_worker";    
   return fetch(url, {
     method: 'POST',
     headers: {
@@ -9,7 +9,7 @@ export const setJobBegin = (hashedId, token) => {
       'Content-Type': 'application/json',
       Authorization:  `Bearer ${token}`, 
     },
-    body: JSON.stringify({hashed_id: hashedId})   
+    body: JSON.stringify(data)   
   })
   .then((response) => response.json())
   .then((responseJson) => {  

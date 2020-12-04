@@ -174,8 +174,13 @@ class AppointmentOption extends React.Component {
   }  
 
   onOK = () => {
-    this.setState ({isVisible: false})    
-    this.props.setJobBeginAction(this.state.hashed_id, this.props.token)
+    this.setState ({isVisible: false})   
+    let data = {
+      id: this.state.hashed_id,
+      job_status_id: 3,
+      worker_comment: ''
+    } 
+    this.props.setJobBeginAction(data, this.props.token)
     navigate ('JobResult')
   }  
 
@@ -246,7 +251,7 @@ class AppointmentOption extends React.Component {
             <JobItemTitle>{serviceSize[this.state.data?.estimate.service_size_id]} home</JobItemTitle>
           </JobItemContainer>
           <RequestContainer>
-            <JobItemTitle>Special Resquests</JobItemTitle>
+            <JobItemTitle>Special Requests</JobItemTitle>
             <Input
               // placeholder = "Read only"
               value={this.state.data?.special_request}
@@ -301,7 +306,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getAppointmentDetail: (data, token) => dispatch(getAppointmentDetailAction(data,token)),   
-    setJobBeginAction: (hashedId, token) => dispatch(SetJobBeginAction(hashedId,token)),      
+    setJobBeginAction: (data, token) => dispatch(SetJobBeginAction(data,token)),      
   };
 };
 

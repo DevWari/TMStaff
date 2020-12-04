@@ -65,7 +65,7 @@ const LoginScreen = (props) => {
           <TitleContainer>
             <Title>Welcome!</Title>
           </TitleContainer>
-          <Introduction textColor='black'>Existing Customers</Introduction>
+          <Introduction textColor='black'>Worker Login</Introduction>
           <Input placeholder="Username" 
             placeholderTextColor = "#15892E"
             onChangeText = {(text) => setUserName(text)}
