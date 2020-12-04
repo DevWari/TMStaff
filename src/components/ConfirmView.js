@@ -13,7 +13,7 @@ const ConfirmView = (props) => {
         {
           props.clockStatus == 0? 
           <Content>
-            Make sure you are at the {'\n'}job site and ready to {'\n'}start the work
+            Make sure you are at the {'\n'}job site and ready to {'\n'}start the work.
           </Content>:
           <Content>
             Make sure your work {'\n'}is completed up to {'\n'}SOP standards? {'\n'}Did you do a "Workthrough" {'\n'} with the client?

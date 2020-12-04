@@ -26,6 +26,8 @@ export const CANCEL_APPOINTMENT = "cancel_appointment";
 export const CANCEL_APPOINTMENT_SUCCESS = "cancel_appointment_success";
 export const CANCEL_APPOINTMENT_FAILURE = "cancel_appointment_failure";
 
-
+export const SET_JOB_BEGIN = "SET_JOB_BEGIN";
+export const SET_JOB_BEGIN_SUCCESS = "SET_JOB_BEGIN_SUCCESS";
+export const SET_JOB_BEGIN_FAILURE = "SET_JOB_BEGIN_FAILURE";
 
 

@@ -6,7 +6,15 @@ import {
   GET_EXTRA_SERVICES,
   ADD_APPOINTMENT,
   CANCEL_APPOINTMENT,
+  SET_JOB_BEGIN
 } from './types';
+
+export function SetJobBeginAction(token) {
+  return {
+    type: SET_JOB_BEGIN,  
+    token,
+  };
+}
 
 export function getAllAppointmentsAction(token) {
 

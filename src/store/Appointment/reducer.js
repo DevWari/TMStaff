@@ -27,6 +27,10 @@ import {
   GET_ALL_APPOINTMENTS_DATE_SUCCESS,
   GET_ALL_APPOINTMENTS_DATE_FAILURE,
 
+  SET_JOB_BEGIN,
+  SET_JOB_BEGIN_SUCCESS,
+  SET_JOB_BEGIN_FAILURE
+
 } from './types';
 
 export const defaultState = {
@@ -36,10 +40,31 @@ export const defaultState = {
   message: null,
   isLoading: false,
   status: -2,
+  clockStatus: 0,
 };
 
 export const appointment = (state = defaultState, action) => {
   switch (action.type) {
+
+    case SET_JOB_BEGIN:
+      return {
+        ...state,       
+        isLoading: false,
+        status: -2,
+      };
+    case SET_JOB_BEGIN_SUCCESS: 
+      return {
+        ...state,
+        isLoading: false,
+        status: 1,
+        clockStatus: action.response.clockStatus
+    }
+    case SET_JOB_BEGIN_FAILURE:
+      return {
+        ...state,
+        status: -2,
+        isLoading: true,
+      };
     case GET_ALL_APPOINTMENTS_SUCCESS:
       return {
         ...state,

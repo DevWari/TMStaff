@@ -31,7 +31,8 @@ import {
   getExtraServicesSaga,
   addAppointmentSaga,
   cancelAppointmentSaga,
-  getAllAppointmentsDateSaga
+  getAllAppointmentsDateSaga,
+  setJobBeginSaga
 } from './Appointment/sagas';
 
 import { 
@@ -58,7 +59,8 @@ import {
   GET_EXTRA_SERVICES,
   ADD_APPOINTMENT,
   CANCEL_APPOINTMENT,
-  GET_ALL_APPOINTMENTS_DATE
+  GET_ALL_APPOINTMENTS_DATE,
+  SET_JOB_BEGIN
 } from './Appointment/types';
 
 import {
@@ -118,6 +120,8 @@ function* watchAll() {
     takeEvery(GET_UNREAD_MESSAGES, getUnreadMessagesSaga),
     takeEvery(GET_CHATS, getChatsSaga),
     takeEvery(GET_CHATS_HISTORY, getChatsHistorySaga),
+
+    takeEvery(SET_JOB_BEGIN, setJobBeginSaga),
   ]);
 }
 

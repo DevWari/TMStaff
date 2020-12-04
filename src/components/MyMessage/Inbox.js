@@ -16,7 +16,7 @@ class Inbox extends React.Component {
         let data = {
           id: this.props.item.hashed_id
         }
-        this.props.moveChatToHistory(data, this.props.token);
+        //this.props.moveChatToHistory(data, this.props.token);
       }
       navigate('MessageList', {hashed_id: this.props.item?.hashed_id});
     }

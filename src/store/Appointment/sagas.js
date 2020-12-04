@@ -8,7 +8,8 @@ import {
   getExtraServices,
   addAppointment,
   cancelAppointment,
-  getAllAppointmentsDate
+  getAllAppointmentsDate,
+  setJobBegin
 } from './services';
 
 import {
@@ -18,11 +19,48 @@ import {
   GET_EXTRA_SERVICES_SUCCESS, GET_EXTRA_SERVICES_FAILURE,
   ADD_APPOINTMENT_SUCCESS, ADD_APPOINTMENT_FAILURE,
   CANCEL_APPOINTMENT_SUCCESS, CANCEL_APPOINTMENT_FAILURE,
-  GET_ALL_APPOINTMENTS_DATE_SUCCESS, GET_ALL_APPOINTMENTS_DATE_FAILURE
+  GET_ALL_APPOINTMENTS_DATE_SUCCESS, GET_ALL_APPOINTMENTS_DATE_FAILURE,
+  SET_JOB_BEGIN_SUCCESS, SET_JOB_BEGIN_FAILURE
 } from './types';
+
 import { Alert } from 'react-native';
 import { SetTokenAction } from 'src/store/Auth/action'
 import {removeStorage, replaceToken} from 'src/utils/global'
+
+export function* setJobBeginSaga(action) {
+  const { token } = action    
+  let response = null;
+  try {
+    response = yield setJobBegin(token);    
+    console.log ("set job begin...", response)  
+    if (response.status == 1) {
+      yield put({ type: SET_JOB_BEGIN_SUCCESS, response });
+    } else if (response.status == 2) {
+      let token = response.token
+      replaceToken (token)
+      response = yield setJobBegin(token)  
+      console.log ("set job begin...", response)      
+      if (response.status == 1) {        
+        yield all([
+          put({ type: SET_JOB_BEGIN_SUCCESS, response }),
+          put(SetTokenAction(token, null)),        	
+        ]);     
+      }
+      else {    
+        yield put(SetTokenAction(null, null))    
+        removeStorage ()
+        navigate ('LoginScreen')
+      }
+    } else {
+      yield put(SetTokenAction(null, null))    
+      removeStorage ()
+      navigate ('LoginScreen')
+    }
+    
+  } catch (e) {
+    yield put({ type: SET_JOB_BEGIN_FAILURE });
+  }
+}
 
 export function* getAllAppointmentsSaga(action) {
   const { token } = action  

@@ -21,8 +21,7 @@ import {connect} from 'react-redux'
 import Spinner from 'react-native-loading-spinner-overlay';
 import moment from "moment"
 import styled from 'styled-components/native'
-import {SetClockInOutAction} from 'src/store/Work/action'
-import {getAppointmentDetailAction} from 'src/store/Appointment/action'
+import {getAppointmentDetailAction, SetJobBeginAction} from 'src/store/Appointment/action'
 import Icon from 'react-native-vector-icons/Foundation'
 import { TextInput } from "react-native-paper";
 
@@ -176,7 +175,7 @@ class AppointmentOption extends React.Component {
 
   onOK = () => {
     this.setState ({isVisible: false})
-    this.props.setClcokInOut(this.props.token)
+    this.props.setJobBeginAction(this.props.token)
     navigate ('JobResult')
   }
   onCancel = () => {
@@ -294,14 +293,14 @@ const mapStateToProps = (state) => {
     isLoading: state.appointment.isLoading,
     status: state.appointment.status,
     data: state.appointment.appointment,
-    clockStatus: state.work.clockStatus
+    clockStatus: state.appointment.clockStatus
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getAppointmentDetail: (data, token) => dispatch(getAppointmentDetailAction(data,token)),   
-    setClcokInOut: (token) => dispatch(SetClockInOutAction(token)),      
+    setJobBeginAction: (token) => dispatch(SetJobBeginAction(token)),      
   };
 };
 

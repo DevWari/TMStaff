@@ -9,7 +9,7 @@ import {
 import styled from 'styled-components/native'
 import Menu from 'src/components/Menu'
 import LoggedComponent from './LoggedComponent'
-import ConfirmView from 'src/components/ConfirmView'
+import WorkModal from 'src/components/WorkModal'
 import {navigate} from'src/utils/navigation'
 import {connect} from 'react-redux'
 import {GetWorkAction,SetClockInOutAction} from 'src/store/Work/action'
@@ -101,7 +101,7 @@ const WorkScreen = (props) => {
             activeOpacity={1}  
             onPressOut={()=>setIsVisible(false)}          
           >
-            <ConfirmView 
+            <WorkModal 
               onOK = {onOK}
               onCancel = {onCancel}
               clockStatus = {props.clockStatus}
