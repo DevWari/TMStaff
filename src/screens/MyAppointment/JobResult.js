@@ -42,7 +42,7 @@ const JobResult = (props) => {
 }
 const mapStateToProps = (state) => {
     return {      
-      clockStatus: state.work.clockStatus
+      clockStatus: state.appointment.clockStatus
     };
 };  
 

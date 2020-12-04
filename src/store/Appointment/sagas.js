@@ -28,17 +28,18 @@ import { SetTokenAction } from 'src/store/Auth/action'
 import {removeStorage, replaceToken} from 'src/utils/global'
 
 export function* setJobBeginSaga(action) {
-  const { token } = action    
+  const { hashedId, token } = action    
+  console.log ("job token....", token)
   let response = null;
   try {
-    response = yield setJobBegin(token);    
+    response = yield setJobBegin(hashedId, token);    
     console.log ("set job begin...", response)  
     if (response.status == 1) {
       yield put({ type: SET_JOB_BEGIN_SUCCESS, response });
     } else if (response.status == 2) {
       let token = response.token
       replaceToken (token)
-      response = yield setJobBegin(token)  
+      response = yield setJobBegin(hashedId, token)  
       console.log ("set job begin...", response)      
       if (response.status == 1) {        
         yield all([

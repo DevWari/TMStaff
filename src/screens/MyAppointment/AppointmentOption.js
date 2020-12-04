@@ -1,4 +1,4 @@
-import React, { version } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -93,7 +93,7 @@ class AppointmentOption extends React.Component {
         showtime: false,        
       })
     }
-
+    
     if (prevProps.token != this.props.token && !this.props.token) navigate ("Auth")
   }
 
@@ -174,10 +174,11 @@ class AppointmentOption extends React.Component {
   }  
 
   onOK = () => {
-    this.setState ({isVisible: false})
-    this.props.setJobBeginAction(this.props.token)
+    this.setState ({isVisible: false})    
+    this.props.setJobBeginAction(this.state.hashed_id, this.props.token)
     navigate ('JobResult')
-  }
+  }  
+
   onCancel = () => {
     this.setState ({isVisible: false})
   }
@@ -300,7 +301,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getAppointmentDetail: (data, token) => dispatch(getAppointmentDetailAction(data,token)),   
-    setJobBeginAction: (token) => dispatch(SetJobBeginAction(token)),      
+    setJobBeginAction: (hashedId, token) => dispatch(SetJobBeginAction(hashedId,token)),      
   };
 };
 

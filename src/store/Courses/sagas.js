@@ -20,9 +20,12 @@ export function* getAllCoursesSaga(action) {
         yield put({ type: GET_ALL_COURSES_SUCCESS, response });
       }
       else if (response.status == 2) {
+        console.log ("should replace token.....")
         let token = response.token
+        console.log ("should replace token.....", token)
         replaceToken (token)
         response = yield getAllCourses(token)      
+        console.log ("replace response....", response)
         if (response.status == 1) {        
           yield all([
               put({ type: GET_ALL_COURSES_SUCCESS, response }),

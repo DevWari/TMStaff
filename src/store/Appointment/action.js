@@ -9,10 +9,12 @@ import {
   SET_JOB_BEGIN
 } from './types';
 
-export function SetJobBeginAction(token) {
+export function SetJobBeginAction(hashedId, token) {
+  console.log ("set job action token..", token)
   return {
     type: SET_JOB_BEGIN,  
     token,
+    hashedId
   };
 }
 

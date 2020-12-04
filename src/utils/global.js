@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
-// import OneSignal from 'react-native-onesignal';
+import OneSignal from 'react-native-onesignal';
 
 export async function removeStorage () {
     console.log ("remove storage....")
@@ -7,7 +7,7 @@ export async function removeStorage () {
       await AsyncStorage.removeItem('userToken');
       await AsyncStorage.removeItem('user_type');
       await AsyncStorage.removeItem('user_hash');
-    //   OneSignal.sendTags({'myid': "", "type": ""});
+      OneSignal.sendTags({'myid': "", "type": ""});
     }
     catch(exception) {
         console.log ("error storage")

@@ -1,6 +1,6 @@
 import { API_URL } from 'src/utils/config';
 
-export const setJobBegin = (token) => {    
+export const setJobBegin = (hashedId, token) => {    
   const url = API_URL + "set-start-stop";    
   return fetch(url, {
     method: 'POST',
@@ -8,7 +8,8 @@ export const setJobBegin = (token) => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       Authorization:  `Bearer ${token}`, 
-    }      
+    },
+    body: JSON.stringify({hashed_id: hashedId})   
   })
   .then((response) => response.json())
   .then((responseJson) => {  
@@ -21,10 +22,7 @@ export const setJobBegin = (token) => {
 };
 
 
-export const getAllAppointments = (token) => {
-
-  console.log ("appoinment service by all....")
-  console.log ("appoinment service by all....", token)
+export const getAllAppointments = (token) => {  
   const url = API_URL + "get-appointments";  
   return fetch(url, {
     method: 'POST',
@@ -46,8 +44,6 @@ export const getAllAppointments = (token) => {
 
 export const getAllAppointmentsDate = (data, token) => {
 
-  console.log ("appintment service by date....", data)
-  console.log ("appintment service by date....", token)
   const url = API_URL + `get-appointments-by-date?start_date=${data.start_date}`;
   console.log ("url....", url)
   return fetch(url, {
@@ -70,8 +66,8 @@ export const getAllAppointmentsDate = (data, token) => {
 };
 
 export const getEstimateAppointments = (data, token) => {
-  const url = API_URL + "get-estimate-appointments";
-  
+
+  const url = API_URL + "get-estimate-appointments";  
   return fetch(url, {
     method: 'POST',
     headers: {
@@ -91,7 +87,7 @@ export const getEstimateAppointments = (data, token) => {
 };
 
 export const getAppointmentDetail = (data, token) => {
-  console.log ("detail...", data)
+  
   const url = API_URL + "get-appointment-details";
   return fetch(url, {
     method: 'POST',
@@ -113,8 +109,8 @@ export const getAppointmentDetail = (data, token) => {
 };
 
 export const getExtraServices = (data, token) => {
-  const url = API_URL + "render-add-appointment-to-estimate";
-  
+
+  const url = API_URL + "render-add-appointment-to-estimate";  
   return fetch(url, {
     method: 'POST',
     headers: {
@@ -134,8 +130,8 @@ export const getExtraServices = (data, token) => {
 };
 
 export const addAppointment = (data, token) => {
-  const url = API_URL + "add-appointment-to-estimate";
-  
+
+  const url = API_URL + "add-appointment-to-estimate";  
   return fetch(url, {
     method: 'POST',
     headers: {
