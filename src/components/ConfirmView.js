@@ -10,9 +10,15 @@ const ConfirmView = (props) => {
   return (
      <Container activeOpacity={1}>
         <Title>ARE YOU SURE?</Title>
-        <Content>
+        {
+          props.clockStatus == 0? 
+          <Content>
             Make sure you are at the {'\n'}job site and ready to {'\n'}start the work
-        </Content>
+          </Content>:
+          <Content>
+            Make sure your work {'\n'}is completed up to {'\n'}SOP standards? {'\n'}Did you do a "Workthrough" {'\n'} with the client?
+          </Content>
+        }        
         <ButtonContainer>
           <Button style={{marginLeft: 20}} onPress={props.onOK}>
             <ButtonTitle>Yes</ButtonTitle>
@@ -30,7 +36,7 @@ export default ConfirmView
 
 const Container = styled (TouchableOpacity)`
   width: 90%;
-  height: 350px;
+  
   background-color: #15892E;  
   justify-content: space-between;
   align-items: center;
@@ -44,6 +50,7 @@ const Content = styled (Text)`
   font-size: 25px;
   text-align: center;
   color: white;
+  margin-top: 25px; 
 `
 const Button = styled (TouchableOpacity)`
   width: 100px;
@@ -61,8 +68,8 @@ const ButtonContainer = styled (View)`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 50px;
-
+  margin-bottom: 30px;
+  margin-top: 30px;
 `
 
 

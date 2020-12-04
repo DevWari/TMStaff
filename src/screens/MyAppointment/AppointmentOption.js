@@ -64,7 +64,7 @@ class AppointmentOption extends React.Component {
       return
     }
     else {
-      this._getCurrentLocation();
+      // this._getCurrentLocation();
       this.getAppointmentDetail();
     }
   }
@@ -224,42 +224,11 @@ class AppointmentOption extends React.Component {
           <View style={styles.itemGroup}>
             <Text style={styles.title}>{estimate?.address}</Text>
           </View>
+          <View style={styles.itemGroup}>
+            <Text style={styles.title}>{moment(data?.service_date ).format('MMM Do YYYY')} at {data?.service_time}</Text>
+          </View>
         </View>
 
-        <View style={{marginTop: 30, alignItems: "center"}}>
-          <Text style={styles.text2}>          
-          {moment(data?.service_date ).format('MMM Do YYYY')} {"\n"}at {data?.service_time}
-          </Text>
-        </View>
-
-        <View style={styles.mapGroup}>
-          <GoogleMapButton onPress={this.openGoogleMap} >
-            <Icon name="thumbnails" size={25} color="gray" />
-          </GoogleMapButton>                
-          {this.state.initialRegion != "" && markers.length > 0 &&
-            <MapView
-              initialRegion={this.state.initialRegion}
-              provider={PROVIDER_GOOGLE}
-              tintColor={null}
-              mapType="standard" // standard, none, satellite, hybrid, terrain, mutedStandard(iOS 11.0+ only)
-              style={styles.map}
-              onRegionChange={this.onRegionChange}
-              >               
-                { markers.map((marker, index) => (
-                    <Marker
-                      coordinate={marker.latlng}
-                      title={marker.title}
-                      description={marker.description}
-                      key={"map" + index}
-                    ></Marker>
-                  ))
-                }
-            </MapView>
-          }
-        </View>
-        <View style={{width: '100%', alignItems: 'center'}}>
-          <Text style={{fontSize: 18}}>Tap on map for directions</Text>           
-        </View>
         <JobContainer>
           <JobTitleContainer>            
             <Text style={{fontSize: 28}}>Job Details</Text>
@@ -310,6 +279,7 @@ class AppointmentOption extends React.Component {
             <ConfirmView 
               onOK = {this.onOK}
               onCancel = {this.onCancel}
+              clockStatus={this.props.clockStatus}
             />
           </ModalContainer>   
         </Modal>

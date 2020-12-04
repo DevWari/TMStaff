@@ -21,15 +21,18 @@ const CoursesDetail = (props) => {
   const [isVisible, setIsVisible] = useState (false)  
   const [videoLoading, setVideoLoading] = useState (false)
   const [videoList, setVideoList] = useState ([])
+  const [markStatus, setMarkStatus] = useState(0)
   
-  useFocusEffect(useCallback(() => {    
-    console.log ("cccc....", props.navigation.state?.params?.item)
+  useFocusEffect(useCallback(() => {   
+    
     let hashedId = props.navigation.state?.params?.item.hashed_id
-    props.getCourse (hashedId, props.token)
+    let markStatus = props.navigation.state?.params?.item.cmp
+    if (markStatus) setMarkStatus(markStatus)
+    props.getCourse (hashedId, props.token) 
 
   }, []));
 
-  useEffect (()=> {    
+  useEffect (()=> {        
     let videoTempArray = props.courseData?.videos.split("https://www.youtube.com/")
     let tempVideoList = []
     if (videoTempArray) {
@@ -91,9 +94,13 @@ const CoursesDetail = (props) => {
         <DetailContainer>
           <Detail>{props.courseData?.description}</Detail>
         </DetailContainer>          
-        <MarkButton onPress={()=>setIsVisible(true)}>
-          <MarkTitle>Mark as completed</MarkTitle>
-        </MarkButton>
+        {
+          markStatus == 0 && 
+          <MarkButton onPress={()=>setIsVisible(true)}>
+            <MarkTitle>Mark as completed</MarkTitle>
+          </MarkButton>
+        }
+        
         <Modal
           animationType="slide"
           transparent={true}

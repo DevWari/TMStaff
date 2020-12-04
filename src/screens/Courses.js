@@ -46,7 +46,7 @@ const Courses = (props) => {
               key={item.id}
               onPress={()=>navigate('CourseDetail', {item: item})}
             >
-              <ButtonTitle>({item.id}) {item.subject}</ButtonTitle>
+              <ButtonTitle>({item.id})  {item.name}</ButtonTitle>
             </LinkButton> )          
         }
       </Container>

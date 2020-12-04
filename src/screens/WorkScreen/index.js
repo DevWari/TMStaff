@@ -47,12 +47,7 @@ const WorkScreen = (props) => {
   }, [props.token])
   return (
     <ScrollView>
-      <Container>
-        {/* <Spinner 
-          visible={props.isLoading}
-          textContent={'Loading...'}
-          textStyle={{color:'#FFF'}}
-        />   */}
+      <Container>        
         <Menu title="Work Hours" back={true} />        
           { props.clockStatus == 0 ? 
             <ClockButton onPress={()=>setIsVisible(true)}>
@@ -61,8 +56,7 @@ const WorkScreen = (props) => {
             <ClockButton onPress={()=>setIsVisible(true)}>
               <ButtonTitle>Clock Out</ButtonTitle>
             </ClockButton>
-          }
-        <ButtonTitle>Clock In</ButtonTitle>        
+          }            
         { props.pageCount > 0 && <Title>Logged Hours</Title> }     
         { props.data && props.data.length > 0 &&
           props.data.map (item =>  {
@@ -97,6 +91,7 @@ const WorkScreen = (props) => {
               </TouchableOpacity>
           }          
         </PageContainer>  
+        <View style={{height: 20}} />
         <Modal
           animationType="slide"
           transparent={true}
@@ -109,6 +104,7 @@ const WorkScreen = (props) => {
             <ConfirmView 
               onOK = {onOK}
               onCancel = {onCancel}
+              clockStatus = {props.clockStatus}
             />
           </ModalContainer>            
         </Modal>  
