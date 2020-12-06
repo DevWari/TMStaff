@@ -45,11 +45,8 @@ const CoursesDetail = (props) => {
       console.log ("videoList...", tempVideoList)
       setVideoList (tempVideoList)
     }    
-  }, [props.courseData])
+  }, [props.courseData])  
   
-  useEffect (()=> {
-    if (!props.token) navigate ("Auth")
-  }, [props.token])
   const onOK = () => {
     let hashedId = props.navigation.state?.params?.item.hashed_id
     props.sendMarkCourse(hashedId, props.token)

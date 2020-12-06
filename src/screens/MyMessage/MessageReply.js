@@ -39,17 +39,7 @@ class MessageReply extends React.Component {
     fileUri: null,
     fileName: null,
     fileSize: null,
-  };
-
-  componentDidMount () {
-    if (!this.props.token) {
-       navigate('LoginScreen')
-    }
-  }
-  
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.token != this.props.token && !this.props.token) navigate ("Auth")
-  }
+  };  
 
   onPressHistory = () => {
     const {

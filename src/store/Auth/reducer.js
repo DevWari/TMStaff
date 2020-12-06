@@ -76,8 +76,7 @@ import {
       case LOG_OUT_FAILURE: 
         return {
           ...state,
-          isLoading: false,
-          token: null
+          isLoading: false,          
       }
       case FORGOT_PASSWORD:
         return {

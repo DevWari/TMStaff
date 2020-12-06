@@ -26,11 +26,9 @@ const MyAccount = (props) => {
   let STATES = null;  
   
   useFocusEffect(useCallback(() => {    
-    if (!props.token) {
-      navigate('LoginScreen') 
-      return
-    }
-    else props.loadProfile (props.token)
+    if (props.token) {
+      props.loadProfile (props.token)
+    }    
   }, []));
 
   async function onLogout (){
@@ -58,13 +56,7 @@ const MyAccount = (props) => {
       setZip(props.data.zip)
       setCity(props.data.city)
     }
-  }, [props.data])
-
-  useEffect (()=> {
-    if (!props.token) {
-      navigate ("Auth")
-    }
-  }, [props.token])
+  }, [props.data])  
 
   function updateProfile () {
     let data = {

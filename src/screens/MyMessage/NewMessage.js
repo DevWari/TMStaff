@@ -43,11 +43,7 @@ class NewMessage extends React.Component {
     fileSize: null,
   };
 
-  componentDidMount () {
-    if (!this.props.token) {
-      navigate('LoginScreen')
-      return
-    }
+  componentDidMount () {   
     
     const { recipients } = this.props;
 
@@ -63,11 +59,7 @@ class NewMessage extends React.Component {
     this.setState({
       recipients: newRecipients
     })
-  }
-  
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.token != this.props.token && !this.props.token) navigate ("Auth")
-  }
+  } 
 
   onPressHistory = () => {
     const {

@@ -21,15 +21,11 @@ class MyAppointment extends React.Component {
     data: [],
   };
 
-  componentDidMount () {       
-    console.log ("appointment token....", this.props.token) 
-      if (!this.props.token) {
-        navigate('LoginScreen')        
-      }
-      else {
-        if (this.props.navigation.state?.params?.todayStatus == 0) this.props.getAllAppointments (this.props.token);
-        else this.props.getAllAppointmentsDate({start_date: moment(new Date()).format('YYYY-MM-DD')}, this.props.token)
-      }
+  componentDidMount () {     
+    if (this.props.token) {      
+      if (this.props.navigation.state?.params?.todayStatus == 0) this.props.getAllAppointments (this.props.token);
+      else this.props.getAllAppointmentsDate({start_date: moment(new Date()).format('YYYY-MM-DD')}, this.props.token)
+    }
   }  
 
   componentDidUpdate(prevProps, prevState) {
@@ -54,11 +50,8 @@ class MyAppointment extends React.Component {
     if ( prevProps.navigation.state?.params?.todayStatus != this.props.navigation.state?.params?.todayStatus ) {   
        console.log ("no data....",moment(new Date()).format('YYYY-MM-DD') )    
        if (this.props.navigation.state?.params?.todayStatus == 1) this.props.getAllAppointmentsDate({start_date: moment(new Date()).format('YYYY-MM-DD')}, this.props.token)
-       else this.props.getAllAppointments (this.props.token)
-      // console.log ('status...', this.props.navigation.state?.params?.todayStatus)
-    }
-
-    if (prevProps.token != this.props.token && !this.props.token) navigate ("Auth")
+       else this.props.getAllAppointments (this.props.token)      
+    }    
   } 
 
   onChangeDescription = (text) => {

@@ -19,9 +19,7 @@ class MyNotificationScreen extends React.Component {
       loading: false,
     }
   }
-  componentDidMount () {
-    if (!this.props.token) navigate ("Auth")
-  }
+    
   render() {
     const { loading } = this.state;
 

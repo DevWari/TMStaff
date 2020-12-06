@@ -25,10 +25,7 @@ const Courses = (props) => {
   useEffect (()=> {
     console.log ("courses...", props.data)
   }, [props.data])
-
-  useEffect (()=> {
-    if (!props.token) navigate ('Auth')
-  }, [props.token])
+  
   return (    
     <ScrollView>
       <Container>

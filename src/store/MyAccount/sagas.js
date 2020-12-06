@@ -25,20 +25,21 @@ export function* loadProfileSaga(action) {
       replaceToken (token)
       response = yield loadProfile(token)  
       console.log ("response 2..... response.....", response)    
-      if (response.status == 1) {        
-        yield all([
-        	put({ type: LOAD_PROFILE_SUCCESS, response }),
-        	put(SetTokenAction(token, null)),        	
+      if (response.status == 1) {   
+        console.log ("response 2..... response..... sucess", response)       
+        yield all([        	
+          put(SetTokenAction(token, null)),        	
+          put({ type: LOAD_PROFILE_SUCCESS, response }),
         ]);     
       }
       else {    
-        yield put(SetTokenAction(null, null))    
+        console.log ("response 2..... response..... failure", response)               
         removeStorage ()
         navigate ('LoginScreen')
       }
     }
     else {
-      yield put(SetTokenAction(null, null))    
+      console.log ("response failure...")          
       removeStorage ()
       navigate ('LoginScreen')
     }
@@ -61,19 +62,16 @@ export function* upadteProfileSaga(action) {
         replaceToken (token)
         response = yield updateProfile(data, response.token)      
         if (response.status == 1) {        
-          yield all([
-            put({ type: LOAD_PROFILE_SUCCESS, response }),
+          yield all([            
             put(SetTokenAction(token, null)),        	
           ]);     
         }
-        else {    
-          yield put(SetTokenAction(null, null))    
+        else {                
           removeStorage ()
           navigate ('LoginScreen')
         }
       }
-      else {
-        yield put(SetTokenAction(null, null))    
+      else {        
         removeStorage ()
         navigate ('LoginScreen')
       }

@@ -28,11 +28,7 @@ class MessageDetail extends React.Component {
   };
 
   componentDidMount () {
-    if (!this.props.token) {
-      navigate('LoginScreen')
-      return
-    }
-    else this.getMessageDetail(this.props.navigation.state?.params?.hashed_id);
+     this.getMessageDetail(this.props.navigation.state?.params?.hashed_id);
   }
   
   componentDidUpdate(prevProps, prevState) {
@@ -44,15 +40,14 @@ class MessageDetail extends React.Component {
     if(this.props.messageDetail != undefined && prevProps.messageDetail?.data != this.props.messageDetail?.data)
     {
       this.setState({messageDetail: this.props.messageDetail?.data})
-    }
-    if (prevProps.token != this.props.token && !this.props.token) navigate ("Auth")
+    }    
   }
 
   getMessageDetail (hashed_id) {
     const data = {
       id: hashed_id
     }
-    this.props.getMessageDetail(data, this.props.token)
+    if (this.props.token) this.props.getMessageDetail(data, this.props.token)
   }
   
   onPressHistory = () => {

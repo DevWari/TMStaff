@@ -26,6 +26,7 @@ const LoginScreen = (props) => {
   // const [password, setPassword] = useState('');
 
   useEffect (()=> {
+    console.log ("login screen load")
     async function setStorage() {      
       try {        
         if (props.status == 1 && props.token && props.user) {

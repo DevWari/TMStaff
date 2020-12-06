@@ -29,9 +29,7 @@ const Support = (props) => {
       props.initStatus()
       Alert.alert("Save Error!")
     }
-    else {console.log("saving.....")}
-
-    if (!props.token) navigate('LoginScreen')
+    else {console.log("saving.....")}    
 
   }, [props.status, props.token])  
    
@@ -89,10 +87,7 @@ const Support = (props) => {
       
     }
   }
-
-  useEffect (()=> {
-    if (!props.token) navigate("Auth")
-  }, [props.token])
+    
   return (
     <KeyboardAwareScrollView>
       <Spinner 

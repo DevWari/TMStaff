@@ -41,10 +41,7 @@ const WorkScreen = (props) => {
   useEffect (()=> {
     console.log ("work data...", props.pageCount)    
   }, [props.pageCount])
-
-  useEffect (()=> {
-    if (!props.token) navigate ("Auth")
-  }, [props.token])
+  
   return (
     <ScrollView>
       <Container>        

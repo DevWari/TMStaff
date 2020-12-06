@@ -58,12 +58,7 @@ class AppointmentOption extends React.Component {
   watchID = null;
 
   componentDidMount () {
-    if (!this.props.token) {
-      navigate('LoginScreen')
-      return
-    }
-    else {
-      // this._getCurrentLocation();
+    if (this.props.token) {     
       this.getAppointmentDetail();
     }
   }
@@ -97,9 +92,7 @@ class AppointmentOption extends React.Component {
 
     if (prevProps.jobStatusData != this.props.jobStatusData) {
       this.getAppointmentDetail();
-    }
-    
-    if (prevProps.token != this.props.token && !this.props.token) navigate ("Auth")
+    }    
   }
 
   getAppointmentDetail() {

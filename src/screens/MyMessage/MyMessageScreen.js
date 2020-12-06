@@ -51,11 +51,7 @@ class MyMessageScreen extends React.Component {
   };
 
   componentDidMount () {
-    // if (!this.props.token) {
-    //   navigate('LoginScreen')
-    //   return
-    // }
-   
+
       this.getChats();
       //this.getChatshisory();
     
@@ -78,9 +74,7 @@ class MyMessageScreen extends React.Component {
       this.setState({messageSent: this.props.navigation?.state?.params?.messageSent != undefined ? 
         this.props.navigation?.state?.params?.messageSent : false,
         messageContent: this.props.navigation.state.params?.message})
-    }
-
-    if (prevProps.token != this.props.token && !this.props.token) navigate ("Auth")
+    }    
 
     if (this.props.chatsData?.data?.chats != undefined && prevProps.chatsData?.data?.chats != this.props.chatsData?.data?.chats) {
       let newData = [];

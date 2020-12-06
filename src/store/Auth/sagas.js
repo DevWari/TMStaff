@@ -10,6 +10,7 @@ import {
   SET_TOKEN_SUCCESS,
   SET_TOKEN_FAILURE
 } from './types';
+import {navigate} from 'src/utils/navigation'
 
 export function* loginSaga(action) {
   const { email, password } = action;
@@ -47,7 +48,7 @@ export function* logoutSaga(action) {
   try {
     const response = yield logout(token);    
      yield put({ type: LOG_OUT_SUCCESS, response });
-    //return navigate('CheckInHome');
+     return navigate('Auth');
   } catch (e) {
     yield put({ type: LOG_OUT_FAILURE });
   }

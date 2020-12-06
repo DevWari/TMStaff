@@ -28,11 +28,9 @@ class MessageList extends React.Component {
   };
 
   componentDidMount () {
-    if (!this.props.token) {
-      navigate('LoginScreen')
-      return
-    }
-    else this.getChatMessages(this.props.navigation.state?.params?.hashed_id);
+    if (this.props.token) {
+      this.getChatMessages(this.props.navigation.state?.params?.hashed_id);
+    }    
   }
   
   componentDidUpdate(prevProps, prevState) {
@@ -45,8 +43,7 @@ class MessageList extends React.Component {
     {
       this.setState({chatMessages: this.props.chatMessages?.data[1]})
     }
-
-    if (prevProps.token != this.props.token && !this.props.token) navigate ("Auth")
+    
   }
 
   getChatMessages (hashed_id) {
