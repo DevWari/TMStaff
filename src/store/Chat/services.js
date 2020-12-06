@@ -50,7 +50,7 @@ export const getChatMessages = (data, token) => {
       'Content-Type': 'application/json',
       Authorization:  `Bearer ${token}`,
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data)  
   })
   .then((response) => response.json())
   .then((responseJson) => {

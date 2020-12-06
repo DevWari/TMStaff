@@ -11,12 +11,12 @@ const ConfirmView = (props) => {
      <Container activeOpacity={1}>
         <Title>ARE YOU SURE?</Title>
         {
-          props.clockStatus == 0? 
+          props.clockStatus == 2? 
           <Content>
             Make sure you are at the {'\n'}job site and ready to {'\n'}start the work.
           </Content>:
           <Content>
-            Make sure your work {'\n'}is completed up to {'\n'}SOP standards? {'\n'}Did you do a "Workthrough" {'\n'} with the client?
+            Make sure your work {'\n'}is completed up to {'\n'}SOP standards? {'\n'}Did you do a workthrough {'\n'} with the client?
           </Content>
         }        
         <ButtonContainer>

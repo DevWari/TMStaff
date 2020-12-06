@@ -186,7 +186,7 @@ class AppointmentOption extends React.Component {
       worker_comment: ''
     } 
     this.props.setJobBeginAction(data, this.props.token)
-    navigate ('JobResult')
+    navigate ('JobResult', {jobStatus: this.state.data.service_status_id})
   }  
 
   onCancel = () => {

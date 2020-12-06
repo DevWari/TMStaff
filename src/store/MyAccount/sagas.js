@@ -19,10 +19,12 @@ export function* loadProfileSaga(action) {
     if (response.status == 1) {
       yield put({ type: LOAD_PROFILE_SUCCESS, response });
     }
-    else if (response.status == 2) {
+    else if (response.status == 2) {      
       let token = response.token
+      console.log ("response  2......", token)
       replaceToken (token)
-      response = yield loadProfile(token)      
+      response = yield loadProfile(token)  
+      console.log ("response 2..... response.....", response)    
       if (response.status == 1) {        
         yield all([
         	put({ type: LOAD_PROFILE_SUCCESS, response }),

@@ -8,27 +8,26 @@ import {
 import styled from 'styled-components/native'
 import Menu from 'src/components/Menu'
 import {navigate} from 'src/utils/navigation'
-import {connect} from 'react-redux'
 
 const JobResult = (props) => {
   return (
     <ScrollView>
       <Container>                 
         <Menu title="Job" back={true} />        
-        {props.clockStatus == 2 ? 
+        {props.navigation.state?.params?.jobStatus == 2 ? 
            <Title>Job Sucessfully Started</Title> : 
            <CompletedContainer>
              <CompletedTitle>Job Completed!</CompletedTitle > 
            </CompletedContainer>
            
         }        
-        {props.clockStatus == 2 ?
+        {props.navigation.state?.params?.jobStatus == 2 ? 
           <Content>You have sucessfully started this job.</Content>:
           <View>
             <Content>This job is now completed. Make sure your client is happy and the final workthrough is approved.</Content>            
           </View>            
         }
-        {props.clockStatus == 1?
+        {props.navigation.state?.params?.jobStatus == 2 ? 
           <Button onPress={()=>navigate ('AppointmentOption')}>
             <ButtonTitle>Back To Job Detail</ButtonTitle>
           </Button>:
@@ -40,13 +39,7 @@ const JobResult = (props) => {
     </ScrollView>
   )
 }
-const mapStateToProps = (state) => {
-    return {      
-      clockStatus: state.appointment.clockStatus
-    };
-};  
-
-export default connect(mapStateToProps, null)(JobResult);
+export default JobResult
 
 const Container = styled (View)`
   flex: 1;
