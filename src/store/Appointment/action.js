@@ -9,8 +9,7 @@ import {
   SET_JOB_BEGIN
 } from './types';
 
-export function SetJobBeginAction(data, token) {
-  console.log ("set job action token..", token)
+export function SetJobBeginAction(data, token) {  
   return {
     type: SET_JOB_BEGIN,  
     token,
@@ -19,16 +18,14 @@ export function SetJobBeginAction(data, token) {
 }
 
 export function getAllAppointmentsAction(token) {
-
-  console.log ("all appointment action....")
+  
   return {
     type: GET_ALL_APPOINTMENTS,
     token    
   };
 }
 
-export function getAllAppointmentsDateAction(data, token) {
-  console.log ("date appointment action....")
+export function getAllAppointmentsDateAction(data, token) {  
   return {
     type: GET_ALL_APPOINTMENTS_DATE,
     data,
