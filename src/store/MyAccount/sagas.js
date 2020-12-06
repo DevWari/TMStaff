@@ -20,8 +20,7 @@ export function* loadProfileSaga(action) {
       yield put({ type: LOAD_PROFILE_SUCCESS, response });
     }
     else if (response.status == 2) {      
-      let token = response.token
-      console.log ("response  2......", token)
+      let token = response.token      
       replaceToken (token)
       response = yield loadProfile(token)  
       console.log ("response 2..... response.....", response)    
