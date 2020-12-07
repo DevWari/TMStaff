@@ -43,3 +43,21 @@ export const setClockInOut = (token) => {
 };
 
 
+export const getClockStatus = (token) => {    
+  const url = API_URL + "get-clock-status";    
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization:  `Bearer ${token}`, 
+    }      
+  })
+  .then((response) => response.json())
+  .then((responseJson) => {      
+    return responseJson
+  })
+  .catch((error) => {
+    return "error";
+  });
+};

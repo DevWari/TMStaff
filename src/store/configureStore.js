@@ -21,7 +21,7 @@ import { notification } from './Notification/reducer';
 import { loginSaga, logoutSaga, forgotPasswordSaga, setTokenSaga } from './Auth/sagas';
 import { loadProfileSaga, upadteProfileSaga } from './MyAccount/sagas';
 import { sendContactSaga } from './Contact/sagas';
-import { getWorkSaga, setClockInOutSaga } from './Work/sagas';
+import { getWorkSaga, setClockInOutSaga, getClockStatusSaga } from './Work/sagas';
 import { getAllCoursesSaga, getCourseSaga, sendMarkCourseSaga } from './Courses/sagas';
 
 import {
@@ -50,7 +50,7 @@ import {
 import { LOGIN, LOG_OUT, FORGOT_PASSWORD, SET_TOKEN } from './Auth/types';
 import { LOAD_PROFILE, UPDATE_PROFILE } from './MyAccount/types';
 import { SEND_CONTACT } from './Contact/types';
-import { GET_WORK, CLOCK_IN_OUT } from './Work/types';
+import { GET_WORK, CLOCK_IN_OUT, GET_CLOCK_STATUS } from './Work/types';
 
 import {
   GET_ALL_APPOINTMENTS,
@@ -100,6 +100,7 @@ function* watchAll() {
     takeEvery(SEND_CONTACT, sendContactSaga),
     takeEvery(GET_WORK, getWorkSaga),
     takeEvery(CLOCK_IN_OUT, setClockInOutSaga),
+    takeEvery(GET_CLOCK_STATUS, getClockStatusSaga),
 
     takeEvery(GET_ALL_APPOINTMENTS, getAllAppointmentsSaga),
     takeEvery(GET_ALL_APPOINTMENTS_DATE, getAllAppointmentsDateSaga),

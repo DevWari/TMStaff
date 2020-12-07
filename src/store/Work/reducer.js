@@ -4,7 +4,10 @@ import {
   GET_WORK_FAILURE,
   CLOCK_IN_OUT,
   CLOCK_IN_OUT_SUCCESS,
-  CLOCK_IN_OUT_FAILURE
+  CLOCK_IN_OUT_FAILURE,
+  GET_CLOCK_STATUS,
+  GET_CLOCK_STATUS_SUCCESS,
+  GET_CLOCK_STATUS_FAILURE
 } from './types';
 
 export const defaultState = {
@@ -49,13 +52,33 @@ export const work = (state = defaultState, action) => {
       return {
         ...state,        
         isLoading: false,
-        clockStatus: action.response.clockStatus
+        clockStatus: action.response.clockStatus,
+        status: 1
       }
     case CLOCK_IN_OUT_FAILURE:
       return {
         ...state,
         isLoading: false,
+        status: -1,
+      }    
+    case GET_CLOCK_STATUS:
+      return {
+        ...state,
+        isLoading: true,        
         status: -2,
+      };
+    case GET_CLOCK_STATUS_SUCCESS: 
+      return {
+        ...state,        
+        isLoading: false,
+        clockStatus: action.response.clocked,
+        status: 1,
+      }
+    case GET_CLOCK_STATUS_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        status: -1,
       }    
     default:
       return state;

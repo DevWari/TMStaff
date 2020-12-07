@@ -12,7 +12,7 @@ import LoggedComponent from './LoggedComponent'
 import WorkModal from 'src/components/WorkModal'
 import {navigate} from'src/utils/navigation'
 import {connect} from 'react-redux'
-import {GetWorkAction,SetClockInOutAction} from 'src/store/Work/action'
+import {GetWorkAction,SetClockInOutAction, GetClockStatusAction} from 'src/store/Work/action'
 import Spinner from 'react-native-loading-spinner-overlay';
 
 const WorkScreen = (props) => {
@@ -36,6 +36,7 @@ const WorkScreen = (props) => {
   useEffect (()=> {    
     const paginator = 0
     props.getWork(paginator, props.token)
+    props.getClockStatus(props.token)
   }, [])
 
   useEffect (()=> {
@@ -124,6 +125,7 @@ const mapStateToProps = (state) => {
     return {      
       getWork: (paginator, token) => dispatch(GetWorkAction(paginator, token)),      
       setClcokInOut: (token) => dispatch(SetClockInOutAction(token)),      
+      getClockStatus: (token) => dispatch(GetClockStatusAction(token)),  
     };
   };
   export default connect(mapStateToProps, mapDispatchToProps)(WorkScreen);
