@@ -76,33 +76,26 @@ class MessageReply extends React.Component {
     if (hashed_id == undefined || hashed_id == null) return;
     if (message == "") return;
     let file = null;
-    // if (singleFile != null) {
-    //   //If file selected then create FormData
-    //   const fileToUpload = singleFile;
-    //   file = new FormData();
-    //   file.append('name', singleFile.name);
-    //   file.append('type', singleFile.type);
-    //   file.append('uri', singleFile.uri);
-    //   file.append('size', singleFile.size);
-    //   file.append('file', JSON.stringify(singleFile));
-    // }
+    
     if (fileUri != null) {
       //If file selected then create FormData
-      file = new FormData();
-      file.append('name', fileName);
-      file.append('type', fileType);
-      file.append('uri', fileUri);
-      file.append('size', fileSize);
-      file.append('file', fileData);
-    }
-
-    const data = {
-      id: hashed_id,
-      message: message,
-      file: file,
-    }
-    
-    this.props.replyMessage(data, this.props.token)
+      file = new FormData();      
+      file.append('files[]', {
+        uri: fileUri,
+        type: fileType,
+        name: fileName        
+      }); 
+      file.append ('id', hashed_id)
+      file.append ('message', message)
+      this.props.replyMessage(file, this.props.token)
+    } else {
+      let data = {
+        id: hashed_id,
+        message: message,        
+        statusValue: 1
+      }        
+      this.props.replyMessage(data, this.props.token)
+    }   
   }
 
   async selectFile () {

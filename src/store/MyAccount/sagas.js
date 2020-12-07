@@ -22,17 +22,14 @@ export function* loadProfileSaga(action) {
     else if (response.status == 2) {      
       let token = response.token      
       replaceToken (token)
-      response = yield loadProfile(token)  
-      console.log ("response 2..... response.....", response)    
-      if (response.status == 1) {   
-        console.log ("response 2..... response..... sucess", response)       
+      response = yield loadProfile(token)        
+      if (response.status == 1) {           
         yield all([        	
           put(SetTokenAction(token, null)),        	
           put({ type: LOAD_PROFILE_SUCCESS, response }),
         ]);     
       }
-      else {    
-        console.log ("response 2..... response..... failure", response)               
+      else {            
         removeStorage ()
         navigate ('LoginScreen')
       }

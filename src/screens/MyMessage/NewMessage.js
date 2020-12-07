@@ -100,21 +100,27 @@ class NewMessage extends React.Component {
     let file = null;
     if (fileUri != null) {
       //If file selected then create FormData
-      file = new FormData();
-      file.append('name', fileName);
-      file.append('type', fileType);
-      file.append('uri', fileUri);
-      file.append('size', fileSize);
-      file.append('file', fileData);
-    }
+      file = new FormData();     
+      file.append('files[]', {
+        uri: fileUri,
+        type: fileType,
+        name: fileName        
+      }); 
 
-    let data = {
-      to: selectRecipient,
-      message: message,
-      title: title,
-      file: file,
-    }
-    this.props.newConversation(data, this.props.token)
+      file.append ('to', selectRecipient)
+      file.append ('message', message)
+      file.append ('title', title) 
+      this.props.newConversation(file, this.props.token)
+    } else {      
+      let data = {
+        to: selectRecipient,
+        message: message,
+        title: title,
+        statusValue: 1
+      }
+      console.log ("no.....", data)
+      this.props.newConversation(data, this.props.token)    
+    }   
   }
 
   async selectFile () {

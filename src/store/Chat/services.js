@@ -1,5 +1,5 @@
 import { API_URL } from 'src/utils/config';
-
+import Axios from 'axios'
 
 export const getChats = (data, token) => {
   const url = API_URL + "chats";
@@ -82,46 +82,54 @@ export const getMessageDetail = (data, token) => {
   });
 };
 
-export const replyMessage = (data, token) => {
-  const url = API_URL + "reply-message";
-  
-  return fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization:  `Bearer ${token}`,
-    },
-    body: JSON.stringify(data)
+export const replyMessage = (data, token) => {  
+
+  let headers = ''
+  if (data.statusValue && data.statusValue == 1) {
+    headers = {        
+      Authorization:  `Bearer ${token}`,   
+    }
+  } else {
+    headers = {  
+      "Content-Type": "multipart/form-data",
+      Authorization:  `Bearer ${token}`,   
+    }
+  }
+  const url = API_URL + "reply-message"; 
+
+  return Axios.post(url, data, {    
+    "headers": headers
   })
-  .then((response) => response.json())
-  .then((responseJson) => {
-     return responseJson
-  })
-  .catch((error) => {
-    return "error";
-  });
+  .then(res => { 
+    console.log ("reply-message...", res)   
+    return res
+  })  
+  .catch( error => error );  
 };
 
 export const newChatConversation = (data, token) => {
-  const url = API_URL + "new-conversation";
-  
-  return fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization:  `Bearer ${token}`,
-    },
-    body: JSON.stringify(data)
-  })
-  .then((response) => response.json())
-  .then((responseJson) => {
-     return responseJson
-  })
-  .catch((error) => {
-    return "error";
-  });
+
+  let headers = ''
+  if (data.statusValue && data.statusValue == 1) {
+    headers = {        
+      Authorization:  `Bearer ${token}`,   
+    }
+  } else {
+    headers = {  
+      "Content-Type": "multipart/form-data",
+      Authorization:  `Bearer ${token}`,   
+    }
+  }
+  const url = API_URL + "new-conversation"; 
+
+  return Axios.post(url, data, {    
+    "headers": headers
+    })
+  .then(res => {
+    console.log ("aaaaa", res)
+    return res
+  })  
+  .catch( error => error );  
 };
 
 export const moveChatToHistory = (data, token) => {

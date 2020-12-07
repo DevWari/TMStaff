@@ -232,16 +232,16 @@ export function* replyMessageSaga(action) {
     let response = null;
     try {
       response = yield replyMessage(data,token);
-      if (response.status == 1) {
+      if (response.data.status == 1) {
         yield put({ type: REPLY_MESSAGE_SUCCESS, response });
-        let message = response?.message;
+        let message = response.data?.message;
         navigate('MyMessageScreen', {messageSent: true, message: message});
       }
-      else if ( response.status == 2) {
-        replaceToken (response.token)
-        yield put(SetTokenAction(response.token, null))
-        response = yield replyMessage(data, response.token)
-        if (response.status == 1) {
+      else if ( response.data.status == 2) {
+        replaceToken (response.data.token)
+        yield put(SetTokenAction(response.data.token, null))
+        response = yield replyMessage(data, response.data.token)
+        if (response.data.status == 1) {
           yield all([
             put({ type: REPLY_MESSAGE_SUCCESS, response }),
           ]);
@@ -264,19 +264,22 @@ export function* replyMessageSaga(action) {
 
 export function* newChatConversationSaga(action) {
   const { token, data } = action
+
+    // console.log ("conversation saga...", data)
     let response = null;
     try {
       response = yield newChatConversation(data,token);
-      if (response.status == 1) {
+      console.log ("conversation saga...", response)
+      if (response.data.status == 1) {
         yield put({ type: NEW_CONVERSATION_SUCCESS, response });
-        let message = response?.message;
+        let message = response.data?.message;
         navigate('MyMessageScreen', {messageSent: true, message: message});
       }
-      else if ( response.status == 2) {
-        replaceToken (response.token)
-        yield put(SetTokenAction(response.token, null))
-        response = yield newChatConversation(data, response.token)
-        if (response.status == 1) {
+      else if ( response.data.status == 2) {
+        replaceToken (response.data.token)
+        yield put(SetTokenAction(response.data.token, null))
+        response = yield newChatConversation(data, response.data.token)
+        if (response.data.status == 1) {
           yield all([
             put({ type: NEW_CONVERSATION_SUCCESS, response }),
           ]);
