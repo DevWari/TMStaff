@@ -14,8 +14,7 @@ import {
 import { navigate } from 'src/utils/navigation';
 import Menu from '../../components/Menu';
 import Theme from '../../theme/Theme';
-import Geolocation from '@react-native-community/geolocation';
-import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+// import Geolocation from '@react-native-community/geolocation';
 import ConfirmView from 'src/components/ConfirmView'
 import {connect} from 'react-redux'
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -64,7 +63,7 @@ class AppointmentOption extends React.Component {
   }
   
   componentWillUnmount() {
-    this.watchID != null && Geolocation.clearWatch(this.watchID);
+    // this.watchID != null && Geolocation.clearWatch(this.watchID);
   }
 
   componentDidUpdate(prevProps, prevState) {    
@@ -106,70 +105,70 @@ class AppointmentOption extends React.Component {
     this.props.getAppointmentDetail(data, this.props.token)
   }
 
-  _getCurrentLocation = () => {
-    var that = this;
-      this.setState({loading: true})
-      if(Platform.OS === 'ios'){
-        this.callLocation(that);
-      }else{
-        async function requestLocationPermission() {
-          try {
-            const granted = await PermissionsAndroid.request(
-              PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,{
-                'title': 'Location Access Required',
-                'message': 'This App needs to Access your location'
-              }
-            )
-            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-              //To Check, If Permission is granted
-              that.callLocation(that);
-            } else {
-              console.log("Permission Denied");
-            }
-          } catch (err) {
-            console.warn(err)
-            that.setState({loading: false})
-          }
-        }
-        requestLocationPermission();
-      }   
-  }
+  // _getCurrentLocation = () => {
+  //   var that = this;
+  //     this.setState({loading: true})
+  //     if(Platform.OS === 'ios'){
+  //       this.callLocation(that);
+  //     }else{
+  //       async function requestLocationPermission() {
+  //         try {
+  //           const granted = await PermissionsAndroid.request(
+  //             PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,{
+  //               'title': 'Location Access Required',
+  //               'message': 'This App needs to Access your location'
+  //             }
+  //           )
+  //           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+  //             //To Check, If Permission is granted
+  //             that.callLocation(that);
+  //           } else {
+  //             console.log("Permission Denied");
+  //           }
+  //         } catch (err) {
+  //           console.warn(err)
+  //           that.setState({loading: false})
+  //         }
+  //       }
+  //       requestLocationPermission();
+  //     }   
+  // }
 
-  callLocation(that) {
-    let markers = [];
-     Geolocation.getCurrentPosition(
-        (position) => {
-           const currentLongitude = Number(JSON.stringify(position.coords.longitude)).toFixed(10);
-           const currentLatitude = Number(JSON.stringify(position.coords.latitude)).toFixed(10);
+  // callLocation(that) {
+  //   let markers = [];
+  //    Geolocation.getCurrentPosition(
+  //       (position) => {
+  //          const currentLongitude = Number(JSON.stringify(position.coords.longitude)).toFixed(10);
+  //          const currentLatitude = Number(JSON.stringify(position.coords.latitude)).toFixed(10);
            
-          let location = {
-            latitude: parseFloat(currentLatitude),
-            longitude: parseFloat(currentLongitude),
-          }
+  //         let location = {
+  //           latitude: parseFloat(currentLatitude),
+  //           longitude: parseFloat(currentLongitude),
+  //         }
           
-          let newMarker = {
-            latlng: location,
-            title: "my location",
-            description: "current position",
-          }
-          markers.push(newMarker);
+  //         let newMarker = {
+  //           latlng: location,
+  //           title: "my location",
+  //           description: "current position",
+  //         }
+  //         markers.push(newMarker);
 
-          let initialRegion={
-            latitude: parseFloat(currentLatitude),
-            longitude: parseFloat(currentLongitude),
-            latitudeDelta: 0.00922,
-            longitudeDelta: 0.00421,
-          }
+  //         let initialRegion={
+  //           latitude: parseFloat(currentLatitude),
+  //           longitude: parseFloat(currentLongitude),
+  //           latitudeDelta: 0.00922,
+  //           longitudeDelta: 0.00421,
+  //         }
 
-          that.setState({ initialRegion, markers });
-        },
+  //         that.setState({ initialRegion, markers });
+  //       },
 
-        (error) => {
-          that.setState({loading: false})
-        },
-        { enableHighAccuracy: false}
-     );
-  }  
+  //       (error) => {
+  //         that.setState({loading: false})
+  //       },
+  //       { enableHighAccuracy: false}
+  //    );
+  // }  
 
   onOK = () => {
     this.setState ({isVisible: false})   

@@ -67,27 +67,6 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - Google-Maps-iOS-Utils (2.1.0):
-    - Google-Maps-iOS-Utils/Clustering (= 2.1.0)
-    - Google-Maps-iOS-Utils/Geometry (= 2.1.0)
-    - Google-Maps-iOS-Utils/Heatmap (= 2.1.0)
-    - Google-Maps-iOS-Utils/QuadTree (= 2.1.0)
-    - GoogleMaps
-  - Google-Maps-iOS-Utils/Clustering (2.1.0):
-    - Google-Maps-iOS-Utils/QuadTree
-    - GoogleMaps
-  - Google-Maps-iOS-Utils/Geometry (2.1.0):
-    - GoogleMaps
-  - Google-Maps-iOS-Utils/Heatmap (2.1.0):
-    - Google-Maps-iOS-Utils/QuadTree
-    - GoogleMaps
-  - Google-Maps-iOS-Utils/QuadTree (2.1.0):
-    - GoogleMaps
-  - GoogleMaps (3.5.0):
-    - GoogleMaps/Maps (= 3.5.0)
-  - GoogleMaps/Base (3.5.0)
-  - GoogleMaps/Maps (3.5.0):
-    - GoogleMaps/Base
   - OneSignal (2.15.4)
   - OpenSSL-Universal (1.0.2.20):
     - OpenSSL-Universal/Static (= 1.0.2.20)
@@ -260,16 +239,8 @@ PODS:
   - React-jsinspector (0.63.3)
   - react-native-document-picker (4.1.0):
     - React-Core
-  - react-native-geolocation (2.0.2):
-    - React
-  - react-native-google-maps (0.27.1):
-    - Google-Maps-iOS-Utils (= 2.1.0)
-    - GoogleMaps (= 3.5.0)
-    - React
   - react-native-image-picker (2.3.4):
     - React-Core
-  - react-native-maps (0.27.1):
-    - React
   - react-native-onesignal (3.9.2):
     - OneSignal (= 2.15.4)
     - React (< 1.0.0, >= 0.13.0)
@@ -380,8 +351,6 @@ DEPENDENCIES:
   - FlipperKit/SKIOSNetworkPlugin (~> 0.54.0)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - Google-Maps-iOS-Utils
-  - GoogleMaps
   - OneSignal (< 3.0, >= 2.9.3)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -396,10 +365,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
-  - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
-  - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
-  - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-onesignal (from `../node_modules/react-native-onesignal`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
@@ -434,8 +400,6 @@ SPEC REPOS:
     - Flipper-PeerTalk
     - Flipper-RSocket
     - FlipperKit
-    - Google-Maps-iOS-Utils
-    - GoogleMaps
     - OneSignal
     - OpenSSL-Universal
     - YogaKit
@@ -473,14 +437,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-document-picker:
     :path: "../node_modules/react-native-document-picker"
-  react-native-geolocation:
-    :path: "../node_modules/@react-native-community/geolocation"
-  react-native-google-maps:
-    :path: "../node_modules/react-native-maps"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
-  react-native-maps:
-    :path: "../node_modules/react-native-maps"
   react-native-onesignal:
     :path: "../node_modules/react-native-onesignal"
   react-native-safe-area-context:
@@ -540,8 +498,6 @@ SPEC CHECKSUMS:
   FlipperKit: ab353d41aea8aae2ea6daaf813e67496642f3d7d
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
-  Google-Maps-iOS-Utils: c32891ff472eaaa1fca032beedafa1a013af7875
-  GoogleMaps: 32ca02de09de357a10ac773f2c70f1986751392d
   OneSignal: 6647275955d0f06d9e17c90dc93af9d85ecfd2b9
   OpenSSL-Universal: ff34003318d5e1163e9529b08470708e389ffcdd
   RCTRequired: 48884c74035a0b5b76dbb7a998bd93bcfc5f2047
@@ -555,10 +511,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: b56c03e61c0dd5f5801255f2160a815f4a53d451
   React-jsinspector: 8e68ffbfe23880d3ee9bafa8be2777f60b25cbe2
   react-native-document-picker: 37b870da56cf33b8432212842e3f374b9fe98889
-  react-native-geolocation: cbd9d6bd06bac411eed2671810f454d4908484a8
-  react-native-google-maps: 0a989abda71059db2caa98b9dacca7a8f38a47d0
   react-native-image-picker: 32d1ad2c0024ca36161ae0d5c2117e2d6c441f11
-  react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
   react-native-onesignal: 9fdf8cf885105266960a75567a38823bd824a22b
   react-native-safe-area-context: 86612d2c9a9e94e288319262d10b5f93f0b395f5
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
@@ -582,6 +535,6 @@ SPEC CHECKSUMS:
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: a19a4e8771dbddea25dce9992dffa3f343e40b16
+PODFILE CHECKSUM: 827779cdc5f0dcf70cac155bc8124fb78065a767
 
 COCOAPODS: 1.9.3

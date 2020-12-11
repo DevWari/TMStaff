@@ -25,14 +25,15 @@ target 'tmstaff' do
         config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'NO'
       end
     end
-  
+    installer.pods_project.targets.each do |target|
+      if target.name == "React-Core.common-AccessibilityResources"
+        target.remove_from_project
+      end
+    end  
   end
 end
   # React Native Maps dependencies
-  rn_maps_path = '../node_modules/react-native-maps'
-  pod 'react-native-google-maps', :path => rn_maps_path
-  pod 'GoogleMaps'
-  pod 'Google-Maps-iOS-Utils'
+  rn_maps_path = '../node_modules/react-native-maps' 
 
   target 'OneSignalNotificationServiceExtension' do
     pod 'OneSignal', '>= 2.9.3', '< 3.0'

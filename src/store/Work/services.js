@@ -54,7 +54,8 @@ export const getClockStatus = (token) => {
     }      
   })
   .then((response) => response.json())
-  .then((responseJson) => {      
+  .then((responseJson) => {   
+    console.log ("response....clock status", responseJson)   
     return responseJson
   })
   .catch((error) => {

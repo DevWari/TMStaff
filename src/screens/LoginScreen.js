@@ -18,12 +18,12 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 const LoginScreen = (props) => {
 
-  const [username, setUserName] = useState('christina@geronco.com');
-  const [password, setPassword] = useState('change543');       
+  // const [username, setUserName] = useState('christina@geronco.com');
+  // const [password, setPassword] = useState('change543');       
   // const [username, setUserName] = useState('geronco@gmail.com');
   // const [password, setPassword] = useState('change543');          
-  // const [username, setUserName] = useState('');
-  // const [password, setPassword] = useState('');
+  const [username, setUserName] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect (()=> {
     console.log ("login screen load")
