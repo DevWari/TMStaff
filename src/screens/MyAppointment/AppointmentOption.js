@@ -242,7 +242,8 @@ class AppointmentOption extends React.Component {
             <Text style={styles.title}>{estimate?.address}</Text>
           </View>
           <View style={styles.itemGroup}>
-            <Text style={styles.title}>{moment(data?.service_date ).format('MMM Do YYYY')} at {data?.service_time}</Text>
+            {/* <Text style={styles.title}>{moment(data?.service_date ).format('MMM Do YYYY')} at {data?.service_time}</Text> */}
+            <Text style={styles.title}>{estimate?.city_name} / {estimate?.state}</Text>
           </View>
         </View>
 

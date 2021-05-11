@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 import {
   View,
   Text,
@@ -14,6 +14,7 @@ import {navigate} from'src/utils/navigation'
 import {connect} from 'react-redux'
 import {GetWorkAction,SetClockInOutAction, GetClockStatusAction} from 'src/store/Work/action'
 import Spinner from 'react-native-loading-spinner-overlay';
+import { useFocusEffect} from 'react-navigation-hooks'
 
 const WorkScreen = (props) => {
 
@@ -32,12 +33,13 @@ const WorkScreen = (props) => {
   }
   function onPrev () {    
     props.getWork(props.paginator - 1, props.token)
-  }
-  useEffect (()=> {    
-    const paginator = 0
-    props.getWork(paginator, props.token)
-    props.getClockStatus(props.token)
-  }, [])
+  }  
+
+  useFocusEffect(useCallback(() => {         
+     const paginator = 0
+     props.getWork(paginator, props.token)
+     props.getClockStatus(props.token)
+  }, []));
 
   useEffect (()=> {
     console.log ("work data...", props.pageCount)    
@@ -45,7 +47,12 @@ const WorkScreen = (props) => {
   
   return (
     <ScrollView>
-      <Container>        
+      <Container>   
+        <Spinner 
+          visible={props.isLoading}
+          textContent={'Loading...'}
+          textStyle={{color:'#FFF'}}
+        />        
         <Menu title="Work Hours" back={true} />        
           { props.clockStatus == 0 ? 
             <ClockButton onPress={()=>setIsVisible(true)}>

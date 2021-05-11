@@ -10,6 +10,7 @@ import {
 } from './types';
 import { SetTokenAction } from 'src/store/Auth/action'
 import {removeStorage, replaceToken} from 'src/utils/global'
+import { navigate } from 'src/utils/navigation'
 
 export function* getWorkSaga(action) {
     const { token, paginator } = action    
