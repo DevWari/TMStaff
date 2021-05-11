@@ -86,7 +86,7 @@ const Description = styled (Text)`
 `
 const LinkButton = styled(TouchableOpacity)`
   width: 90%;
-  height: 40px;
+  flex: 1;
   border-bottom-width: 1px;
   border-color: gray;
   margin-top: 30px;  

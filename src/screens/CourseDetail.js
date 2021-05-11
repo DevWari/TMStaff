@@ -169,7 +169,8 @@ const Title = styled (Text)`
 `
 const TitleContainer = styled (View)`
   width: 90%;
-  height: 40px;
+  flex: 1;
+  padding-bottom: 15px;
   margin-top: 30px;  
   border-bottom-width: 1px;
   border-color: gray;

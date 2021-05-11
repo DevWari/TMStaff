@@ -22,12 +22,12 @@ const Resources = () => {
         <LinkButton onPress={()=>Linking.openURL('https://app.tinamaids.com/login')}>
           <ButtonTitle>Tina Maids SOP</ButtonTitle>
         </LinkButton>        
-        <LinkButton onPress={()=>Linking.openURL('https://mailto:help@tinamaids.com')}>
+        <LinkButton onPress={()=>Linking.openURL('https://tinamaids.com/locations')}>
           <ButtonTitle>Contact Local Branch</ButtonTitle>
         </LinkButton>
-        <LinkButton onPress={()=>Linking.openURL('https://tinamaids.com/locations')}>
+        {/* <LinkButton onPress={()=>Linking.openURL('https://tinamaids.com/locations')}>
           <ButtonTitle>Contact Corporate</ButtonTitle>
-        </LinkButton>
+        </LinkButton> */}
       </Container>
     </ScrollView>
   )
