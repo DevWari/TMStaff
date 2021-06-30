@@ -15,28 +15,29 @@ import { navigate } from 'src/utils/navigation'
 export function* getWorkSaga(action) {
     const { token, paginator } = action    
     let response = null;
-    try {
-      response = yield getWork(paginator, token);
-      console.log ("work saga....", response)
+    try {      
+      console.log ("work token...", token)
+      response = yield getWork(paginator, token);      
+      console.log ("work response...", response)
       if (response.status == 1) {
-        yield put({ type: GET_WORK_SUCCESS, response });
+        yield put({ type: GET_WORK_SUCCESS, response });        
       } else if (response.status == 2) {
-        let token = response.token
-        replaceToken (token)
-        response = yield getWork(paginator,token)      
+        let token1 = response.token
+        replaceToken (token1)
+        response = yield getWork(paginator,token1)      
         if (response.status == 1) {        
           yield all([
             put({ type: GET_WORK_SUCCESS, response }),
-            put(SetTokenAction(token, null)),        	
+            put(SetTokenAction(token1, null)),               
           ]);     
         }
         else {    
-          yield put(SetTokenAction(null, null))    
+          yield put(SetTokenAction(null, null))             	  
           removeStorage ()
           navigate ('LoginScreen')
         }
       }
-      else {
+      else {        
         yield put(SetTokenAction(null, null))    
         removeStorage ()
         navigate ('LoginScreen')
@@ -51,27 +52,25 @@ export function* setClockInOutSaga(action) {
     const { token } = action    
     let response = null;
     try {
-      response = yield setClockInOut(token);    
-      console.log ("response...clock", response)  
+      response = yield setClockInOut(token);          
       if (response.status == 1) {
-        yield put({ type: CLOCK_IN_OUT_SUCCESS, response });
-      } else if (response.status == 2) {
+        yield put({ type: CLOCK_IN_OUT_SUCCESS, response });        
+      } else if (response.status == 2) {        
         let token = response.token
         replaceToken (token)
-        response = yield setClockInOut(token)  
-        console.log ("response...clock", response)      
-        if (response.status == 1) {        
+        response = yield setClockInOut(token)          
+        if (response.status == 1) {                  
           yield all([
             put({ type: CLOCK_IN_OUT_SUCCESS, response }),
             put(SetTokenAction(token, null)),        	
           ]);     
         }
-        else {    
+        else {              
           yield put(SetTokenAction(null, null))    
           removeStorage ()
           navigate ('LoginScreen')
         }
-      } else {
+      } else {        
         yield put(SetTokenAction(null, null))    
         removeStorage ()
         navigate ('LoginScreen')
@@ -86,7 +85,9 @@ export function* getClockStatusSaga(action) {
   const { token } = action    
   let response = null;
   try {
-    response = yield getClockStatus(token);        
+    console.log ("clock token...", token)
+    response = yield getClockStatus(token);         
+    console.log ("clock response...", response)
     if (response.status == 1) {
       yield put({ type: GET_CLOCK_STATUS_SUCCESS, response });
     } else if (response.status == 2) {

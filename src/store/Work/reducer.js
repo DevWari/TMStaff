@@ -34,6 +34,7 @@ export const work = (state = defaultState, action) => {
         ...state,
         data: action.response.data,
         pageCount: action.response.paginationCount,
+        clockStatus: action.response.clocked,
         isLoading: false
       }
     case GET_WORK_FAILURE:

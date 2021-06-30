@@ -33,18 +33,18 @@ const WorkScreen = (props) => {
   }
   function onPrev () {    
     props.getWork(props.paginator - 1, props.token)
-  }  
+  }    
 
-  useFocusEffect(useCallback(() => {         
-     const paginator = 0
-     props.getWork(paginator, props.token)
-     props.getClockStatus(props.token)
-  }, []));
+  useFocusEffect(useCallback(() => {        
+    const paginator = 0    
+    props.getWork(paginator, props.token)   
+    // props.getClockStatus(props.token)
+  }, [props.token])); 
 
   useEffect (()=> {
-    console.log ("work data...", props.pageCount)    
+    console.log ("work data...", props.pageCount)     
   }, [props.pageCount])
-  
+
   return (
     <ScrollView>
       <Container>   

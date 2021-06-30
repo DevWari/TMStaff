@@ -1,8 +1,8 @@
 import { API_URL } from 'src/utils/config';
 
-export const loadProfile = (token) => {
-  console.log ("load profile....")
+export const loadProfile = (token) => {    
   const url = API_URL + "get-user-info";
+  console.log ("load profile url....", url)  
   return fetch(url, {
     method: 'POST',
     headers: {

@@ -15,7 +15,9 @@ export function* loadProfileSaga(action) {
   const { token } = action
   let response = null;
   try {
-    response = yield loadProfile(token);
+    console.log ("account token...", token)
+    response = yield loadProfile(token);   
+    console.log ("account response...", response) 
     if (response.status == 1) {
       yield put({ type: LOAD_PROFILE_SUCCESS, response });
     }
@@ -35,7 +37,7 @@ export function* loadProfileSaga(action) {
       }
     }
     else {
-      console.log ("response failure...")          
+      console.log ("response failure...", response)          
       removeStorage ()
       navigate ('LoginScreen')
     }

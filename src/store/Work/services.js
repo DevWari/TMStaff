@@ -1,9 +1,7 @@
 import { API_URL } from 'src/utils/config';
 
-export const getWork = (paginator, token) => {
-    console.log ("work services   token...", token)
-    const url = API_URL + `hour-list?paginator=${paginator}`;
-    console.log ("url...", url)
+export const getWork = (paginator, token) => {    
+    const url = API_URL + `hour-list?paginator=${paginator}`;    
     return fetch(url, {
       method: 'POST',
       headers: {
@@ -22,8 +20,7 @@ export const getWork = (paginator, token) => {
 };
 
 export const setClockInOut = (token) => {    
-    const url = API_URL + "set-start-stop";  
-    console.log ("url...", url)
+    const url = API_URL + "set-start-stop";      
     return fetch(url, {
       method: 'POST',
       headers: {
@@ -54,8 +51,7 @@ export const getClockStatus = (token) => {
     }      
   })
   .then((response) => response.json())
-  .then((responseJson) => {   
-    console.log ("response....clock status", responseJson)   
+  .then((responseJson) => {       
     return responseJson
   })
   .catch((error) => {

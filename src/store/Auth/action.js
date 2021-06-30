@@ -13,8 +13,8 @@ export function LoginAction(email, password) {
   };
 }
 
-export function SetTokenAction(token, user) {
-  console.log ("SetTokenAction.....", token + "=============" + user)
+export function SetTokenAction(token, user) {  
+  console.log ("set token action...")
   return {
     type: SET_TOKEN,
     token,

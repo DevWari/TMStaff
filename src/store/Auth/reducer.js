@@ -99,8 +99,7 @@ import {
       case SET_TOKEN: 
         return {
           ...state,
-          isLoading: true,
-          token: null
+          isLoading: true,          
         }
       case SET_TOKEN_SUCCESS: 
         

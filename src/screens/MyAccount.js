@@ -29,7 +29,7 @@ const MyAccount = (props) => {
     if (props.token) {
       props.loadProfile (props.token)
     }    
-  }, []));
+  }, [props.token]));
 
   async function onLogout (){
     console.log ("logout...")
